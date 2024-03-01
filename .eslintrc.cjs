@@ -6,28 +6,29 @@ module.exports = {
     'plugin:@typescript-eslint/recommended-type-checked',
     'plugin:react-hooks/recommended',
     'plugin:react/recommended',
-    'prettier'
+    'prettier',
+    'plugin:jsx-a11y/recommended',
   ],
-  ignorePatterns: ['.eslintrc.cjs'],
+  ignorePatterns: ['.eslintrc.cjs', 'postcss.config.cjs'],
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh'],
   settings: {
     react: {
-      version: 'detect'
-    }
+      version: 'detect',
+    },
   },
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
     project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname
+    tsconfigRootDir: __dirname,
   },
   rules: {
     'react-refresh/only-export-components': [
       'warn',
-      { allowConstantExport: true }
+      { allowConstantExport: true },
     ],
     'react/jsx-uses-react': 'off',
-    'react/react-in-jsx-scope': 'off'
-  }
+    'react/react-in-jsx-scope': 'off',
+  },
 };
