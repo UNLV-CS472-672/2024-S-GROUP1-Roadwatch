@@ -4,5 +4,9 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), tsconfigPaths()]
+  plugins: [react(), tsconfigPaths()],
+  build: {
+    // Ensures a CSS file is emitted during `build` step.
+    cssCodeSplit: false, // TODO: Reassess if necessary towards end of project.
+  },
 });

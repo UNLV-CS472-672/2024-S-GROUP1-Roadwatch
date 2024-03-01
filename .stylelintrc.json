@@ -1,0 +1,12 @@
+{
+  "extends": ["stylelint-config-standard-scss"],
+  "files": ["**/*.scss"],
+  "rules": {
+    "unit-allowed-list": ["%", "deg", "rem", "vw", "vh", "s", "ms"],
+    "declaration-property-unit-allowed-list": {
+      "/^border/": ["px", "rem"]
+    },
+    "color-hex-length": "long",
+    "selector-class-pattern": null
+  }
+}
