@@ -3,12 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Home from './pages/Home/Home';
-import Community from './pages/Community/Community';
-import Chat from './pages/Chat/Chat';
-import Profile from './pages/Profile/Profile';
-import Login from './pages/Login/Login';
-import SignUp from './pages/SignUp/SignUp';
+import { Chat, Community, Home, Login, Profile, SignUp } from '@/pages';
 
 // Collection of paths for the site.
 const router = createBrowserRouter([
