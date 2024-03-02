@@ -1,4 +1,4 @@
-import Navbar from '@/components/Navbar/Navbar';
+import Navbar from '@/components';
 import styles from './Home.module.scss';
 
 export default function Home(): JSX.Element {
