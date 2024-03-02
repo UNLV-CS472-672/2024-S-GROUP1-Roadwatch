@@ -25,6 +25,8 @@
     "paths": {
       "@/components": ["src/components/index.ts"],
       "@/components/*": ["src/components/*"],
+      "@/pages": ["src/pages/index.ts"],
+      "@/pages/*": ["src/pages/*"],
       "@/store": ["./src/store/index.ts"],
       "@/store/*": ["./src/store/*"]
     }
