@@ -5,10 +5,11 @@
   "private": "true",
   "workspaces": [
     "client",
-    "server/*"
+    "server"
   ],
   "scripts": {
-    "dev-client": "npm run dev -w client"
+    "dev-client": "npm run dev -w client",
+    "dev-server": "npm run start -w server"
   },
   "author": "",
   "license": "ISC"
