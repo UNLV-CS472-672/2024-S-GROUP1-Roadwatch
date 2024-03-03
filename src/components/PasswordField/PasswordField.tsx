@@ -14,7 +14,7 @@ interface PasswordFieldProps {
      */
     header: string;
     /** Variable to set the input value of the password. */
-    setInputValue: React.Dispatch<React.SetStateAction<string>>;
+    setInputValue: (value: string) => void;
 }
 
 /***
