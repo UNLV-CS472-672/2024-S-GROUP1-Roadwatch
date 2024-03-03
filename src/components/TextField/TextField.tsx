@@ -1,27 +1,32 @@
 import styles from './TextField.module.scss';
+import * as React from 'react';
 
 /***
-import styles from './InputField.module.scss';
  * Parameters for the text field
- * header: Required. String of the header for the textbox. Example: "First Name", "Last Name"
- * setInputValue: Required. Variable to set the input value of the text
- * type: Optional. Sets the type of text box. Example: "text", "date"
  */
 interface TextFieldProps {
+    /**
+     * Required. String of the header for the textbox.
+     * @example
+     * header={"First Name"}
+     */
     header: string;
-    setInputValue: React.Dispatch<React.SetStateAction<string>>;
+    //Required. Variable to set the input value of the text
+    setInputValue: (value: string) => void;
+    /**
+     * Optional. Sets the type of text box.
+     * @example
+     * type={"date"}
+     */
     type?: string;
 }
 
 /***
  * Creates a text field with a header
- * @param header: String. The header of the TextField 
- * @param setInputValue: useState. Variable to store the input of the text field  send the 'set' variable
- * @param type: String. Optional, Defaults to 'text'. Sets the type of text box.
  */
-export const TextField: React.FC<TextFieldProps> = ({ header, setInputValue, type}) => {
+const TextField: React.FC<TextFieldProps> = ({ header, setInputValue, type}) => {
     // Event handler to update the input value
-    const handleChange = (event: any) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
     };
         
@@ -42,3 +47,5 @@ export const TextField: React.FC<TextFieldProps> = ({ header, setInputValue, typ
 TextField.defaultProps = {
     type: 'text', // Default placeholder text
 };
+
+export default TextField;
