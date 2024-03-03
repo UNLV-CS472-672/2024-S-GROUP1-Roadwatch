@@ -1,0 +1,16 @@
+.TextField {
+    &__textBox {
+        background-color: #F9FAFA;
+        border-radius: 5px;
+        height: 30px;
+        width: 100%;
+        border: 1px solid lightgray;
+        margin: 5px 0 10px 0;
+    }
+
+    &__header {
+        padding-top: 5px; 
+        font-weight: bold;
+    }
+}
+  
