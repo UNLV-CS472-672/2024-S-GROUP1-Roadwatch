@@ -1,7 +1,0 @@
-PORT=3000
-
-# DB Connection
-DB_HOST=something.something.mongodb.net
-DB_NAME=cooldb
-DB_USER=johnsmith
-DB_PASSWORD=123

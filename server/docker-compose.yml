@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  mongodb:
+    image: mongodb/mongodb-community-server:6.0-ubi8
+    container_name: mongodb
+    restart: always
+    env_file: .env
+    environment:
+      MONGODB_INITDB_ROOT_USERNAME: ${DB_USER}
+      MONGODB_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MONGODB_INITDB_DATABASE: ${DB_NAME}
+    ports:
+      - 27017:27017
