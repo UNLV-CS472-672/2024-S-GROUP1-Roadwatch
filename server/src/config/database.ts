@@ -1,4 +1,4 @@
-import mongoose, { ConnectOptions } from "mongoose";
+import mongoose from 'mongoose';
 
 const conn = mongoose.connection;
 conn.on('error', (err) => console.error('DB Connection Error', err));
@@ -15,4 +15,4 @@ const connect = () => {
   conn.once('open', () => console.info('Connected to DB'));
 };
 
-export { connect, conn }
+export { connect, conn };
