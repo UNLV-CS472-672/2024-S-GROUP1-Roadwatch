@@ -1,15 +1,16 @@
+import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import User from "../models/User";
 
 // Retrieve all users from Database
-export const getUsers = async (req: any, res: any) => {
+export const getUsers = async (_req: Request, res: Response) => {
   console.log('getting all users');
   const users = await User.find({});
   res.json({ data: users });
 }
 
 // Retrieves 1 user from Database by ID
-export const getUser = async (req: any, res: any) => {
+export const getUser = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
@@ -23,7 +24,7 @@ export const getUser = async (req: any, res: any) => {
 }
 
 // Create a user for the Database
-export const createUser = async (req: any, res: any) => {
+export const createUser = async (req: Request, res: Response) => {
   const {
     firstName,
     lastName,
@@ -36,7 +37,6 @@ export const createUser = async (req: any, res: any) => {
     address,
     state,
     zip } = req.body;
-
 
   const hashedPassword = await bcrypt.hash(password, 3);
 
@@ -63,7 +63,7 @@ export const createUser = async (req: any, res: any) => {
 }
 
 // deletes 1 user by id
-export const deleteUser = async (req: any, res: any) => {
+export const deleteUser = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
@@ -77,7 +77,7 @@ export const deleteUser = async (req: any, res: any) => {
 }
 
 // updates a user using their id
-export const updateUser = async (req: any, res: any) => {
+export const updateUser = async (req: Request) => {
   console.log('some actions to udpate user from database');
   const { id } = req.params;
 
