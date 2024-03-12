@@ -5,6 +5,30 @@ navigate their local road systems by providing a combined platform for
 reporting road conditions, alerting users to hazards, allowing community input,
 and influencing road infrastructure improvements.
 
+# MonoRepo Setup
+
+This project will become a monorepo just so development on backend and frontend is easy.
+All you need to do is go to root and npm i. This will install and configure everything for both sides.
+You can run npm run dev-client from root to start the react project.
+,,,
+If you need to run other commands and don't want to cd into the respective folders you can run:
+npm i <package> -w server/client
+-w stands for workspace and specifying one will install the package there. This is from root, if you cd into a folder you don't need to do this.
+
+These 2 folders will have their own package and package locks that they manage. Root package will not manage anything except just stating that 2 workspaces exist.
+I could make it so that they share packages and have 1 eslint config but that gets complicated.
+
+# Using Docker
+
+Go to docker https://www.docker.com/products/docker-desktop/ and download the desktop application.
+Ensure you have virtualization enabled.
+run the commands in a separate terminal:
+- cd server
+- docker-compose up
+
+You'll now have a local mongodb docker container running that you can use.
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
