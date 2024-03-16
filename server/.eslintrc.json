@@ -16,6 +16,7 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "require-await": "error"
+        "require-await": "error",
+        "eslint@typescript-eslint/no-explicit-any": "off"
     }
 }

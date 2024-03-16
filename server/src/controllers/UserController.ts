@@ -1,12 +1,27 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import User from "../models/User";
+import { signToken } from '../utils';
 
-// Retrieve all users from Database
-export const getUsers = async (_req: Request, res: Response) => {
-  console.log('getting all users');
-  const users = await User.find({});
-  res.json({ data: users });
+// Retrieves logged in user based on their userId
+// this could eventually be different from getting a user in the other route I think
+export const getLoggedInUser = async (req: Request, res: Response) => {
+  const { user_id } = req.body
+
+  if (!user_id) {
+    return res.status(401).send({
+      error: "Unauthorized",
+    });
+  }
+
+  try {
+    const user = await User.findById(user_id);
+    return res.json({ data: user });
+  }
+  catch (err) {
+    console.error("Could Not Find User: ", err);
+    return res.sendStatus(400);
+  }
 }
 
 // Retrieves 1 user from Database by ID
@@ -15,11 +30,11 @@ export const getUser = async (req: Request, res: Response) => {
 
   try {
     const user = await User.findById(id);
-    res.json({ data: user });
+    return res.json({ data: user });
   }
   catch (err) {
     console.error("Could Not Find User: ", err);
-    res.sendStatus(400);
+    return res.sendStatus(400);
   }
 }
 
@@ -56,10 +71,10 @@ export const createUser = async (req: Request, res: Response) => {
     })
   } catch (err) {
     console.error("User Creation Error: ", err);
-    res.sendStatus(400);
+    return res.sendStatus(400);
   }
 
-  res.sendStatus(200);
+  return res.sendStatus(200);
 }
 
 // deletes 1 user by id
@@ -68,11 +83,11 @@ export const deleteUser = async (req: Request, res: Response) => {
 
   try {
     await User.deleteOne({ id });
-    res.sendStatus(200);
+    return res.sendStatus(200);
   }
   catch (err) {
     console.error("Could Not Delete User: ", err);
-    res.sendStatus(400);
+    return res.sendStatus(400);
   }
 }
 
@@ -112,5 +127,38 @@ export const updateUser = async (req: Request) => {
     });
   } catch (err) {
     console.error("Update User Error: ", err);
+  }
+}
+
+export const login = async (req: Request, res: Response) => {
+  const { userInput, password } = req.body;
+
+  const user = await User.findOne({
+    $or: [
+      { email: userInput },
+      { userName: userInput }
+    ]
+  });
+
+  if (!user) {
+    return res.sendStatus(404);
+  }
+
+  console.log(user);
+
+  if (!bcrypt.compareSync(password, user?.password || '')) {
+    return res.sendStatus(404);
+  }
+
+  try {
+    return res.json({
+      data: {
+        user_id: user.id,
+        access_token: signToken({ user_id: user.id }),
+      }
+    });
+  } catch (err) {
+    console.error(err);
+    return res.sendStatus(500);
   }
 }

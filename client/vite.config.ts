@@ -9,4 +9,7 @@ export default defineConfig({
     // Ensures a CSS file is emitted during `build` step.
     cssCodeSplit: false, // TODO: Reassess if necessary towards end of project.
   },
+  optimizeDeps: {
+    include: ['@emotion/styled'], // Needed for MUI
+  },
 });
