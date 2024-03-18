@@ -4,7 +4,6 @@ import styles from './Login.module.scss';
 import { TextField, Button } from '@mui/material';
 import { useLoginMutation } from '@/store';
 import { useNavigate } from 'react-router-dom';
-import { getAccessToken } from '@/utils';
 
 export default function Login(): JSX.Element {
   const [userInput, setUserInput] = useState('');
@@ -14,16 +13,19 @@ export default function Login(): JSX.Element {
 
   const handleLogin = async () => {
     try {
-      await login({ userInput, password });
-      console.log(getAccessToken());
+      const res = await login({ userInput, password });
 
-      if (getAccessToken()) {
-        navigate('/');
+      // this is very annoying type guarding
+      if ('data' in res) {
+        const { user_id } = res.data;
+        if (user_id) {
+          navigate('/');
+        }
       }
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   return (
     <div className={styles['Login']}>
@@ -31,12 +33,13 @@ export default function Login(): JSX.Element {
       <TextField
         label="Username or Email"
         value={userInput}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUserInput(event.target.value)}
+        onChange={(event) => setUserInput(event.target.value)}
       />
       <TextField
         label="Password"
         value={password}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)} />
+        onChange={(event) => setPassword(event.target.value)}
+      />
       <Button onClick={handleLogin}>Login</Button>
     </div>
   );

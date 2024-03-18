@@ -12,3 +12,8 @@ export interface User {
   state?: string;
   zip?: string;
 }
+
+export interface Auth {
+  user_id: string;
+  access_token: string;
+}

@@ -1,6 +1,8 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { User } from "@/types";
-import { getAccessToken, setAccessToken } from "@/utils";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { apiSlice } from '../api';
+import { Auth, User } from '@/types';
+import { setAccessToken } from '@/utils';
 
 const transformUserResponse = ({
   data: {
@@ -30,49 +32,40 @@ const transformUserResponse = ({
   zip,
 });
 
-export const user = createApi({
-  reducerPath: 'user',
-  baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_API_BASE_URL,
-    prepareHeaders: (headers) => {
-      const accessToken = getAccessToken();
-      if (accessToken) {
-        headers.set('authorization', `Bearer ${accessToken}`);
-      }
-      return headers;
-    }
-  }),
+export const user = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getUser: builder.query<User, void>({
       query: () => `/user`,
       transformResponse: transformUserResponse,
+      providesTags: ['User'],
     }),
     createUser: builder.mutation<void, User>({
       query: (body) => ({
         url: '/user',
         method: 'POST',
-        body: body
-      })
+        body: body,
+      }),
     }),
-    login: builder.mutation<any, { userInput: string, password: string }>({
+    login: builder.mutation<Auth, { userInput: string; password: string }>({
       query: ({ userInput, password }) => ({
         url: '/user/login',
         method: 'POST',
         body: {
           userInput,
-          password
-        }
+          password,
+        },
       }),
       onQueryStarted: async (_, { queryFulfilled }) => {
         try {
-          const { data } = (await queryFulfilled).data;
+          const { data } = await queryFulfilled;
           const { access_token } = data;
           setAccessToken(access_token);
         } catch (error) {
           console.log(error);
         }
       },
-    })
+      invalidatesTags: ['User'],
+    }),
   }),
 });
 
