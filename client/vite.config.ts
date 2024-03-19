@@ -10,6 +10,6 @@ export default defineConfig({
     cssCodeSplit: false, // TODO: Reassess if necessary towards end of project.
   },
   optimizeDeps: {
-    include: ['@emotion/styled'], // Needed for MUI
+    include: ['@emotion/styled'],
   },
 });
