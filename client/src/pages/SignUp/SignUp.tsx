@@ -18,6 +18,10 @@ import '@fontsource/roboto/700.css';
 export default function SignUp(): JSX.Element {
   return ( 
     <div className={styles['SignUp']}> 
+
+    {/* for mobile to desktop scaling */}
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    
       {/* create the header */}
       <Box sx={{ width: '100%', maxWidth: 500 }}>
         <Stack direction="row" spacing={1} alignItems={"center"} justifyContent={"space-evenly"}>
@@ -29,9 +33,6 @@ export default function SignUp(): JSX.Element {
           </Typography>
         </Stack>
       </Box>
-
-      {/* for mobile to desktop scaling */}
-      <meta name="viewport" content="initial-scale=1, width=device-width" />
 
       {/* create the input fields and the titles for the fields */}
       <Box sx={{ width: '100%', maxWidth: 500 }}>
