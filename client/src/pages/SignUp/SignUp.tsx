@@ -1,5 +1,5 @@
 import styles from './SignUp.module.scss';
-import * as React from 'react';
+import {useState} from 'react';
 
 import {Button, IconButton, Stack, Box, Typography} from '@mui/material';
 import {ArrowBackIos} from '@mui/icons-material';
@@ -8,10 +8,10 @@ import {TextField} from '@/components'
 
 export default function SignUp(): JSX.Element {
   {/* input values from the text fields, will be used later */}
-  const [address, setAddressValue] = React.useState<string>('');
-  const [city, setCityValue] = React.useState<string>('');
-  const [state, setStateValue] = React.useState<string>('');
-  const [zip, setZipValue] = React.useState<string>('');
+  const [address, setAddressValue] = useState<string>('');
+  const [city, setCityValue] = useState<string>('');
+  const [state, setStateValue] = useState<string>('');
+  const [zip, setZipValue] = useState<string>('');
 
   return ( 
     <div className={styles['SignUp']}> 
