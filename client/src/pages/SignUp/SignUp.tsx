@@ -1,14 +1,10 @@
 import styles from './SignUp.module.scss';
 import * as React from 'react';
 
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import TextField from '@/components/TextField/TextField'
+import {Button, IconButton, Stack, Box, Typography} from '@mui/material';
+import {ArrowBackIos} from '@mui/icons-material';
+import {TextField} from '@/components'
 //import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 
 export default function SignUp(): JSX.Element {
   {/* input values from the text fields, will be used later */}
@@ -27,7 +23,7 @@ export default function SignUp(): JSX.Element {
       <Box sx={{ width: '100%', maxWidth: 500 }}>
         <Stack direction="row" spacing={1} alignItems={"center"} justifyContent={"space-evenly"}>
           <IconButton aria-label='back'>
-            <ArrowBackIosIcon/>
+            <ArrowBackIos/>
           </IconButton>
           <Typography variant="h4" gutterBottom align="center" sx={{ flexGrow: 1}}>
             Location
