@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { useState } from 'react';
 import styles from './Login.module.scss';
-import { TextField, Button } from '@mui/material';
+import { Button } from '@mui/material';
 import { useLoginMutation } from '@/store';
 import { useNavigate } from 'react-router-dom';
+import { TextField, PasswordField } from '@/components';
 
 export default function Login(): JSX.Element {
   const [userInput, setUserInput] = useState('');
@@ -30,16 +31,8 @@ export default function Login(): JSX.Element {
   return (
     <div className={styles['Login']}>
       <p>Login Page</p>
-      <TextField
-        label="Username or Email"
-        value={userInput}
-        onChange={(event) => setUserInput(event.target.value)}
-      />
-      <TextField
-        label="Password"
-        value={password}
-        onChange={(event) => setPassword(event.target.value)}
-      />
+      <TextField header="Username or Email" setInputValue={setUserInput} />
+      <PasswordField header="Password" setInputValue={setPassword} />
       <Button onClick={handleLogin}>Login</Button>
     </div>
   );
