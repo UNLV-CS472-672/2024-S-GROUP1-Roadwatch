@@ -6,16 +6,17 @@ import IconButton from '@mui/material/IconButton';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import TextField from '@/components/TextField/TextField'
+//import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
-
-
 export default function SignUp(): JSX.Element {
+  {/* input values from the text fields, will be used later */}
+  const [address, setAddressValue] = React.useState<string>('');
+  const [city, setCityValue] = React.useState<string>('');
+  const [state, setStateValue] = React.useState<string>('');
+  const [zip, setZipValue] = React.useState<string>('');
+
   return ( 
     <div className={styles['SignUp']}> 
 
@@ -37,25 +38,10 @@ export default function SignUp(): JSX.Element {
       {/* create the input fields and the titles for the fields */}
       <Box sx={{ width: '100%', maxWidth: 500 }}>
         <Stack spacing={2}>
-            <Typography variant="body1" gutterBottom>
-                Address
-            </Typography>
-            <TextField id="outlined-search" label="Enter Address" type="search" />
-
-            <Typography variant="body1" gutterBottom>
-                City
-            </Typography>
-            <TextField id="outlined-search" label="Enter City" type="search" />
-
-            <Typography variant="body1" gutterBottom>
-                State
-            </Typography>
-            <TextField id="outlined-search" label="Enter State" type="search" />
-
-            <Typography variant="body1" gutterBottom>
-                Zip Code
-            </Typography>
-            <TextField id="outlined-search" label="Enter Zip" type="search" />
+            <TextField header="Address" setInputValue={setAddressValue} type="address" />
+            <TextField header="City" setInputValue={setCityValue} type="city" />
+            <TextField header="State" setInputValue={setStateValue} type="state" />
+            <TextField header="Zip Code" setInputValue={setZipValue} type="zip" />
 
             {/* Add a continue button 
                 color can be changed if need be, default is blue*/}
