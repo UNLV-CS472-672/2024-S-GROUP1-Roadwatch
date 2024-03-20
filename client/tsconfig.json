@@ -32,7 +32,9 @@
       "@/types": ["./src/types/index.ts"],
       "@/types/*": ["./src/types/*"],
       "@/utils": ["./src/utils/index.ts"],
-      "@/utils/*": ["./src/utils/*"]
+      "@/utils/*": ["./src/utils/*"],
+      "@/hooks": ["./src/hooks/index.ts"],
+      "@/hooks/*": ["./src/hooks/*"]
     }
   },
   "include": ["src"],
