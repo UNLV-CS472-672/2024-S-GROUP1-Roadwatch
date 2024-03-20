@@ -9,12 +9,15 @@ export type Location = {
   timeStamp: number;
 };
 
+// React hook definintion
 export const useLocation = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // retrieves the current position of the device using browser navigator
     navigator.geolocation.getCurrentPosition(
       (position) => {
+        // dispatches an action to set the location in our app's store
         dispatch(
           AppActions.setLocation({
             latitude: position.coords.latitude,
