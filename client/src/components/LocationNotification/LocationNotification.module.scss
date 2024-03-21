@@ -1,0 +1,48 @@
+.LocationNotification {
+    &__container {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 32px; /* Increase padding as needed */
+        max-width: 400px; /* Optionally, limit the width to prevent excessive stretching */
+        margin: auto; /* Center the box horizontally */
+        height: 80vh; /* Set the height to take up 90% of the viewport height */
+        display: flex; /* Enable flexbox to align content vertically */
+        flex-direction: column; /* Align content vertically */
+        justify-content: space-between; /* Align content vertically */
+    }
+
+    &__image {
+        display: flex;
+        justify-content: center; /* Center the image horizontally */
+        max-width: 100%; /* Ensure the image doesn't exceed its container */
+        max-height: 100%; /* Ensure the image doesn't exceed its container */
+        object-fit: fill; /* Maintain aspect ratio and fit inside the container */
+    }
+
+    &__header {
+        font-size: 2.5rem; /* Increase font size */
+        margin-bottom: 8px; /* Increase margin */
+    }
+
+    &__message {
+        font-size: 1.25rem; /* Decrease font size */
+        color: #999; /* Lighter color for message */
+        margin-bottom: 16px; /* Decrease margin */
+        text-align: center;
+    }
+
+    &__buttonContainer {
+        flex-direction: column; /* Stack buttons vertically */
+        margin-top: 16px; /* Add margin above buttons */
+    }
+
+    &__confirmButton {
+        width: 100%;
+    }
+
+    &__cancelButton {
+        width: 100%; /* Make buttons full width */
+        margin-bottom: 8px; /* Add margin between buttons */
+    }
+}
