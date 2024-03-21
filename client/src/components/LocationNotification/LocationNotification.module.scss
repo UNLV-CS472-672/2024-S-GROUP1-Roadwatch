@@ -1,12 +1,16 @@
 .LocationNotification {
     &__container {
+        z-index: 9999;
+        position:absolute;
         background-color: #fff;
         border-radius: 8px;
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         padding: 32px; /* Increase padding as needed */
         max-width: 400px; /* Optionally, limit the width to prevent excessive stretching */
         margin: auto; /* Center the box horizontally */
-        height: 80vh; /* Set the height to take up 90% of the viewport height */
+        top: 50%; /* Position the component in the vertical center */
+        left: 50%; /* Position the component in the horizontal center */
+        transform: translate(-50%, -50%); /* Center the component */
         display: flex; /* Enable flexbox to align content vertically */
         flex-direction: column; /* Align content vertically */
         justify-content: space-between; /* Align content vertically */
