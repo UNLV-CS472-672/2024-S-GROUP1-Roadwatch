@@ -11,7 +11,6 @@ module.exports = {
     ],
     "overrides": [
         {
-            "root": true,
             "env": {
                 "node": true
             },
