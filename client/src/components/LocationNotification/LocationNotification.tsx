@@ -1,16 +1,11 @@
 import styles from './LocationNotification.module.scss';
-// import {Box, Card,CardContent, Typography, Stack} from '@mui/material'
 import {CustomButton} from '@/components'
-// import {styled} from '@mui/system'
 import UpdatedRoadWatchLogo from '../../assets/Updated_RoadWatch_Logo.svg'
 
 interface LocationNotificationProps {
     onConfirmButtonClick: () => void;
     onCancelButtonClick: () => void;
 }
-
-// const StyledNoti = styled(Card)()
-
 
 const LocationNotification: React.FC<LocationNotificationProps> = ({  
     onConfirmButtonClick, 
@@ -40,7 +35,7 @@ const LocationNotification: React.FC<LocationNotificationProps> = ({
                 </CustomButton>
               </div>
 
-              <div className={styles['LocationNotification__buttonContainer2']}>
+              <div className={styles['LocationNotification__buttonContainer']}>
               <CustomButton className={styles['LocationNotification__cancelButton']} onClick={onCancelButtonClick}>
                   CANCEL
                 </CustomButton>
