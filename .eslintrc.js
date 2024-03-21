@@ -1,5 +1,6 @@
 module.exports = {
     "env": {
+        "root": true,
         "browser": true,
         "es2021": true
     },
@@ -27,7 +28,6 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "root: true",
         "@typescript-eslint",
         "react"
     ],
