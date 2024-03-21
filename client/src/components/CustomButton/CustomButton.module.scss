@@ -1,0 +1,15 @@
+.CustomButton {
+        border-radius:  5px;
+        background-color: #fb7111; //color of our logo
+        height: 50%;
+        width: 100%;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 20px;
+        color: white;
+
+        &:hover {
+                background-color: #e1660e;
+        }
+}
+  
