@@ -1,19 +1,12 @@
 import styles from './CreateAccount.module.scss';
 import { useState } from 'react';
-import { Button, IconButton, Typography, TextField, AppBar, Toolbar } from '@mui/material';
+import { IconButton, Typography, AppBar, Toolbar } from '@mui/material';
 import { ArrowBackIos } from '@mui/icons-material';
+import { CustomButton, PasswordField } from '@/components';
 
 export default function CreateAccount(): JSX.Element {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  };
-
-  const handleConfirmPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setConfirmPassword(event.target.value);
-  };
 
   const handleClick = () => {
     // TODO: This button should pass in the password and finish creating the user
@@ -42,29 +35,9 @@ export default function CreateAccount(): JSX.Element {
         </Toolbar>
       </AppBar>
       <div style={{ padding: '20px' }}>
-        <TextField
-          id="password"
-          label="Password"
-          type="password"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-        <TextField
-          id="confirmPassword"
-          label="Confirm Password"
-          type="password"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          value={confirmPassword}
-          onChange={handleConfirmPasswordChange}
-        />
-        <Button onClick={handleClick} variant="contained" color="primary" fullWidth>
-          Create Account
-        </Button>
+        <PasswordField header="Password" setInputValue={setPassword} />
+        <PasswordField header="Confirm Password" setInputValue={setConfirmPassword} />
+        <CustomButton onClick={handleClick}>Create Account</CustomButton>
       </div>
     </div>
   );
