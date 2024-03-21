@@ -4,10 +4,9 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { useState } from 'react';
 import styles from './Login.module.scss';
-import { Button } from '@mui/material';
 import { useLoginMutation } from '@/store';
 import { useNavigate } from 'react-router-dom';
-import { TextField, PasswordField } from '@/components';
+import { TextField, PasswordField, CustomButton } from '@/components';
 import logo from '../../assets/Updated_RoadWatch_Logo.svg'; 
 
 export default function Login(): JSX.Element {
@@ -44,14 +43,15 @@ export default function Login(): JSX.Element {
 
   // Render login form
   return (
-    <div><p>Login Page</p>
       <div className={styles['Login__LoginContainer']}>
         <div className={styles['Login__whiteContainer']}>
-          <div className={styles['Login__logo']}> <img src = {logo} alt = {"Roadwatch Logo"}/></div>
+          <div className={styles['Login__logo']}> 
+            <img src = {logo} alt = {"Roadwatch Logo"}/>
+          </div>
           <TextField header="Username or Email" setInputValue={setUserInput} />
           <PasswordField header="Password" setInputValue={setPassword} />
           <div className={styles['Login__textCentered']}>
-            <Button onClick={handleLogin}>Login</Button>
+            <CustomButton onClick={handleLogin}>Login</CustomButton>
             <br /><br />
             <b>Forgot Password</b>
             <br /><br />
@@ -64,6 +64,5 @@ export default function Login(): JSX.Element {
           </div>
         </div>
       </div>
-    </div>
   );
 }
