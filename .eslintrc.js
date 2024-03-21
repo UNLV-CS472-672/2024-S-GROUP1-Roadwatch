@@ -27,6 +27,7 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
+        "root: true",
         "@typescript-eslint",
         "react"
     ],
