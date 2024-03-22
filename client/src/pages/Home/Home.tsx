@@ -7,7 +7,7 @@ import { Header, Map } from '@/components';
 
 export default function Home(): JSX.Element {
   const { data } = useGetUserQuery();
-  const location = useLocation();
+  useLocation();
   const reduxLocation = useSelector(selectLocation); // Get the location from the Redux store, automatically updated when the user changes location
 
   // State to control the readiness of the location
