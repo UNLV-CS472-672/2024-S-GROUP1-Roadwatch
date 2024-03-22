@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Chat, Community, GeneralInfo, Home, Login, Profile, SignUp } from '@/pages';
+import { Chat, Community, Home, Login, Profile, SignUp } from '@/pages';
+import GeneralInfo from '@/pages/SignUp/GeneralInfo/GeneralInfo';
 import { PrivateRoute } from '@/utils';
 
 // Collection of paths for the site.
@@ -45,3 +46,4 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     </Provider>
   </React.StrictMode>
 );
+
