@@ -24,7 +24,7 @@ export default function CommunityCard(): JSX.Element {
               </Typography>
               <br />
               <Typography>
-                <FmdGoodIcon sx={{ verticalAlign: 'middle' }} />
+                <FmdGoodIcon className={styles['CommunityCard__VerticalCenter']} />
                 123 street, USA
               </Typography>
               <CardActions disableSpacing>
@@ -34,18 +34,23 @@ export default function CommunityCard(): JSX.Element {
                   <Avatar sx={{ bgcolor: orange[500] }}>P</Avatar>
                 </AvatarGroup>
                 <Stack>
-                  <Typography sx={{ pl: 1, fontWeight: 'medium' }}>3 people</Typography>
-                  <Typography sx={{ pl: 1 }} color="text.secondary">
+                  <Typography className={styles['CommunityCard__NumberOfPeople']}>
+                    3 people
+                  </Typography>
+                  <Typography
+                    className={styles['CommunityCard__PeopleNames']}
+                    color="text.secondary"
+                  >
                     Keiko, Jason, and Peter
                   </Typography>
                 </Stack>
               </CardActions>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
               <img
                 src={communityImage}
-                alt="Community Image"
-                style={{ width: '200px', height: '200px', marginRight: '10px' }}
+                alt="Displaying location for the Community Page"
+                className={styles['CommunityCard__CommunityImage']}
               />
             </div>
           </Stack>
@@ -54,4 +59,3 @@ export default function CommunityCard(): JSX.Element {
     </div>
   );
 }
-

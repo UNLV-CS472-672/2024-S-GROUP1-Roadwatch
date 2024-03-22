@@ -1,3 +1,19 @@
 .CommunityCard {
+  &__VerticalCenter {
+    vertical-align: middle;
+  }
 
+  &__NumberOfPeople {
+    padding-left: 10px;
+    font-weight: 500 !important;
+  }
+
+  &__PeopleNames {
+    padding-left: 10px;
+  }
+  
+  &__CommunityImage {
+    width: 200px;
+    height: 200px;
+  }
 }
