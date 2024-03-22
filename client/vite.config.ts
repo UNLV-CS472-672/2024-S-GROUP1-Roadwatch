@@ -8,6 +8,7 @@ export default defineConfig({
   build: {
     // Ensures a CSS file is emitted during `build` step.
     cssCodeSplit: false, // TODO: Reassess if necessary towards end of project.
+    sourcemap: true, // Ensures sourcemaps are emitted during `build` step.
   },
   optimizeDeps: {
     include: ['@emotion/styled'],
