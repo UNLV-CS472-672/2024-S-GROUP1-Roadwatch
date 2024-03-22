@@ -15,3 +15,6 @@ export * from './Profile/Profile';
 
 export { default as SignUp } from './SignUp/SignUp';
 export * from './SignUp/SignUp';
+
+export { default as GeneralInfo } from './GeneralInfo/GeneralInfo';
+export * from './GeneralInfo/GeneralInfo';

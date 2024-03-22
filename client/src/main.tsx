@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Chat, Community, Home, Login, Profile, SignUp } from '@/pages';
+import { Chat, Community, GeneralInfo, Home, Login, Profile, SignUp } from '@/pages';
 import { PrivateRoute } from '@/utils';
 
 // Collection of paths for the site.
@@ -33,8 +33,11 @@ const router = createBrowserRouter([
     element: <SignUp />,
   },
   {
-    path: '/home',
+    path: '/home', // for testing only
     element: <Home />,
+  },
+    path: '/general-info',
+    element: <GeneralInfo />,
   }
 ]);
 
