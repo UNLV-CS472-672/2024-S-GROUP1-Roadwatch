@@ -3,6 +3,9 @@ import { useState } from 'react';
 import { IconButton, Typography, AppBar, Toolbar } from '@mui/material';
 import { ArrowBackIos } from '@mui/icons-material';
 import { CustomButton, PasswordField } from '@/components';
+// import { styled } from '@mui/system';
+//
+// const TopBar = styled(AppBar)();
 
 export default function CreateAccount(): JSX.Element {
   const [password, setPassword] = useState('');
@@ -16,11 +19,8 @@ export default function CreateAccount(): JSX.Element {
   };
 
   return (
-    <div className={styles['Create Account']}>
-      <AppBar
-        position="static"
-        sx={{ background: 'transparent', boxShadow: 'none', color: 'black' }}
-      >
+    <div className={styles['CreateAccount']}>
+      <AppBar position="static" className={styles['CreateAccount__TopBar']}>
         <Toolbar>
           <IconButton edge="start" color="inherit" aria-label="back">
             <ArrowBackIos />
@@ -28,13 +28,13 @@ export default function CreateAccount(): JSX.Element {
           <Typography
             variant="h6"
             component="div"
-            sx={{ display: 'flex', flexGrow: 1, justifyContent: 'center' }}
+            className={styles['CreateAccount__CenteredTypography']}
           >
             Create Account
           </Typography>
         </Toolbar>
       </AppBar>
-      <div style={{ padding: '20px' }}>
+      <div className={styles['CreateAccount__PaddedDiv']}>
         <PasswordField header="Password" setInputValue={setPassword} />
         <PasswordField header="Confirm Password" setInputValue={setConfirmPassword} />
         <CustomButton onClick={handleClick}>Create Account</CustomButton>
