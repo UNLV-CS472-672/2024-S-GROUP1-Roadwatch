@@ -4,7 +4,6 @@ import { Button, Box, Stack, Typography } from '@mui/material';
 import { TextField } from '@/components';
 
 function GeneralInfo(): JSX.Element {
-  // console.log('Rendering GeneralInfo...');
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
   const [userName, setUserName] = useState<string>('');
