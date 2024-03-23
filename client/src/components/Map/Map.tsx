@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import styles from './Map.module.scss';
 
 // Initialize initMap as a global function
@@ -9,7 +8,17 @@ declare global {
   }
 }
 
-const Map = ({ location }: { location: { lat: number; lng: number } }) => {
+interface Location {
+  lat: number;
+  lng: number;
+}
+
+interface MapProps {
+  location: Location;
+}
+
+
+const Map: React.FC<MapProps> = ({location}) => {
   useEffect(() => {
     const initMap = async () => {
       // Ensure the Google Maps API script has loaded
@@ -67,13 +76,6 @@ const Map = ({ location }: { location: { lat: number; lng: number } }) => {
   }, [location]); // Dependency array to re-run the effect if the location prop changes
 
   return <div id="map" className={styles['mapContainer']}></div>;
-};
-
-Map.propTypes = {
-  location: PropTypes.shape({
-    lat: PropTypes.number.isRequired,
-    lng: PropTypes.number.isRequired,
-  }).isRequired,
 };
 
 export default Map;
