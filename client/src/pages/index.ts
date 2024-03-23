@@ -18,3 +18,6 @@ export * from './SignUp/SignUp';
 
 export { default as CreateAccount } from './CreateAccount/CreateAccount';
 export * from './CreateAccount/CreateAccount';
+
+export { default as GeneralInfo } from './GeneralInfo/GeneralInfo';
+export * from './GeneralInfo/GeneralInfo';
