@@ -20,7 +20,7 @@ on:
 
 jobs:
   eslint_client:
-    name: Run eslint scanning
+    name: client eslint
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -46,7 +46,7 @@ jobs:
         continue-on-error: true
 
   eslint_server:
-    name: Run eslint scanning
+    name: server eslint
     runs-on: ubuntu-latest
     permissions:
       contents: read
