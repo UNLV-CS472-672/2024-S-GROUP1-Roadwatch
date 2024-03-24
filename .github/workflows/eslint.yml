@@ -35,6 +35,7 @@ jobs:
         run: |
           npm install eslint@8.56.0
           npm install @microsoft/eslint-formatter-sarif@2.1.7
+          npm install eslint-plugin-react@latest --save-dev
 
       - name: Run ESLint
         working-directory: ./client
