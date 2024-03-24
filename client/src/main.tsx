@@ -10,7 +10,7 @@ import { PrivateRoute } from '@/utils';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <PrivateRoute component={<Home />} />
+    element: <PrivateRoute component={<Home />} />,
   },
   {
     path: '/community',
@@ -33,6 +33,9 @@ const router = createBrowserRouter([
     element: <SignUp />,
   },
   {
+    path: '/create-account',
+    element: <CreateAccount />,
+  },
     path: '/general-info',
     element: <GeneralInfo />,
   },
