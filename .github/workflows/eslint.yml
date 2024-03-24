@@ -39,7 +39,7 @@ jobs:
       - name: Run ESLint
         working-directory: ./client
         run: npx eslint .
-          --config .eslintrc.cjs
+          --config .eslintrc.json
           --ext .js,.jsx,.ts,.tsx
           --format @microsoft/eslint-formatter-sarif
           --output-file eslint-results.sarif
