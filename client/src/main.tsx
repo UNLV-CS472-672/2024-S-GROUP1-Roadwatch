@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Chat, Community, GeneralInfo, Home, Login, Profile, SignUp } from '@/pages';
+import { Chat, Community, GeneralInfo, Home, Login, Profile, SignUp, CreateAccount } from '@/pages';
 import { PrivateRoute } from '@/utils';
 
 // Collection of paths for the site.
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <PrivateRoute component={<Home />} />
+    element: <PrivateRoute component={<Home />} />,
   },
   {
     path: '/community',
@@ -31,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: '/sign-up',
     element: <SignUp />,
+  },
+  {
+    path: '/create-account',
+    element: <CreateAccount />,
   },
   {
     path: '/general-info',
