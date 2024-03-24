@@ -36,6 +36,7 @@ const router = createBrowserRouter([
     path: '/create-account',
     element: <CreateAccount />,
   },
+  {
     path: '/general-info',
     element: <GeneralInfo />,
   },
