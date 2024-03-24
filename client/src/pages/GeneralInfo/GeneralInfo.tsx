@@ -11,6 +11,8 @@ function GeneralInfo(): JSX.Element {
   const [phone, setPhone] = useState<string>('');
   const [DoB, setDoB] = useState<string>('');
 
+  console.log(firstName, lastName, userName, email, phone, DoB);
+
   return (
     <div className={styles['GeneralInfo']}>
       <Box sx={{ width: '100%', maxWidth: 500 }}>
