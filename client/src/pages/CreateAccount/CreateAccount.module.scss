@@ -1,0 +1,18 @@
+.CreateAccount {
+  &__TopBar {
+    // Must be !important, otherwise styling doesn't work
+    background: transparent !important;
+    box-shadow: none !important;
+    color: black !important;
+  }
+
+  &__CenteredTypography {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+  }
+
+  &__PaddedDiv {
+    padding: 5%;
+  }
+}
