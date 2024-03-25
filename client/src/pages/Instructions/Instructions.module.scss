@@ -1,0 +1,14 @@
+.Instructions {
+    &__image{
+        max-width: 100%;
+        width: 10rem;
+        height: auto;
+        
+    }
+    &__item{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+}

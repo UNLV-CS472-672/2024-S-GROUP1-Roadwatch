@@ -21,3 +21,6 @@ export * from './CreateAccount/CreateAccount';
 
 export { default as GeneralInfo } from './GeneralInfo/GeneralInfo';
 export * from './GeneralInfo/GeneralInfo';
+
+export { default as Instructions } from './Instructions/Instructions';
+export * from './Instructions/Instructions';
