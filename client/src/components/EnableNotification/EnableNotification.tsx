@@ -6,9 +6,9 @@ interface EnableNotificationProps {
   onAllowButtonClick: () => void;
 }
 
-const EnableNotification: React.FC<EnableNotificationProps> = ( 
-  onAllowButtonClick) => { 
-
+// const EnableNotification: React.FC<EnableNotificationProps> = ( 
+//   onAllowButtonClick) => { 
+    export default function EnableNotification(props: EnableNotificationProps): JSX.Element {
       return (
         <div className={styles['EnableNotification__notifContainer']}>
             <div className={styles['EnableNotification__whiteContainer']}>
@@ -27,7 +27,7 @@ const EnableNotification: React.FC<EnableNotificationProps> = (
             </div>
 
             <div className={styles['EnableNotification__buttonContainer']}>
-              <CustomButton className={styles['EnableNotification__allowButton']} onClick={onAllowButtonClick}>
+              <CustomButton className={styles['EnableNotification__allowButton']} onClick={props.onAllowButtonClick}>
                 ALLOW
               </CustomButton>
             </div>
@@ -41,4 +41,4 @@ const EnableNotification: React.FC<EnableNotificationProps> = (
         );
 };
 
-export default EnableNotification;
+// export default EnableNotification;
