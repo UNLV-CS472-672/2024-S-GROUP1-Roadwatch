@@ -7,6 +7,10 @@
       "/^border/": ["px", "rem"]
     },
     "color-hex-length": "long",
-    "selector-class-pattern": null
+    "selector-class-pattern": null,
+    "declaration-empty-line-before": null,
+    "alpha-value-notation": null,
+    "color-function-notation": null,
+    "value-keyword-case": null
   }
 }
