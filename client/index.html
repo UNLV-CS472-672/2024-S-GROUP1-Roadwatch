@@ -2,12 +2,27 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <!-- Favicon for Safari only since they don't support SVG favicons. -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <!-- Favicon for every other browser. -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <!-- Icon used for the home screen application on iPhone and iPad. -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <!-- Used for certain Safari versions. -->
+    <link rel="mask-icon" href="/favicon.svg" color="#FB7110" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#FB7110" />
     <title>Roadwatch 🚦</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <meta
+      name="description"
+      content="Roadwatch revolutionizes how communities interact with and navigate their local road systems by providing a combined platform for reporting road conditions, alerting users to hazards, allowing community input, and influencing road infrastructure improvements."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div id="root"></div>
