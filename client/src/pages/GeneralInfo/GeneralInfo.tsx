@@ -2,6 +2,8 @@ import styles from './GeneralInfo.module.scss';
 import { useState } from 'react';
 import { Button, Box, Stack, Typography } from '@mui/material';
 import { TextField } from '@/components';
+import { Navbar } from '@/components';
+
 
 function GeneralInfo(): JSX.Element {
   const [firstName, setFirstName] = useState<string>('');
@@ -37,6 +39,9 @@ function GeneralInfo(): JSX.Element {
           </Box>
         </Stack>
       </Box>
+    
+    <Navbar />
+
     </div>
   );
 }

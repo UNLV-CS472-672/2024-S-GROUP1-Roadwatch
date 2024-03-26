@@ -3,17 +3,19 @@ import styles from './Home.module.scss';
 import { useGetUserQuery, selectLocation } from '@/store';
 import { useSelector } from 'react-redux';
 import { useLocation } from '@/hooks';
-import { Header, Map } from '@/components';
+import { Header, Map, CustomButton, Navbar } from '@/components';
+
+// Image imports
+import logo from 'src/assets/Updated_RoadWatch_Logo.svg';
+import warning_marker from 'src/assets/markers/WarningSign.svg';
 
 export default function Home(): JSX.Element {
   const { data } = useGetUserQuery();
   useLocation();
-  const reduxLocation = useSelector(selectLocation); // Get the location from the Redux store, automatically updated when the user changes location
+  const reduxLocation = useSelector(selectLocation); // Get the location from the Redux store, if available
 
-  // State to control the readiness of the location
-  // The map will load when location is set.
+  // The map will load when location is set or user asks to load.
   const [isLocationReady, setIsLocationReady] = useState(false);
-  // State to control forcing the map to load with default location.
   const [forceLoadMap, setForceLoadMap] = useState(false);
 
   // Standardize the location object to match the expected format for the Map component
@@ -22,9 +24,8 @@ export default function Home(): JSX.Element {
     : undefined;
 
   useEffect(() => {
-    // If the location is transformed, set the location as ready
     if (transformedLocation) {
-      setIsLocationReady(true);
+      setIsLocationReady(true); // sets the location to ready.
     }
   }, [transformedLocation]); // Depend on transformedLocation
 
@@ -35,17 +36,25 @@ export default function Home(): JSX.Element {
 
   return (
     <div className={styles['Home']}>
+      <Navbar />
       <Header userName={data?.userName} />
       {/* Render the Map if the location is ready or if the user has requested to load the map */}
       {isLocationReady || forceLoadMap ? (
         <Map location={transformedLocation || { lat: 36.18811, lng: -115.176468 }} />
       ) : (
-        // This button is only shown if the Map is not yet ready to be displayed
-        <button onClick={handleLoadMapClick} className={styles['loadMapButton']}>
-          Load Map Anyway
-        </button>
+        <div>
+          <img src={warning_marker} className={styles['Home__center_image']} />
+          <p className={styles['Home__alert_message']}>
+            Location not available.
+            <br></br>
+            Would you like to load the map anyway?
+          </p>
+          <div className={styles['Home__button_container']}>
+            <CustomButton onClick={handleLoadMapClick}>Load Map Anyway</CustomButton>
+          </div>
+        </div>
       )}
-      <h1>Logged in as {`${data?.userName}`}</h1>
+      <img src={logo} alt="RoadWatch Logo" className={styles['Home__logo']} />
     </div>
   );
 }
