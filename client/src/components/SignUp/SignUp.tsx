@@ -4,9 +4,14 @@ import { useState } from 'react';
 import { Button, IconButton, Stack, Box, Typography } from '@mui/material';
 import { ArrowBackIos } from '@mui/icons-material';
 import { TextField } from '@/components';
-//import TextField from '@mui/material/TextField';
 
-export default function SignUp({ updateData, handleBack, handleSubmit }): JSX.Element {
+interface SignUpProps {
+  updateData: (field: string, value: string) => void;
+  handleBack: () => void;
+  handleSubmit: () => void;
+}
+
+export default function SignUp({ updateData, handleBack, handleSubmit }: SignUpProps): JSX.Element {
   {
     /* input values from the text fields, will be used later */
   }

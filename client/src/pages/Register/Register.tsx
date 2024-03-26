@@ -3,24 +3,9 @@ import { GeneralInfo, SignUp, CreateAccount } from '@/components';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-interface FormData {
-  firstName: string;
-  lastName: string;
-  userName: string;
-  email: string;
-  phone: string;
-  DoB: string;
-  address: string;
-  city: string;
-  state: string;
-  zip: string;
-  password: string;
-  confirmPassword: string;
-}
-
 export default function Register(): JSX.Element {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     userName: '',
@@ -35,7 +20,7 @@ export default function Register(): JSX.Element {
     confirmPassword: '',
   });
 
-  const updateFormData = (field: keyof FormData, value: string) => {
+  const updateFormData = (field: string, value: string) => {
     setFormData((prevData) => ({
       ...prevData,
       [field]: value,

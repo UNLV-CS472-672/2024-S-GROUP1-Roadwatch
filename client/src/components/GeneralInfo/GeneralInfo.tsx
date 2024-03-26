@@ -3,7 +3,12 @@ import { useState } from 'react';
 import { Button, Box, Stack, Typography } from '@mui/material';
 import { TextField } from '@/components';
 
-function GeneralInfo({ updateData, handleSubmit }): JSX.Element {
+interface GeneralInfoProps {
+  updateData: (field: string, value: string) => void;
+  handleSubmit: () => void;
+}
+
+function GeneralInfo({ updateData, handleSubmit }: GeneralInfoProps): JSX.Element {
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
   const [userName, setUserName] = useState<string>('');

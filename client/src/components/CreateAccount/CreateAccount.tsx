@@ -3,11 +3,18 @@ import { useState } from 'react';
 import { IconButton, Typography, AppBar, Toolbar } from '@mui/material';
 import { ArrowBackIos } from '@mui/icons-material';
 import { CustomButton, PasswordField } from '@/components';
-// import { styled } from '@mui/system';
-//
-// const TopBar = styled(AppBar)();
 
-export default function CreateAccount({ updateData, handleBack, handleSubmit }): JSX.Element {
+interface CreateAccountProps {
+  updateData: (field: string, value: string) => void;
+  handleBack: () => void;
+  handleSubmit: () => void;
+}
+
+export default function CreateAccount({
+  updateData,
+  handleBack,
+  handleSubmit,
+}: CreateAccountProps): JSX.Element {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
