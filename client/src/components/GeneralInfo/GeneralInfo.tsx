@@ -1,7 +1,7 @@
 import styles from './GeneralInfo.module.scss';
 import { useState } from 'react';
-import { Button, Box, Stack, Typography } from '@mui/material';
-import { TextField } from '@/components';
+import { AppBar, Toolbar, Typography } from '@mui/material';
+import { CustomButton, TextField } from '@/components';
 
 interface GeneralInfoProps {
   updateData: (field: string, value: string) => void;
@@ -18,42 +18,40 @@ function GeneralInfo({ updateData, handleSubmit }: GeneralInfoProps): JSX.Elemen
 
   return (
     <div className={styles['GeneralInfo']}>
-      <Box sx={{ width: '100%', maxWidth: 500 }}>
-        <Typography variant="h4" gutterBottom align="center">
-          General Info
-        </Typography>
-      </Box>
-
-      <Box sx={{ width: '100%', maxWidth: 500 }}>
-        <Stack spacing={2}>
-          <TextField header="First Name" setInputValue={setFirstName} type="text" />
-          <TextField header="Last Name" setInputValue={setLastName} type="text" />
-          <TextField header="Username" setInputValue={setUserName} type="text" />
-          <TextField header="Email" setInputValue={setEmail} type="email" />
-          <TextField header="Phone" setInputValue={setPhone} type="tel" />
-          <TextField header="Date of Birth" setInputValue={setDoB} type="date" />
-
-          <Box sx={{ mt: 2, display: 'flex', justifyContent: 'center' }}>
-            <Button
-              variant="contained"
-              size="large"
-              color="success"
-              onClick={() => {
-                // Store all form data
-                updateData('firstName', firstName);
-                updateData('lastName', lastName);
-                updateData('userName', userName);
-                updateData('email', email);
-                updateData('phone', phone);
-                updateData('DoB', DoB);
-                handleSubmit();
-              }}
-            >
-              Continue
-            </Button>
-          </Box>
-        </Stack>
-      </Box>
+      <meta name="viewport" content="initial-scale=1, width=device-width" />
+      <AppBar position="static" className={styles['GeneralInfo__TopBar']}>
+        <Toolbar>
+          <Typography
+            variant="h4"
+            component="div"
+            className={styles['GeneralInfo__CenteredTypography']}
+          >
+            General Info
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <div className={styles['GeneralInfo__PaddedDiv']}>
+        <TextField header="First Name" setInputValue={setFirstName} type="text" />
+        <TextField header="Last Name" setInputValue={setLastName} type="text" />
+        <TextField header="Username" setInputValue={setUserName} type="text" />
+        <TextField header="Email" setInputValue={setEmail} type="email" />
+        <TextField header="Phone" setInputValue={setPhone} type="tel" />
+        <TextField header="Date of Birth" setInputValue={setDoB} type="date" />
+        <CustomButton
+          onClick={() => {
+            // Store all form data
+            updateData('firstName', firstName);
+            updateData('lastName', lastName);
+            updateData('userName', userName);
+            updateData('email', email);
+            updateData('phone', phone);
+            updateData('DoB', DoB);
+            handleSubmit();
+          }}
+        >
+          Continue
+        </CustomButton>
+      </div>
     </div>
   );
 }

@@ -20,13 +20,14 @@ export default function CreateAccount({
 
   return (
     <div className={styles['CreateAccount']}>
+      <meta name="viewport" content="initial-scale=1, width=device-width" />
       <AppBar position="static" className={styles['CreateAccount__TopBar']}>
         <Toolbar>
           <IconButton edge="start" color="inherit" aria-label="back" onClick={handleBack}>
             <ArrowBackIos />
           </IconButton>
           <Typography
-            variant="h6"
+            variant="h4"
             component="div"
             className={styles['CreateAccount__CenteredTypography']}
           >

@@ -1,4 +1,7 @@
 .CreateAccount {
+  font-family: Lato, sans-serif;
+  padding: 20px;
+
   &__TopBar {
     // Must be !important, otherwise styling doesn't work
     background: transparent !important;
