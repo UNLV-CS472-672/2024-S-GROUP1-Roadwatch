@@ -7,4 +7,4 @@ export { default as ResetPassword } from './ResetPassword/ResetPassword';
 export { default as LocationNotification } from './LocationNotification/LocationNotification'
 export { default as ResetPasswordVerify } from './ResetPasswordVerify/ResetPasswordVerify';
 export { default as CommunityCard } from './CommunityCard/CommunityCard';
-
+export { default as EnableNotification } from './EnableNotification/EnableNotification';
