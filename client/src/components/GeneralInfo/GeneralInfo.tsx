@@ -3,15 +3,13 @@ import { useState } from 'react';
 import { Button, Box, Stack, Typography } from '@mui/material';
 import { TextField } from '@/components';
 
-function GeneralInfo(): JSX.Element {
+function GeneralInfo({ updateData, handleSubmit }): JSX.Element {
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
   const [userName, setUserName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [DoB, setDoB] = useState<string>('');
-
-  console.log(firstName, lastName, userName, email, phone, DoB);
 
   return (
     <div className={styles['GeneralInfo']}>
@@ -31,7 +29,21 @@ function GeneralInfo(): JSX.Element {
           <TextField header="Date of Birth" setInputValue={setDoB} type="date" />
 
           <Box sx={{ mt: 2, display: 'flex', justifyContent: 'center' }}>
-            <Button variant="contained" size="large" color="success">
+            <Button
+              variant="contained"
+              size="large"
+              color="success"
+              onClick={() => {
+                // Store all form data
+                updateData('firstName', firstName);
+                updateData('lastName', lastName);
+                updateData('userName', userName);
+                updateData('email', email);
+                updateData('phone', phone);
+                updateData('DoB', DoB);
+                handleSubmit();
+              }}
+            >
               Continue
             </Button>
           </Box>

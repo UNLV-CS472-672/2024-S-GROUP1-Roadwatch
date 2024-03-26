@@ -7,22 +7,15 @@ import { CustomButton, PasswordField } from '@/components';
 //
 // const TopBar = styled(AppBar)();
 
-export default function CreateAccount(): JSX.Element {
+export default function CreateAccount({ updateData, handleBack, handleSubmit }): JSX.Element {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
-  const handleClick = () => {
-    // TODO: This button should pass in the password and finish creating the user
-    // For now, it simply prints the values
-    console.log(password);
-    console.log(confirmPassword);
-  };
 
   return (
     <div className={styles['CreateAccount']}>
       <AppBar position="static" className={styles['CreateAccount__TopBar']}>
         <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="back">
+          <IconButton edge="start" color="inherit" aria-label="back" onClick={handleBack}>
             <ArrowBackIos />
           </IconButton>
           <Typography
@@ -37,7 +30,15 @@ export default function CreateAccount(): JSX.Element {
       <div className={styles['CreateAccount__PaddedDiv']}>
         <PasswordField header="Password" setInputValue={setPassword} />
         <PasswordField header="Confirm Password" setInputValue={setConfirmPassword} />
-        <CustomButton onClick={handleClick}>Create Account</CustomButton>
+        <CustomButton
+          onClick={() => {
+            updateData('password', password);
+            updateData('confirmPassword', confirmPassword);
+            handleSubmit();
+          }}
+        >
+          Create Account
+        </CustomButton>
       </div>
     </div>
   );
