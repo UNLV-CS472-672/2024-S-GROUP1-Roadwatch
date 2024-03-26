@@ -5,9 +5,6 @@ import notifBell from '../../assets/EnableNotif_bell.svg';
 interface EnableNotificationProps {
   onAllowButtonClick: () => void;
 }
-
-// const EnableNotification: React.FC<EnableNotificationProps> = ( 
-//   onAllowButtonClick) => { 
     export default function EnableNotification(props: EnableNotificationProps): JSX.Element {
       return (
         <div className={styles['EnableNotification__notifContainer']}>
@@ -41,4 +38,3 @@ interface EnableNotificationProps {
         );
 };
 
-// export default EnableNotification;
