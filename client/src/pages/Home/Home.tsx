@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Home.module.scss';
 import { useGetUserQuery, selectLocation } from '@/store';
 import { useSelector } from 'react-redux';

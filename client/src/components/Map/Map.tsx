@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import styles from './Map.module.scss';
 
 // Initialize initMap as a global function
 declare global {
   interface Window {
     initMap: () => void;
+    google: any;
   }
 }
 
@@ -31,8 +32,8 @@ const Map: React.FC<MapProps> = ({location}) => {
       const position = { lat: location.lat, lng: location.lng };
 
       // Import the Google Maps library and AdvancedMarkerElement
-      const { Map } = await google.maps.importLibrary('maps');
-      const { AdvancedMarkerElement } = await google.maps.importLibrary('marker');
+      const { Map } = await window.google.maps.importLibrary('maps');
+      const { AdvancedMarkerElement } = await window.google.maps.importLibrary('marker');
 
       // Map initialization
       const map = new Map(document.getElementById('map'), {
