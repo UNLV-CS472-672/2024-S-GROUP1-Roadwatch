@@ -3,11 +3,18 @@ import { useState } from 'react';
 import { IconButton, Typography, AppBar, Toolbar } from '@mui/material';
 import { ArrowBackIos } from '@mui/icons-material';
 import { CustomButton, PasswordField } from '@/components';
-// import { styled } from '@mui/system';
-//
-// const TopBar = styled(AppBar)();
 
-export default function CreateAccount(): JSX.Element {
+interface CreateAccountProps {
+  updateData: (field: string, value: string) => void;
+  handleBack: () => void;
+  handleSubmit: () => void;
+}
+
+export default function CreateAccount({
+  updateData,
+  handleBack,
+  handleSubmit,
+}: CreateAccountProps): JSX.Element {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -16,18 +23,17 @@ export default function CreateAccount(): JSX.Element {
       alert('Please fill in all required fields.');
       return;
     }
-  
-    // TODO: This button should pass in the password and finish creating the user
-    // For now, it simply prints the values
-    console.log(password);
-    console.log(confirmPassword);
+
+    updateData('password', password);
+    updateData('confirmPassword', confirmPassword);
+    handleSubmit();
   };
 
   return (
     <div className={styles['CreateAccount']}>
       <AppBar position="static" className={styles['CreateAccount__TopBar']}>
         <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="back">
+          <IconButton edge="start" color="inherit" aria-label="back" onClick={handleBack}>
             <ArrowBackIos />
           </IconButton>
           <Typography

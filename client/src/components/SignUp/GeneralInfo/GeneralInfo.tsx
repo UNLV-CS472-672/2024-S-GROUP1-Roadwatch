@@ -3,7 +3,12 @@ import { useState } from 'react';
 import { Box, Stack, Typography } from '@mui/material';
 import { TextField, CustomButton, Navbar } from '@/components';
 
-function GeneralInfo(): JSX.Element {
+interface GeneralInfoProps {
+  updateData: (field: string, value: string) => void;
+  handleSubmit: () => void;
+}
+
+function GeneralInfo({ updateData, handleSubmit }: GeneralInfoProps): JSX.Element {
   // State variables to store form input values
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
@@ -18,7 +23,15 @@ function GeneralInfo(): JSX.Element {
       alert('Please fill in all required fields.');
       return;
     }
-    console.log('Button clicked!');
+
+    // Store all form data
+    updateData('firstName', firstName);
+    updateData('lastName', lastName);
+    updateData('userName', userName);
+    updateData('email', email);
+    updateData('phone', phone);
+    updateData('DoB', DoB);
+    handleSubmit();
   };
 
   return (
@@ -54,4 +67,3 @@ function GeneralInfo(): JSX.Element {
 }
 
 export default GeneralInfo;
-
