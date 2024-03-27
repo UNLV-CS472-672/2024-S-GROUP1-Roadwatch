@@ -9,3 +9,4 @@ export { default as Map } from './Map/Map';
 export { default as LocationNotification } from './LocationNotification/LocationNotification'
 export { default as ResetPasswordVerify } from './ResetPasswordVerify/ResetPasswordVerify';
 export { default as CommunityCard } from './CommunityCard/CommunityCard';
+export { default as EnableNotification } from './EnableNotification/EnableNotification';
