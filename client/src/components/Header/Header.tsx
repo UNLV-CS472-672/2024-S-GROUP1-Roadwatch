@@ -38,24 +38,36 @@ export default function Header(props: HeaderProps): JSX.Element {
       {/* Quick action buttons */}
       <div className={styles['Header__horizontal_container']}>
         <div className={styles['Header__quick_action_wrapper']}>
-          <div className={styles['Header__block']}>
+          <div className={styles['Header__block']}
+            onClick={throwError}
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                throwError();
+              }
+            }} // Adds keyboard interaction
+          >
             {/* <CustomButton onClick={throwError} >Help</CustomButton> */}
             <img
               src={notification_icon}
               alt="Notification Icon"
-              onClick={throwError}
               className={styles['Header__quick_action_button']}
-              tabIndex={0}
             />
           </div>
-          <div className={styles['Header__block']}>
+          <div className={styles['Header__block']}
+            onClick={throwError}
+            tabIndex={1}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                throwError();
+              }
+            }} // Adds keyboard interaction
+          >
             {/* <CustomButton onClick={throwError}>Notifications</CustomButton> */}
             <img
               src={help_icon}
               alt="Help Icon"
-              onClick={throwError}
               className={styles['Header__quick_action_button']}
-              tabIndex={1}
             />
           </div>
         </div>
