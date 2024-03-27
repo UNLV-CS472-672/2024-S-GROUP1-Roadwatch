@@ -34,4 +34,12 @@ module.exports = {
       },
     ],
   },
+
+  // Removes TypeScript linting from all JavaScript files while preserving ESLint's linting rules.
+  overrides: [
+    {
+      extends: ['plugin:@typescript-eslint/disable-type-checked'],
+      files: ['./**/*.js'],
+    },
+  ],
 };

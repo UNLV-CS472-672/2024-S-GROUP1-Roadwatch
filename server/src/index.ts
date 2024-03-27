@@ -4,6 +4,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import { connect } from './config/database';
 import userRoutes from './routes/User';
+import pushNotificationRoutes from './routes/PushNotification';
 
 dotenv.config();
 const app = express();
@@ -16,6 +17,7 @@ app.use(bodyParser.json()); // this is needed to parse body of requests
 
 // routes
 app.use('/api/user', userRoutes);
+app.use('/api/push-notification', pushNotificationRoutes);
 
 // server start
 app.listen(port, () => {

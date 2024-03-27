@@ -12,3 +12,4 @@ export { default as CommunityCard } from './CommunityCard/CommunityCard';
 export { default as GeneralInfo } from './GeneralInfo/GeneralInfo';
 export { default as SignUp } from './SignUp/SignUp';
 export { default as CreateAccount } from './CreateAccount/CreateAccount';
+export { default as EnableNotification } from './EnableNotification/EnableNotification';

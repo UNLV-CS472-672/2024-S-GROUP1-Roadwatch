@@ -13,7 +13,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       devOptions: {
         enabled: true,
+        type: 'module',
       },
+      strategies: 'injectManifest', // Allows us to use a custom service worker script.
       includeAssets: ['favicon.ico', 'favicon.svg', 'apple-touch-icon.png'],
       manifest: {
         name: 'Roadwatch',

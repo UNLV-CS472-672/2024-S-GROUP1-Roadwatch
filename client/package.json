@@ -16,6 +16,7 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
     "@googlemaps/js-api-loader": "^1.16.6",
+    "@microsoft/eslint-formatter-sarif": "^2.1.7",
     "@mui/icons-material": "^5.15.14",
     "@mui/material": "^5.15.14",
     "@reduxjs/toolkit": "^2.2.1",
@@ -23,7 +24,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.1.0",
-    "react-router-dom": "^6.22.2"
+    "react-router-dom": "^6.22.2",
+    "react-material-ui-carousel":"^3.4.2"
   },
   "devDependencies": {
     "@testing-library/react": "^14.2.1",
@@ -53,6 +55,8 @@
     "vite": "^5.1.0",
     "vite-plugin-pwa": "^0.19.7",
     "vite-tsconfig-paths": "^4.3.1",
-    "vitest": "^1.3.1"
+    "vitest": "^1.3.1",
+    "workbox-core": "^7.0.0",
+    "workbox-precaching": "^7.0.0"
   }
 }

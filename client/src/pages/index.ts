@@ -15,3 +15,6 @@ export * from './Profile/Profile';
 
 export { default as Register } from './Register/Register';
 export * from './Register/Register';
+
+export { default as Instructions } from './Instructions/Instructions';
+export * from './Instructions/Instructions';
