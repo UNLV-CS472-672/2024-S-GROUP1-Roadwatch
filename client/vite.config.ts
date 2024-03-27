@@ -1,14 +1,20 @@
 /// <reference types="vitest" />
-import { defineConfig } from 'vite';
+import { defineConfig, Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { VitePWA } from 'vite-plugin-pwa';
+
+const warningsToIgnore = [
+  ['SOURCEMAP_ERROR', "Can't resolve original location of error"],
+  ['INVALID_ANNOTATION', 'contains an annotation that Rollup cannot interpret'],
+];
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
     tsconfigPaths(),
+    muteWarningsPlugin(warningsToIgnore),
     VitePWA({
       registerType: 'autoUpdate',
       devOptions: {
@@ -67,3 +73,48 @@ export default defineConfig({
     },
   },
 });
+
+/**
+ * Suppresses sourcemap errors when building.
+ * Sourced from {@link https://github.com/vitejs/vite/issues/15012#issuecomment-1825035992}.
+ * @param warningsToIgnore Warnings that appear during the build step that should be ignored.
+ * @returns A new Vite Plugin.
+ */
+function muteWarningsPlugin(warningsToIgnore: string[][]): Plugin {
+  const mutedMessages = new Set();
+  return {
+    name: 'mute-warnings',
+    enforce: 'pre',
+    config: (userConfig) => ({
+      build: {
+        rollupOptions: {
+          onwarn(warning, defaultHandler) {
+            if (warning.code) {
+              const muted = warningsToIgnore.find(
+                ([code, message]) => code == warning.code && warning.message.includes(message)
+              );
+
+              if (muted) {
+                mutedMessages.add(muted.join());
+                return;
+              }
+            }
+
+            if (userConfig.build?.rollupOptions?.onwarn) {
+              userConfig.build.rollupOptions.onwarn(warning, defaultHandler);
+            } else {
+              defaultHandler(warning);
+            }
+          },
+        },
+      },
+    }),
+    closeBundle() {
+      const diff = warningsToIgnore.filter((x) => !mutedMessages.has(x.join()));
+      if (diff.length > 0) {
+        this.warn('Some of your muted warnings never appeared during the build process:');
+        diff.forEach((m) => this.warn(`- ${m.join(': ')}`));
+      }
+    },
+  };
+}
