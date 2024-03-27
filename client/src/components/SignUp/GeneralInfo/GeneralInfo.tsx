@@ -49,17 +49,9 @@ function GeneralInfo({ updateData, handleSubmit }: GeneralInfoProps): JSX.Elemen
           <TextField header="Email" setInputValue={setEmail} type="email" />
           <TextField header="Phone" setInputValue={setPhone} type="tel" />
           <TextField header="Date of Birth" setInputValue={setDoB} type="date" />
-
-          <Box
-            className={styles['GeneralInfo__continueHereContainer']}
-            sx={{ mt: 2, display: 'flex', justifyContent: 'center' }}
-          >
-            {/* Custom button for form submission */}
-            <CustomButton className={styles['GeneralInfo__continueHereBtn']} onClick={handleClick}>
-              Continue
-            </CustomButton>
-          </Box>
         </Stack>
+        {/* Custom button for form submission */}
+        <CustomButton onClick={handleClick}>Continue</CustomButton>
       </Box>
       <Navbar />
     </div>

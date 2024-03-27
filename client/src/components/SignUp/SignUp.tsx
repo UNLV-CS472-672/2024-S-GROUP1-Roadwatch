@@ -1,7 +1,7 @@
 import styles from './SignUp.module.scss';
 import { useState } from 'react';
 
-import { IconButton, Stack, Box, Typography } from '@mui/material';
+import { AppBar, Toolbar, IconButton, Stack, Box, Typography } from '@mui/material';
 import { ArrowBackIos } from '@mui/icons-material';
 import { TextField, CustomButton } from '@/components';
 
@@ -31,38 +31,31 @@ export default function SignUp({ updateData, handleBack, handleSubmit }: SignUpP
   };
 
   return (
-    <div className={styles['SignUp']}>
+    <div className={styles['SignUp__Container']}>
       {/* for mobile to desktop scaling */}
       <meta name="viewport" content="initial-scale=1, width=device-width" />
 
-      {/* create the header */}
-      <Box sx={{ width: '100%', maxWidth: 500 }}>
-        <Stack direction="row" spacing={1} alignItems={'center'} justifyContent={'space-evenly'}>
-          <IconButton aria-label="back" onClick={handleBack}>
-            <ArrowBackIos />
-          </IconButton>
-          <Typography variant="h4" gutterBottom align="center" sx={{ flexGrow: 1 }}>
-            Location
-          </Typography>
-        </Stack>
-      </Box>
+      <Box className={styles['SignUp__whiteContainer']} sx={{ width: '75%', maxWidth: 500 }}>
+        {/* create the header */}
+        <AppBar position="static" className={styles['SignUp__TopBar']}>
+          <Toolbar>
+            <IconButton edge="start" color="inherit" aria-label="back" onClick={handleBack}>
+              <ArrowBackIos />
+            </IconButton>
+            <Typography variant="h4" className={styles['SignUp__CenteredTypography']}>
+              Location
+            </Typography>
+          </Toolbar>
+        </AppBar>
 
-      {/* create the input fields and the titles for the fields */}
-      <Box sx={{ width: '100%', maxWidth: 500 }}>
+        {/* create the input fields and the titles for the fields */}
         <Stack spacing={2}>
           <TextField header="Address" setInputValue={setAddressValue} type="address" />
           <TextField header="City" setInputValue={setCityValue} type="city" />
           <TextField header="State" setInputValue={setStateValue} type="state" />
           <TextField header="Zip Code" setInputValue={setZipValue} type="zip" />
-
-          {/* Add a continue button 
-                color can be changed if need be, default is blue*/}
-          <Box sx={{ mt: 2, display: 'flex', justifyContent: 'center' }}>
-            <CustomButton variant="contained" size="large" color="success" onClick={handleClick}>
-              Continue
-            </CustomButton>
-          </Box>
         </Stack>
+        <CustomButton onClick={handleClick}>Continue</CustomButton>
       </Box>
     </div>
   );
