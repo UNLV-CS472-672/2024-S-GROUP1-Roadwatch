@@ -24,11 +24,16 @@ module.exports = {
     tsconfigRootDir: __dirname,
   },
   rules: {
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
+    'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
   },
+
+  // Removes TypeScript linting from all JavaScript files while preserving ESLint's linting rules.
+  overrides: [
+    {
+      extends: ['plugin:@typescript-eslint/disable-type-checked'],
+      files: ['./**/*.js'],
+    },
+  ],
 };
