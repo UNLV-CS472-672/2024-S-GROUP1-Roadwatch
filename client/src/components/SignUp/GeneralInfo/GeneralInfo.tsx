@@ -1,20 +1,20 @@
 import styles from './GeneralInfo.module.scss';
 import { useState } from 'react';
 import { Box, Stack, Typography } from '@mui/material';
-import { TextField, CustomButton, Navbar} from '@/components';
+import { TextField, CustomButton, Navbar } from '@/components';
 
 function GeneralInfo(): JSX.Element {
   // State variables to store form input values
-  const [, setFirstName] = useState<string>('');
-  const [, setLastName] = useState<string>('');
-  const [, setUserName] = useState<string>('');
-  const [, setEmail] = useState<string>('');
-  const [, setPhone] = useState<string>('');
-  const [, setDoB] = useState<string>('');
+  const [firstName, setFirstName] = useState<string>('');
+  const [lastName, setLastName] = useState<string>('');
+  const [userName, setUserName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [phone, setPhone] = useState<string>('');
+  const [DoB, setDoB] = useState<string>('');
 
   // Function to handle button click
   const handleClick = () => {
-    if (!setFirstName || !setLastName || !setUserName || !setEmail || !setPhone || !setDoB) {
+    if (!firstName || !lastName || !userName || !email || !phone || !DoB) {
       alert('Please fill in all required fields.');
       return;
     }
@@ -23,7 +23,7 @@ function GeneralInfo(): JSX.Element {
 
   return (
     <div className={styles['GeneralInfo__Container']}>
-      <Box className={styles['GeneralInfo__whiteContainer']} sx={{ width: '75%', maxWidth: 500}}>
+      <Box className={styles['GeneralInfo__whiteContainer']} sx={{ width: '75%', maxWidth: 500 }}>
         <Typography variant="h4" gutterBottom align="center" sx={{ paddingBottom: '20px' }}>
           General Info
         </Typography>
@@ -37,7 +37,10 @@ function GeneralInfo(): JSX.Element {
           <TextField header="Phone" setInputValue={setPhone} type="tel" />
           <TextField header="Date of Birth" setInputValue={setDoB} type="date" />
 
-          <Box className={styles['GeneralInfo__continueHereContainer']} sx={{ mt: 2, display: 'flex', justifyContent: 'center' }}>
+          <Box
+            className={styles['GeneralInfo__continueHereContainer']}
+            sx={{ mt: 2, display: 'flex', justifyContent: 'center' }}
+          >
             {/* Custom button for form submission */}
             <CustomButton className={styles['GeneralInfo__continueHereBtn']} onClick={handleClick}>
               Continue
@@ -51,3 +54,4 @@ function GeneralInfo(): JSX.Element {
 }
 
 export default GeneralInfo;
+
