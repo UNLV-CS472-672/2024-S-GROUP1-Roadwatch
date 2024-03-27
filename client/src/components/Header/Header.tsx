@@ -39,6 +39,7 @@ export default function Header(props: HeaderProps): JSX.Element {
       <div className={styles['Header__horizontal_container']}>
         <div className={styles['Header__quick_action_wrapper']}>
           <div className={styles['Header__block']}
+            role="button"
             onClick={throwError}
             tabIndex={0}
             onKeyDown={(e) => {
@@ -55,8 +56,9 @@ export default function Header(props: HeaderProps): JSX.Element {
             />
           </div>
           <div className={styles['Header__block']}
+            role="button"
             onClick={throwError}
-            tabIndex={1}
+            tabIndex={0}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 throwError();
