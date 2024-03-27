@@ -59,9 +59,12 @@ export default defineConfig({
     include: ['@emotion/styled'],
   },
   test: {
-    exclude: ['**/*.cjs', '**/index.ts'],
+    environment: 'jsdom',
+    exclude: ['**/*.cjs', '**/index.ts', './tests/setupTest.ts'],
     coverage: {
-      exclude: ['**/*.cjs', '**/index.ts'],
+      provider: 'v8',
+      exclude: ['**/*.cjs', '**/index.ts', './tests/setupTest.ts'],
     },
+    setupFiles: './tests/setupTest.ts',
   },
 });
