@@ -1,7 +1,7 @@
 import styles from './GeneralInfo.module.scss';
 import { useState } from 'react';
 import { Box, Stack, Typography } from '@mui/material';
-import { TextField, CustomButton } from '@/components';
+import { TextField, CustomButton, Navbar} from '@/components';
 
 function GeneralInfo(): JSX.Element {
   // State variables to store form input values
@@ -41,6 +41,7 @@ function GeneralInfo(): JSX.Element {
           </Box>
         </Stack>
       </Box>
+      <Navbar />
     </div>
   );
 }
