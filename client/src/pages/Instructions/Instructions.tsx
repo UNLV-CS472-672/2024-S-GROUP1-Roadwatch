@@ -3,9 +3,6 @@ import Carousel from 'react-material-ui-carousel';
 import { CustomButton } from '@/components';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/Updated_RoadWatch_Logo.svg';
-//import image1 from './images/image1.svg';
-//import image2 from './images/image2.svg';
-//import image3 from './images/image3.svg';
 
 interface Item {
   name: string;
