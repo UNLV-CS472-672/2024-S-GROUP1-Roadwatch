@@ -23,11 +23,37 @@ I could make it so that they share packages and have 1 eslint config but that ge
 Go to docker https://www.docker.com/products/docker-desktop/ and download the desktop application.
 Ensure you have virtualization enabled.
 run the commands in a separate terminal:
+
 - cd server
 - docker-compose up
 
 You'll now have a local mongodb docker container running that you can use.
 
+# Generating VAPID Keys
+
+In order to send push notifications on `localhost`, you need to set up VAPID keys in your `.env` file.
+These keys enable a secure line of communication between the server, service worker, and client. Additionally, some browsers
+like Chrome make having them a _requirement_ to send push notifications at all.
+
+To create these keys, run the following command:
+
+```console
+$ npx web-push generate-vapid-keys
+```
+
+For the **Public Key**, add the following line to you `.env` file in the `server` folder:
+
+```
+NOTIFICATION_PUBLIC_KEY=<your public key>
+```
+
+For the **Private Key**, add the following line:
+
+```
+NOTIFICATION_PRIVATE_KEY=<your private key>
+```
+
+Adding these keys should allow you to successfully send push notifications within the PWA.
 
 # React + TypeScript + Vite
 
@@ -48,12 +74,12 @@ If you are developing a production application, we recommend updating the config
 export default {
   // other rules...
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
+    ecmaVersion: "latest",
+    sourceType: "module",
+    project: ["./tsconfig.json", "./tsconfig.node.json"],
     tsconfigRootDir: __dirname,
   },
-}
+};
 ```
 
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`

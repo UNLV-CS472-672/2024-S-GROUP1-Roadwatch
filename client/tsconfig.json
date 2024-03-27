@@ -37,6 +37,7 @@
       "@/hooks/*": ["./src/hooks/*"]
     }
   },
-  "include": ["src", "tests"],
+  "include": ["src"],
+  "exclude": ["public"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
