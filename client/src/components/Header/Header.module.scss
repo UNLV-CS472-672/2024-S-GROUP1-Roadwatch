@@ -14,6 +14,7 @@ body {
     height: 5vh;
     width: auto;
     padding: 10px;
+    border-bottom: orangered 5px solid;
   }
   &__horizontal_container {
     display: flex;
@@ -67,7 +68,7 @@ body {
   }
 
   &__quick_action_button {
-    width: auto;
+    width: 40px;
     height: auto;
     appearance: none;
   }
