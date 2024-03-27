@@ -1,0 +1,35 @@
+.Instructions {
+    &__container{
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center horizontally */
+        justify-content: center; /* Center vertically */
+        min-height: 100vh; /* Adjust height as needed */
+        background-color: white;
+        height: auto
+    }
+
+    &__whiteContainer{
+        background-color: white; /* Set the background color of the container */
+        padding: 20px; /* Add padding to create space between the content and the container */
+        border-radius: 10px; /* Add rounded corners to the container */
+        width: 80%; /* Adjust the width of the container */
+        max-width: 280px; /* Set maximum width for responsiveness */
+        min-height: 600px;
+    }
+
+    &__center{
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center horizontally */
+        justify-content: center; /* Center vertically */
+        height: auto
+    }
+
+    &__cimage{
+        max-width: 100%;
+        width: 12rem;
+        height: auto;
+    }
+
+}
