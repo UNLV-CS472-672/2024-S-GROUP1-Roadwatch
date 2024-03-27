@@ -19,5 +19,8 @@ export * from './SignUp/SignUp';
 export { default as CreateAccount } from './CreateAccount/CreateAccount';
 export * from './CreateAccount/CreateAccount';
 
+export { default as Instructions } from './Instructions/Instructions';
+export * from './Instructions/Instructions';
+
 export { default as GeneralInfo } from './SignUp/GeneralInfo/GeneralInfo';
 export * from './SignUp/GeneralInfo/GeneralInfo';
