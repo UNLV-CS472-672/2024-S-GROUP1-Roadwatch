@@ -12,13 +12,18 @@ interface SignUpProps {
 }
 
 export default function SignUp({ updateData, handleBack, handleSubmit }: SignUpProps): JSX.Element {
-  {
-    /* input values from the text fields, will be used later */
-  }
   const [address, setAddressValue] = useState<string>('');
   const [city, setCityValue] = useState<string>('');
   const [state, setStateValue] = useState<string>('');
   const [zip, setZipValue] = useState<string>('');
+
+  const handleClick = () => {
+    updateData('address', address);
+    updateData('city', city);
+    updateData('state', state);
+    updateData('zip', zip);
+    handleSubmit();
+  };
 
   return (
     <div className={styles['SignUp']}>
@@ -43,17 +48,7 @@ export default function SignUp({ updateData, handleBack, handleSubmit }: SignUpP
         <TextField header="City" setInputValue={setCityValue} type="city" />
         <TextField header="State" setInputValue={setStateValue} type="state" />
         <TextField header="Zip Code" setInputValue={setZipValue} type="zip" />
-        <CustomButton
-          onClick={() => {
-            updateData('address', address);
-            updateData('city', city);
-            updateData('state', state);
-            updateData('zip', zip);
-            handleSubmit();
-          }}
-        >
-          Continue
-        </CustomButton>
+        <CustomButton onClick={handleClick}>Continue</CustomButton>
       </div>
     </div>
   );

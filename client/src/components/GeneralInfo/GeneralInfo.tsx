@@ -16,6 +16,17 @@ function GeneralInfo({ updateData, handleSubmit }: GeneralInfoProps): JSX.Elemen
   const [phone, setPhone] = useState<string>('');
   const [DoB, setDoB] = useState<string>('');
 
+  const handleClick = () => {
+    // Store all form data
+    updateData('firstName', firstName);
+    updateData('lastName', lastName);
+    updateData('userName', userName);
+    updateData('email', email);
+    updateData('phone', phone);
+    updateData('DoB', DoB);
+    handleSubmit();
+  };
+
   return (
     <div className={styles['GeneralInfo']}>
       <meta name="viewport" content="initial-scale=1, width=device-width" />
@@ -37,20 +48,7 @@ function GeneralInfo({ updateData, handleSubmit }: GeneralInfoProps): JSX.Elemen
         <TextField header="Email" setInputValue={setEmail} type="email" />
         <TextField header="Phone" setInputValue={setPhone} type="tel" />
         <TextField header="Date of Birth" setInputValue={setDoB} type="date" />
-        <CustomButton
-          onClick={() => {
-            // Store all form data
-            updateData('firstName', firstName);
-            updateData('lastName', lastName);
-            updateData('userName', userName);
-            updateData('email', email);
-            updateData('phone', phone);
-            updateData('DoB', DoB);
-            handleSubmit();
-          }}
-        >
-          Continue
-        </CustomButton>
+        <CustomButton onClick={handleClick}>Continue</CustomButton>
       </div>
     </div>
   );
