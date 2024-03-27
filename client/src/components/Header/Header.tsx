@@ -45,15 +45,17 @@ export default function Header(props: HeaderProps): JSX.Element {
               alt="Notification Icon"
               onClick={throwError}
               className={styles['Header__quick_action_button']}
+              tabIndex={0}
             />
           </div>
           <div className={styles['Header__block']}>
             {/* <CustomButton onClick={throwError}>Notifications</CustomButton> */}
             <img
               src={help_icon}
-              alt="Notification Icon"
+              alt="Help Icon"
               onClick={throwError}
               className={styles['Header__quick_action_button']}
+              tabIndex={1}
             />
           </div>
         </div>
