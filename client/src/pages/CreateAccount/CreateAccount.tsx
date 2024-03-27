@@ -12,6 +12,11 @@ export default function CreateAccount(): JSX.Element {
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleClick = () => {
+    if (!password || !confirmPassword) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+  
     // TODO: This button should pass in the password and finish creating the user
     // For now, it simply prints the values
     console.log(password);

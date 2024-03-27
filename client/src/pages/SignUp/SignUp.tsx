@@ -45,7 +45,20 @@ export default function SignUp(): JSX.Element {
           {/* Add a continue button 
                 color can be changed if need be, default is blue*/}
           <Box sx={{ mt: 2, display: 'flex', justifyContent: 'center' }}>
-            <Button variant="contained" size="large" color="success">
+            <Button
+              variant="contained"
+              size="large"
+              color="success"
+              onClick={() => {
+                if (!address || !city || !state || !zip) {
+                  alert('Please fill in all required fields.');
+                  return;
+                }
+
+                // TODO: Continue to the next page
+                console.log(address, city, state, zip);
+              }}
+            >
               Continue
             </Button>
           </Box>

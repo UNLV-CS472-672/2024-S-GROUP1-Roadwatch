@@ -14,6 +14,10 @@ function GeneralInfo(): JSX.Element {
 
   // Function to handle button click
   const handleClick = () => {
+    if (!setFirstName || !setLastName || !setUserName || !setEmail || !setPhone || !setDoB) {
+      alert('Please fill in all required fields.');
+      return;
+    }
     console.log('Button clicked!');
   };
 
