@@ -16,9 +16,7 @@ export default defineConfig({
     react(),
     tsconfigPaths(),
     muteWarningsPlugin(warningsToIgnore),
-    nodePolyfills({
-      include: ['buffer'], // Adds `node:` polyfill to Node modules used in the service worker.
-    }),
+    nodePolyfills(), // Adds `node:` polyfill to Node modules used in the service worker.
     VitePWA({
       registerType: 'autoUpdate',
       devOptions: {
