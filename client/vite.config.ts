@@ -3,6 +3,7 @@ import { defineConfig, Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { VitePWA } from 'vite-plugin-pwa';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 const warningsToIgnore = [
   ['SOURCEMAP_ERROR', "Can't resolve original location of error"],
@@ -15,6 +16,9 @@ export default defineConfig({
     react(),
     tsconfigPaths(),
     muteWarningsPlugin(warningsToIgnore),
+    nodePolyfills({
+      include: ['buffer'], // Adds `node:` polyfill to Node modules used in the service worker.
+    }),
     VitePWA({
       registerType: 'autoUpdate',
       devOptions: {
