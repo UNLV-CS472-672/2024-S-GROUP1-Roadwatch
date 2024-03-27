@@ -1,9 +1,9 @@
 import styles from './SignUp.module.scss';
 import { useState } from 'react';
 
-import { Button, IconButton, Stack, Box, Typography } from '@mui/material';
+import { IconButton, Stack, Box, Typography } from '@mui/material';
 import { ArrowBackIos } from '@mui/icons-material';
-import { TextField } from '@/components';
+import { TextField, CustomButton } from '@/components';
 //import TextField from '@mui/material/TextField';
 
 export default function SignUp(): JSX.Element {
@@ -16,6 +16,16 @@ export default function SignUp(): JSX.Element {
   const [zip, setZipValue] = useState<string>('');
 
   console.log(address, city, state, zip);
+
+  const handleClick = () => {
+    if (!address || !city || !state || !zip) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+
+    // TODO: Continue to the next page
+    console.log(address, city, state, zip);
+  };
 
   return (
     <div className={styles['SignUp']}>
@@ -45,9 +55,14 @@ export default function SignUp(): JSX.Element {
           {/* Add a continue button 
                 color can be changed if need be, default is blue*/}
           <Box sx={{ mt: 2, display: 'flex', justifyContent: 'center' }}>
-            <Button variant="contained" size="large" color="success">
+            <CustomButton
+              variant="contained"
+              size="large"
+              color="success"
+              onClick={handleClick}
+            >
               Continue
-            </Button>
+            </CustomButton>
           </Box>
         </Stack>
       </Box>
