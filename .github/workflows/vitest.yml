@@ -48,5 +48,5 @@ jobs:
 
           - name: Run Vitest Coverage
             working-directory: ./client
-            run: npm coverage
+            run: npm run coverage
                 
