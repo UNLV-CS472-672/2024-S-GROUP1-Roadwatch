@@ -22,11 +22,12 @@ jobs:
             uses: actions/checkout@v3
 
           - name: Install Jest
-            working-directory: ./client
+            working-directory: ./server
             run: |
               npm install
+              
           - name: Run Jest
-            working-directory: ./client
+            working-directory: ./server
             run: npm test
         
     jest_coverage:
@@ -41,9 +42,10 @@ jobs:
             uses: actions/checkout@v3
 
           - name: Install Jest
-            working-directory: ./client
+            working-directory: ./server
             run: |
                 npm install
+
           - name: Run Jest Coverage
-            working-directory: ./client
+            working-directory: ./server
             run: npm run coverage
