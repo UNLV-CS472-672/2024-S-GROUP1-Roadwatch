@@ -1,7 +1,7 @@
 import styles from './GeneralInfo.module.scss';
 import { useState } from 'react';
 import { Box, Stack, Typography } from '@mui/material';
-import { TextField, CustomButton, Navbar } from '@/components';
+import { TextField, CustomButton } from '@/components';
 
 interface GeneralInfoProps {
   updateData: (field: string, value: string) => void;
@@ -53,7 +53,6 @@ function GeneralInfo({ updateData, handleSubmit }: GeneralInfoProps): JSX.Elemen
         {/* Custom button for form submission */}
         <CustomButton onClick={handleClick}>Continue</CustomButton>
       </Box>
-      <Navbar />
     </div>
   );
 }
