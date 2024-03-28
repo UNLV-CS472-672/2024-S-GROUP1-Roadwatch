@@ -1,4 +1,4 @@
-name: Jest
+name: Testing
 
 on:
   push:
@@ -6,8 +6,6 @@ on:
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ "main" ]
-  schedule:
-    - cron: '24 21 * * 4'
 
 jobs:
     jest_run:
@@ -26,12 +24,16 @@ jobs:
             run: |
               npm install
               
-          - name: Run Jest
+          - name: Run Jest Test
             working-directory: ./server
             run: npm test
-        
-    jest_coverage:
-        name: run jest coverage
+
+          - name: Run Jest Coverage
+            working-directory: ./server
+            run: npm run coverage
+    
+    vitest_run:
+        name: run vitest
         runs-on: ubuntu-latest
         permissions:
             contents: read
@@ -41,11 +43,16 @@ jobs:
           - name: Checkout code
             uses: actions/checkout@v3
 
-          - name: Install Jest
-            working-directory: ./server
+          - name: Install Vitest
+            working-directory: ./client
             run: |
-                npm install
+              npm install
+              
+          - name: Run Vitest Test
+            working-directory: ./client
+            run: npm test
 
-          - name: Run Jest Coverage
-            working-directory: ./server
+          - name: Run Vitest Coverage
+            working-directory: ./client
             run: npm run coverage
+            
