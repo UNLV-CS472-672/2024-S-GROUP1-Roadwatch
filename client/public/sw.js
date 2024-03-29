@@ -51,5 +51,6 @@ self.addEventListener('activate', async () => {
 
 // Intercept push notifications sent by the server and display them on the client.
 self.addEventListener('push', (e) => {
+  console.log('here');
   e.waitUntil(self.registration.showNotification('Roadwatch', { body: e.data.text(), icon: Logo }));
 });

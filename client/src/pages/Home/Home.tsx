@@ -15,7 +15,7 @@ export default function Home(): JSX.Element {
   const { data } = useGetUserQuery();
   useLocation();
   const reduxLocation = useSelector(selectLocation); // Get the location from the Redux store, if available
-  const [sendNotification, notificationResult] = useLazySendNotificationQuery();
+  const [sendNotification] = useLazySendNotificationQuery();
 
   // The map will load when location is set or user asks to load.
   const [isLocationReady, setIsLocationReady] = useState(false);
@@ -38,13 +38,11 @@ export default function Home(): JSX.Element {
   };
 
   const handleNotificationRequest = async () => {
-    const permission = await Notification.requestPermission().catch((e) => console.error(e));
-    console.log(permission);
+    await Notification.requestPermission().catch((e) => console.error(e));
   };
 
   const handleNotificationSend = async () => {
     await sendNotification({ message: 'Hello Jordan!' });
-    console.log(notificationResult);
   };
 
   const handleNotificationSubscription = async () => {};

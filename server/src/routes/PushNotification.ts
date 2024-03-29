@@ -1,4 +1,4 @@
-import express, { response } from 'express';
+import express from 'express';
 import webpush from 'web-push';
 import dotenv from 'dotenv';
 
