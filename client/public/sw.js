@@ -1,7 +1,7 @@
 import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching';
 import { clientsClaim } from 'workbox-core';
 import { Buffer } from 'buffer';
-import Logo from './icons/512.png';
+import Logo from '/src/assets/icons/logo_512.png';
 
 // Removes previously cached assets when a new version of the PWA is installed.
 cleanupOutdatedCaches();
@@ -22,13 +22,21 @@ clientsClaim();
  * @returns The response from the server after requesting to store the user's subscription object.
  */
 const saveSubscription = async (subscription) => {
-  const response = await fetch('http://localhost:3000/api/push-notification/save-subscription', {
+  let response;
+
+  fetch('http://localhost:3000/api/push-notification/save-subscription', {
     method: 'post',
     headers: { 'Content-type': 'application/json' },
     body: JSON.stringify(subscription),
-  });
+  })
+    .then((e) => {
+      response = e.json();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 
-  return response.json();
+  return response;
 };
 
 // Runs as soon as the service worker is created and registered.
@@ -44,7 +52,7 @@ self.addEventListener('activate', async () => {
       ),
     })
     .catch((error) => {
-      console.error(error);
+      console.log(error);
     });
   await saveSubscription(subscription);
 });
