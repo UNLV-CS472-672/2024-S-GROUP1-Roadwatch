@@ -16,6 +16,8 @@ const tempDatabase = []; // TODO: Replace with database implemenation after link
 
 router.post('/save-subscription', (req, res) => {
   tempDatabase.push(req.body); // TODO: Change to use actual database.
+  // @ts-expect-error Don't need to worry about this until database implementation.
+  console.log('Subscribed', tempDatabase[0]);
   res.json({ status: 200, message: 'Subscription saved!' });
 });
 

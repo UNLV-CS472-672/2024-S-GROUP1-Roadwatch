@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 import { useLocation } from '@/hooks';
 import { Header, Map, CustomButton, Navbar } from '@/components';
 
+import { useLazySendNotificationQuery } from '@/store';
+
 // Image imports
 import logo from 'src/assets/Updated_RoadWatch_Logo.svg';
 import warning_marker from 'src/assets/markers/WarningSign.svg';
@@ -13,6 +15,7 @@ export default function Home(): JSX.Element {
   const { data } = useGetUserQuery();
   useLocation();
   const reduxLocation = useSelector(selectLocation); // Get the location from the Redux store, if available
+  const [sendNotification, notificationResult] = useLazySendNotificationQuery();
 
   // The map will load when location is set or user asks to load.
   const [isLocationReady, setIsLocationReady] = useState(false);
@@ -34,6 +37,17 @@ export default function Home(): JSX.Element {
     setForceLoadMap(true);
   };
 
+  const handleNotificationRequest = async () => {
+    const permission = await Notification.requestPermission().catch((e) => console.error(e));
+  };
+
+  const handleNotificationSend = async () => {
+    await sendNotification({ message: 'Hello Jordan!' });
+    console.log(notificationResult);
+  };
+
+  const handleNotificationSubscription = async () => {};
+
   return (
     <div className={styles['Home']}>
       <Navbar />
@@ -43,7 +57,7 @@ export default function Home(): JSX.Element {
         <Map location={transformedLocation || { lat: 36.18811, lng: -115.176468 }} />
       ) : (
         <div>
-          <img src={warning_marker} className={styles['Home__center_image']} alt='warning icon'/>
+          <img src={warning_marker} className={styles['Home__center_image']} alt="warning icon" />
           <p className={styles['Home__alert_message']}>
             Location not available.
             <br></br>
@@ -52,6 +66,9 @@ export default function Home(): JSX.Element {
           <div className={styles['Home__button_container']}>
             <CustomButton onClick={handleLoadMapClick}>Load Map Anyway</CustomButton>
           </div>
+          <button onClick={handleNotificationRequest}>Request Notification Permission</button>
+          <button onClick={handleNotificationSubscription}>Subscribe to Notifications</button>
+          <button onClick={handleNotificationSend}>Send Notification</button>
         </div>
       )}
       <img src={logo} alt="RoadWatch Logo" className={styles['Home__logo']} />
