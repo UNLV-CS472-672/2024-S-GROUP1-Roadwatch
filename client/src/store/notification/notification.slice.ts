@@ -1,13 +1,17 @@
 import { apiSlice } from '../api';
-import { SendResult } from 'web-push';
 
 interface INotification {
   message: string;
 }
 
+interface INotficationResponse {
+  status: number;
+  message: string;
+}
+
 export const notification = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    sendNotification: builder.query<SendResult, INotification>({
+    sendNotification: builder.query<INotficationResponse, INotification>({
       query: (notification) =>
         `/push-notification/send-notification?message=${notification.message}`,
     }),

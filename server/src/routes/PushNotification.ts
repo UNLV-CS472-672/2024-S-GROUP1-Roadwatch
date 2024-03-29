@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { response } from 'express';
 import webpush from 'web-push';
 import dotenv from 'dotenv';
 
@@ -21,14 +21,30 @@ router.post('/save-subscription', (req, res) => {
   res.json({ status: 200, message: 'Subscription saved!' });
 });
 
-router.get('/send-notification', async (req, res) => {
-  const notificationResponse = await webpush.sendNotification(
-    // @ts-expect-error Don't need to worry about this until database implementation.
-    tempDatabase[0],
-    req.query.message as string
-  );
+router.get('/send-notification', (req, res) => {
+  webpush
+    .sendNotification(
+      // @ts-expect-error Don't need to worry about this until database implementation.
+      tempDatabase[0],
+      req.query.message as string
+    )
+    .then((response) => {
+      console.log('Notification sent');
+      res.json({
+        status: response.statusCode,
+        message: 'Message sent successfully!',
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      res.json({
+        status: 500,
+        message: 'Message was not sent.',
+      });
+    });
 
-  res.json({ ...notificationResponse });
+  // res.json({ ...notificationResponse });
+  // console.log('notification sent');
 });
 
 export default router;
