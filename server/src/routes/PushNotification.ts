@@ -6,7 +6,7 @@ const router = express.Router();
 dotenv.config();
 
 webpush.setVapidDetails(
-  'https://cs472-roadwatch.vercel.app/', // TODO: Replace with final registered domain (e.g., https://roadwatch.com )
+  'mailto:kingj32@unlv.nevada.edu', // TODO: Replace with final registered domain (e.g., https://roadwatch.com )
   process.env.NOTIFICATION_PUBLIC_KEY as string,
   process.env.NOTIFICATION_PRIVATE_KEY as string
 );
