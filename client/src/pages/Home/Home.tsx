@@ -39,6 +39,7 @@ export default function Home(): JSX.Element {
 
   const handleNotificationRequest = async () => {
     const permission = await Notification.requestPermission().catch((e) => console.error(e));
+    console.log(permission);
   };
 
   const handleNotificationSend = async () => {
