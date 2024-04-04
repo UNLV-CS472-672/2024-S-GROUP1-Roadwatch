@@ -5,10 +5,10 @@ import { validateToken } from '../middlewares';
 const router = express.Router();
 
 // define routes
-router.get('/', validateToken, markerController.getMarkers);
+router.get('/', markerController.getMarkers);
 
-router.post('/', validateToken, markerController.saveMarker);
+router.post('/', markerController.saveMarker);
 
-router.delete('/', validateToken, markerController.deleteMarker);
+router.delete('/', markerController.deleteMarker);
 
 export default router; 
