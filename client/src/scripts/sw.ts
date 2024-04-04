@@ -22,7 +22,6 @@ clientsClaim();
 
 // Intercept push notifications sent by the server and display them on the client.
 self.addEventListener('push', (event) => {
-  console.log('received notification');
   event.waitUntil(
     self.registration.showNotification('Roadwatch', { body: event.data?.text(), icon: Logo })
   );
