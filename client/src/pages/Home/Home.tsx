@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useLocation } from '@/hooks';
 import { Header, Map, CustomButton, Navbar } from '@/components';
 
-import { useLazySendNotificationQuery, useSaveSubscriptionMutation } from '@/store';
+import { useLazySendNotificationQuery, useNotificationSubscriptionMutation } from '@/store';
 
 // Image imports
 import logo from 'src/assets/Updated_RoadWatch_Logo.svg';
@@ -37,36 +37,14 @@ export default function Home(): JSX.Element {
   };
 
   const [sendNotification] = useLazySendNotificationQuery();
-  const [subscribe] = useSaveSubscriptionMutation();
-
-  const handleNotificationRequest = async () => {
-    await Notification.requestPermission().catch((e) => console.error(e));
-  };
+  const [subscribe] = useNotificationSubscriptionMutation();
 
   const handleNotificationSend = async () => {
     await sendNotification({ id: data?.id as string, message: 'Hello Jordan!' });
   };
 
-  const handleNotificationSubscription = async () => {
-    if (Notification.permission !== 'granted') return;
-
-    const registration = await navigator.serviceWorker.getRegistration();
-
-    if (!registration) return;
-
-    try {
-      const applicationServerKey = Buffer.from(
-        'BOF8HhjS9CbQ4Qf7SvJ7wehXHUveQ1iNBSkZSYifNIWVVmgadYmye5vy7wmAkFYVpIHnTXhyc5N6myssnwRcono',
-        'base64'
-      );
-      const subscription: PushSubscription = await registration.pushManager.subscribe({
-        userVisibleOnly: true, // Makes user see every notification sent.
-        applicationServerKey,
-      });
-      await subscribe({ id: data?.id as string, subscription });
-    } catch (error) {
-      console.error(error);
-    }
+  const handleNotificationSubscribe = async () => {
+    await subscribe({ id: data?.id as string });
   };
 
   const handleUnregisterServiceWorker = async () => {
@@ -94,8 +72,7 @@ export default function Home(): JSX.Element {
             <CustomButton onClick={handleLoadMapClick}>Load Map Anyway</CustomButton>
           </div>
           <button onClick={handleUnregisterServiceWorker}>Unregister SW</button>
-          <button onClick={handleNotificationRequest}>Request Notification Permission</button>
-          <button onClick={handleNotificationSubscription}>Subscribe to Notifications</button>
+          <button onClick={handleNotificationSubscribe}>Subscribe to Notifications</button>
           <button onClick={handleNotificationSend}>Send Notification</button>
         </div>
       )}
