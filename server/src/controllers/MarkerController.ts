@@ -5,9 +5,9 @@ import Marker from '../models/Marker';
 export const getMarkers = async (req: Request, res: Response) => {
     try {
         const markers = await Marker.find({}, 'longitude latitude'); // Projection to include only longitude and latitude
-        res.status(200).json(markers);
+        return res.status(200).json(markers);
     } catch (error) {
-        res.status(500).json({ message: 'Internal server error' });
+        return res.status(500).json({ message: 'Internal server error' });
     }
 };
 
