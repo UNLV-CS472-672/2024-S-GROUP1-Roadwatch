@@ -30,7 +30,7 @@ export const saveSubscription = async (req: Request, res: Response) => {
     await User.findByIdAndUpdate(id, {
       notificationSubscription: subscription,
     });
-    console.log('Successfully subscribed to notifications!', subscription);
+    console.log('Successfully subscribed user to receive notifications!');
   } catch (error) {
     console.error('Notification Subscription Error: ', error);
     return res.sendStatus(400);
@@ -43,7 +43,7 @@ export const saveSubscription = async (req: Request, res: Response) => {
 
 // TODO: Create "send to all users" endpoint
 
-// TODO: Change `sendNotification` to POST instead of GET
+// TODO: Change `sendNotification` to POST instead of GET (that way we can use the body to send more stuff over and in a more secure way)
 
 export const sendNotification = async (req: Request, res: Response) => {
   if (!req.query.id) {
@@ -66,6 +66,7 @@ export const sendNotification = async (req: Request, res: Response) => {
       user.notificationSubscription
     );
 
+    // TODO: Send a stringified JSON object to the user containing all the notification stuff. This can be parsed later in the `push` event using the `json()` method.
     const response = await webpush.sendNotification(
       subscription,
       req.query.message as string
