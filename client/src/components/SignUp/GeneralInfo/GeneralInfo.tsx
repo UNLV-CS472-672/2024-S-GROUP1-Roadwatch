@@ -1,14 +1,22 @@
 import styles from './GeneralInfo.module.scss';
 import { useState } from 'react';
 import { Box, Stack, Typography } from '@mui/material';
+import { Stepper, Step, StepLabel } from '@mui/material';
 import { TextField, CustomButton } from '@/components';
 
 interface GeneralInfoProps {
+  currentStep: number;
+  steps: string[];
   updateData: (field: string, value: string) => void;
   handleSubmit: () => void;
 }
 
-function GeneralInfo({ updateData, handleSubmit }: GeneralInfoProps): JSX.Element {
+function GeneralInfo({
+  currentStep,
+  steps,
+  updateData,
+  handleSubmit,
+}: GeneralInfoProps): JSX.Element {
   // State variables to store form input values
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
@@ -40,6 +48,14 @@ function GeneralInfo({ updateData, handleSubmit }: GeneralInfoProps): JSX.Elemen
         <Typography variant="h4" gutterBottom align="center" sx={{ paddingBottom: '20px' }}>
           General Info
         </Typography>
+
+        <Stepper activeStep={currentStep} alternativeLabel>
+          {steps.map((label) => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
 
         <Stack spacing={2}>
           {/* Text fields for user input */}

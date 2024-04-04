@@ -1,7 +1,6 @@
 import styles from './Register.module.scss';
 import { GeneralInfo, SignUp, CreateAccount } from '@/components';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import { Stepper, Step, StepLabel } from '@mui/material';
 import { useState } from 'react';
 
 const steps = ['General Info', 'Location', 'Create Account'];
@@ -59,24 +58,24 @@ export default function Register(): JSX.Element {
 
   return (
     <div className={styles['Register']}>
-      <Stepper activeStep={currentStep} alternativeLabel>
-        {steps.map((label) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
       <Routes>
         <Route
           path="/"
           element={
-            <GeneralInfo updateData={updateFormData} handleSubmit={handleSubmitGeneralInfo} />
+            <GeneralInfo
+              currentStep={currentStep}
+              steps={steps}
+              updateData={updateFormData}
+              handleSubmit={handleSubmitGeneralInfo}
+            />
           }
         />
         <Route
           path="/sign-up"
           element={
             <SignUp
+              currentStep={currentStep}
+              steps={steps}
               updateData={updateFormData}
               handleBack={handleBackSignUp}
               handleSubmit={handleSubmitSignUp}
@@ -87,6 +86,8 @@ export default function Register(): JSX.Element {
           path="/create-account"
           element={
             <CreateAccount
+              currentStep={currentStep}
+              steps={steps}
               updateData={updateFormData}
               handleBack={handleBackCreateAccount}
               handleSubmit={handleSubmitCreateAccount}
