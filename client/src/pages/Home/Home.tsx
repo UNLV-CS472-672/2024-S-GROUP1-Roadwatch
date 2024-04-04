@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useLocation } from '@/hooks';
 import { Header, Map, CustomButton, Navbar } from '@/components';
 
-import { useLazySendNotificationQuery } from '@/store';
+import { useLazySendNotificationQuery, useSaveSubscriptionMutation } from '@/store';
 
 // Image imports
 import logo from 'src/assets/Updated_RoadWatch_Logo.svg';
@@ -15,7 +15,6 @@ export default function Home(): JSX.Element {
   const { data } = useGetUserQuery();
   useLocation();
   const reduxLocation = useSelector(selectLocation); // Get the location from the Redux store, if available
-  const [sendNotification] = useLazySendNotificationQuery();
 
   // The map will load when location is set or user asks to load.
   const [isLocationReady, setIsLocationReady] = useState(false);
@@ -37,15 +36,43 @@ export default function Home(): JSX.Element {
     setForceLoadMap(true);
   };
 
+  const [sendNotification] = useLazySendNotificationQuery();
+  const [subscribe] = useSaveSubscriptionMutation();
+
   const handleNotificationRequest = async () => {
     await Notification.requestPermission().catch((e) => console.error(e));
   };
 
   const handleNotificationSend = async () => {
-    await sendNotification({ message: 'Hello Jordan!' });
+    await sendNotification({ id: data?.id as string, message: 'Hello Jordan!' });
   };
 
-  const handleNotificationSubscription = async () => {};
+  const handleNotificationSubscription = async () => {
+    if (Notification.permission !== 'granted') return;
+
+    const registration = await navigator.serviceWorker.getRegistration();
+
+    if (!registration) return;
+
+    try {
+      const applicationServerKey = Buffer.from(
+        'BOF8HhjS9CbQ4Qf7SvJ7wehXHUveQ1iNBSkZSYifNIWVVmgadYmye5vy7wmAkFYVpIHnTXhyc5N6myssnwRcono',
+        'base64'
+      );
+      const subscription: PushSubscription = await registration.pushManager.subscribe({
+        userVisibleOnly: true, // Makes user see every notification sent.
+        applicationServerKey,
+      });
+      await subscribe({ id: data?.id as string, subscription });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleUnregisterServiceWorker = async () => {
+    const registration = await navigator.serviceWorker.getRegistration();
+    await registration?.unregister();
+  };
 
   return (
     <div className={styles['Home']}>
@@ -56,6 +83,7 @@ export default function Home(): JSX.Element {
         <Map location={transformedLocation || { lat: 36.18811, lng: -115.176468 }} />
       ) : (
         <div>
+          <p>{Notification.permission}</p>
           <img src={warning_marker} className={styles['Home__center_image']} alt="warning icon" />
           <p className={styles['Home__alert_message']}>
             Location not available.
@@ -65,6 +93,7 @@ export default function Home(): JSX.Element {
           <div className={styles['Home__button_container']}>
             <CustomButton onClick={handleLoadMapClick}>Load Map Anyway</CustomButton>
           </div>
+          <button onClick={handleUnregisterServiceWorker}>Unregister SW</button>
           <button onClick={handleNotificationRequest}>Request Notification Permission</button>
           <button onClick={handleNotificationSubscription}>Subscribe to Notifications</button>
           <button onClick={handleNotificationSend}>Send Notification</button>
