@@ -1,11 +1,9 @@
 import styles from './Register.module.scss';
 import { GeneralInfo, SignUp, CreateAccount } from '@/components';
-import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-const steps = ['General Info', 'Location', 'Create Account'];
-
 export default function Register(): JSX.Element {
+  const steps = ['General Info', 'Location', 'Create Account'];
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({
     firstName: '',
@@ -22,8 +20,6 @@ export default function Register(): JSX.Element {
     confirmPassword: '',
   });
 
-  const navigate = useNavigate();
-
   const updateFormData = (field: string, value: string) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -31,70 +27,63 @@ export default function Register(): JSX.Element {
     }));
   };
 
-  const handleSubmitGeneralInfo = () => {
-    navigate('/register/sign-up');
+  const handleNext = () => {
     setCurrentStep((prevStep) => prevStep + 1);
   };
 
-  const handleBackSignUp = () => {
-    navigate('/register');
+  const handleBack = () => {
     setCurrentStep((prevStep) => prevStep - 1);
   };
 
-  const handleSubmitSignUp = () => {
-    navigate('/register/create-account');
-    setCurrentStep((prevStep) => prevStep + 1);
-  };
-
-  const handleBackCreateAccount = () => {
-    navigate('/register/sign-up');
-    setCurrentStep((prevStep) => prevStep - 1);
-  };
-
-  const handleSubmitCreateAccount = () => {
-    setCurrentStep((prevStep) => prevStep + 1);
+  const handleCreateAccount = () => {
+    // TODO: Create the User
     console.log(formData);
+    return 'Account Created';
+  };
+
+  const getStepContent = () => {
+    switch (currentStep) {
+      case 0:
+        return (
+          <GeneralInfo
+            currentStep={currentStep}
+            steps={steps}
+            updateData={updateFormData}
+            handleSubmit={handleNext}
+          />
+        );
+      case 1:
+        return (
+          <SignUp
+            currentStep={currentStep}
+            steps={steps}
+            updateData={updateFormData}
+            handleBack={handleBack}
+            handleSubmit={handleNext}
+          />
+        );
+      case 2:
+        return (
+          <CreateAccount
+            currentStep={currentStep}
+            steps={steps}
+            updateData={updateFormData}
+            handleBack={handleBack}
+            handleSubmit={handleNext}
+          />
+        );
+      default:
+        return;
+    }
   };
 
   return (
     <div className={styles['Register']}>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <GeneralInfo
-              currentStep={currentStep}
-              steps={steps}
-              updateData={updateFormData}
-              handleSubmit={handleSubmitGeneralInfo}
-            />
-          }
-        />
-        <Route
-          path="/sign-up"
-          element={
-            <SignUp
-              currentStep={currentStep}
-              steps={steps}
-              updateData={updateFormData}
-              handleBack={handleBackSignUp}
-              handleSubmit={handleSubmitSignUp}
-            />
-          }
-        />
-        <Route
-          path="/create-account"
-          element={
-            <CreateAccount
-              currentStep={currentStep}
-              steps={steps}
-              updateData={updateFormData}
-              handleBack={handleBackCreateAccount}
-              handleSubmit={handleSubmitCreateAccount}
-            />
-          }
-        />
-      </Routes>
+      {currentStep === steps.length ? (
+        <div>{handleCreateAccount()}</div>
+      ) : (
+        <div>{getStepContent()}</div>
+      )}
     </div>
   );
 }
