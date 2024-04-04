@@ -24,6 +24,8 @@ export default defineConfig({
         type: 'module',
       },
       strategies: 'injectManifest', // Allows us to use a custom service worker script.
+      srcDir: 'src/scripts',
+      filename: 'sw.ts',
       includeAssets: ['favicon.ico', 'favicon.svg', 'apple-touch-icon.png'],
       manifest: {
         name: 'Roadwatch',
