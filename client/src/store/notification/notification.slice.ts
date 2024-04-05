@@ -53,9 +53,13 @@ export const useNotificationSubscriptionMutation = () => {
 
   const notificationSubscriptionMutation = async ({ id }: Pick<ISubscription, 'id'>) => {
     // Check notification permissions before proceeding.
-    if (Notification.permission === 'denied') return;
-    if (Notification.permission === 'default') {
-      await Notification.requestPermission().catch((e) => console.error(e));
+    switch (Notification.permission) {
+      case 'denied':
+        throw new Error('User blocked notifications.');
+      case 'granted':
+        throw new Error('User has already enabled notifications.'); // Prevents duplicate subscriptions from being saved.
+      case 'default':
+        await Notification.requestPermission().catch((e) => console.error(e));
     }
 
     // If the service worker hasn't been registered yet, don't attempt subscription.
