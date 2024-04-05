@@ -1,11 +1,17 @@
 import { useEffect, useState } from 'react';
 import styles from './Home.module.scss';
-import { useGetUserQuery, selectLocation } from '@/store';
+import {
+  useGetUserQuery,
+  selectLocation,
+  useCreateUserMutation,
+  useNotificationUnsubscribeMutation,
+} from '@/store';
 import { useSelector } from 'react-redux';
 import { useLocation } from '@/hooks';
 import { Header, Map, CustomButton, Navbar } from '@/components';
 
-import { useLazySendNotificationQuery, useNotificationSubscriptionMutation } from '@/store';
+import { useSendNotificationMutation, useNotificationSubscriptionMutation } from '@/store';
+import Logo from '../../assets/icons/logo_512.png';
 
 // Image imports
 import logo from 'src/assets/Updated_RoadWatch_Logo.svg';
@@ -36,11 +42,20 @@ export default function Home(): JSX.Element {
     setForceLoadMap(true);
   };
 
-  const [sendNotification] = useLazySendNotificationQuery();
+  const [sendNotification] = useSendNotificationMutation();
   const [subscribe] = useNotificationSubscriptionMutation();
+  const [createUser] = useCreateUserMutation();
+  const [unsubscribe] = useNotificationUnsubscribeMutation();
 
   const handleNotificationSend = async () => {
-    await sendNotification({ id: data?.id as string, message: 'Hello Jordan!' });
+    await sendNotification({
+      id: data?.id as string,
+      title: 'Hello Jordan!',
+      options: {
+        body: 'Sending a cool message!!',
+        icon: Logo,
+      },
+    });
   };
 
   const handleNotificationSubscribe = async () => {
@@ -50,6 +65,19 @@ export default function Home(): JSX.Element {
   const handleUnregisterServiceWorker = async () => {
     const registration = await navigator.serviceWorker.getRegistration();
     await registration?.unregister();
+  };
+
+  const handleCreateUser = async () => {
+    await createUser({
+      firstName: 'Jane',
+      lastName: 'Doe',
+      userName: 'testUser',
+      password: '1234',
+    });
+  };
+
+  const handleUnsubscribe = async () => {
+    await unsubscribe({ id: data?.id as string });
   };
 
   return (
@@ -71,8 +99,10 @@ export default function Home(): JSX.Element {
           <div className={styles['Home__button_container']}>
             <CustomButton onClick={handleLoadMapClick}>Load Map Anyway</CustomButton>
           </div>
+          <button onClick={handleCreateUser}>Create user</button>
           <button onClick={handleUnregisterServiceWorker}>Unregister SW</button>
           <button onClick={handleNotificationSubscribe}>Subscribe to Notifications</button>
+          <button onClick={handleUnsubscribe}>Unsubscribe User</button>
           <button onClick={handleNotificationSend}>Send Notification</button>
         </div>
       )}

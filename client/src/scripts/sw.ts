@@ -5,7 +5,7 @@ declare let self: ServiceWorkerGlobalScope;
 
 import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching';
 import { clientsClaim } from 'workbox-core';
-import Logo from '../assets/icons/logo_512.png';
+import { ISendNotificationRequestBody } from '@/types';
 
 // Removes previously cached assets when a new version of the PWA is installed.
 cleanupOutdatedCaches();
@@ -22,7 +22,8 @@ clientsClaim();
 
 // Intercept push notifications sent by the server and display them on the client.
 self.addEventListener('push', (event) => {
+  const notification = event.data?.json() as ISendNotificationRequestBody;
   event.waitUntil(
-    self.registration.showNotification('Roadwatch', { body: event.data?.text(), icon: Logo })
+    self.registration.showNotification(notification.title, { ...notification.options })
   );
 });

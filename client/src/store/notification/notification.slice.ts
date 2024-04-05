@@ -1,24 +1,9 @@
 import { apiSlice } from '../api';
-
-interface INotficationResponse {
-  status: number;
-  message: string;
-}
-
-interface ISubscription {
-  id: string;
-  subscription: PushSubscription;
-}
-
-interface ISendNotificationRequestBody {
-  id: string;
-  title: string;
-  options?: NotificationOptions;
-}
+import { ISendNotificationRequestBody, ISubscription } from '@/types';
 
 const notification = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    sendNotification: builder.mutation<INotficationResponse, ISendNotificationRequestBody>({
+    sendNotification: builder.mutation<void, ISendNotificationRequestBody>({
       query: (notification: ISendNotificationRequestBody) => ({
         url: `/push-notification/send-notification`,
         method: 'POST',
@@ -28,7 +13,7 @@ const notification = apiSlice.injectEndpoints({
         },
       }),
     }),
-    saveSubscription: builder.mutation<INotficationResponse, ISubscription>({
+    saveSubscription: builder.mutation<void, ISubscription>({
       query: ({ id, subscription }) => ({
         url: '/push-notification/save-subscription',
         method: 'POST',
