@@ -1,25 +1,18 @@
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import styles from './Home.module.scss';
-import {
-  useGetUserQuery,
-  selectLocation,
-  useCreateUserMutation,
-  useNotificationUnsubscribeMutation,
-} from '@/store';
+import { useGetUserQuery, selectLocation } from '@/store';
 import { useSelector } from 'react-redux';
 import { useLocation } from '@/hooks';
-import { Header, Map, CustomButton, Navbar } from '@/components';
-
-import { useSendNotificationMutation, useNotificationSubscriptionMutation } from '@/store';
-import Logo from '../../assets/icons/logo_512.png';
+import { Header, Map, CustomButton, Navbar, EnableNotification } from '@/components';
 
 // Image imports
 import logo from 'src/assets/Updated_RoadWatch_Logo.svg';
 import warning_marker from 'src/assets/markers/WarningSign.svg';
 
 export default function Home(): JSX.Element {
-  const { data } = useGetUserQuery();
   useLocation();
+  const { data } = useGetUserQuery();
   const reduxLocation = useSelector(selectLocation); // Get the location from the Redux store, if available
 
   // The map will load when location is set or user asks to load.
@@ -42,46 +35,9 @@ export default function Home(): JSX.Element {
     setForceLoadMap(true);
   };
 
-  const [sendNotification] = useSendNotificationMutation();
-  const [subscribe] = useNotificationSubscriptionMutation();
-  const [createUser] = useCreateUserMutation();
-  const [unsubscribe] = useNotificationUnsubscribeMutation();
-
-  const handleNotificationSend = async () => {
-    await sendNotification({
-      id: data?.id as string,
-      title: 'Hello Jordan!',
-      options: {
-        body: 'Sending a cool message!!',
-        icon: Logo,
-      },
-    });
-  };
-
-  const handleNotificationSubscribe = async () => {
-    await subscribe({ id: data?.id as string });
-  };
-
-  const handleUnregisterServiceWorker = async () => {
-    const registration = await navigator.serviceWorker.getRegistration();
-    await registration?.unregister();
-  };
-
-  const handleCreateUser = async () => {
-    await createUser({
-      firstName: 'Jane',
-      lastName: 'Doe',
-      userName: 'testUser',
-      password: '1234',
-    });
-  };
-
-  const handleUnsubscribe = async () => {
-    await unsubscribe({ id: data?.id as string });
-  };
-
   return (
     <div className={styles['Home']}>
+      {createPortal(<EnableNotification />, document.getElementById('root') as HTMLElement)}
       <Navbar />
       <Header userName={data?.userName} />
       {/* Render the Map if the location is ready or if the user has requested to load the map */}
@@ -99,11 +55,6 @@ export default function Home(): JSX.Element {
           <div className={styles['Home__button_container']}>
             <CustomButton onClick={handleLoadMapClick}>Load Map Anyway</CustomButton>
           </div>
-          <button onClick={handleCreateUser}>Create user</button>
-          <button onClick={handleUnregisterServiceWorker}>Unregister SW</button>
-          <button onClick={handleNotificationSubscribe}>Subscribe to Notifications</button>
-          <button onClick={handleUnsubscribe}>Unsubscribe User</button>
-          <button onClick={handleNotificationSend}>Send Notification</button>
         </div>
       )}
       <img src={logo} alt="RoadWatch Logo" className={styles['Home__logo']} />
