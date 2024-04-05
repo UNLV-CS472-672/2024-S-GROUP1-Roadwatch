@@ -50,6 +50,7 @@ export const createUser = async (req: Request, res: Response) => {
     address,
     state,
     zip,
+    notificationSubscriptions,
   } = req.body;
 
   const hashedPassword = await bcrypt.hash(password, 3);
@@ -67,6 +68,7 @@ export const createUser = async (req: Request, res: Response) => {
       address,
       state,
       zip,
+      notificationSubscriptions,
     });
   } catch (err) {
     console.error('User Creation Error: ', err);
@@ -106,6 +108,7 @@ export const updateUser = async (req: Request) => {
     address,
     state,
     zip,
+    notificationSubscriptions,
   } = req.body;
 
   const hashedPassword = password ? await bcrypt.hash(password, 3) : undefined;
@@ -125,6 +128,7 @@ export const updateUser = async (req: Request) => {
         address,
         state,
         zip,
+        notificationSubscriptions,
       }
     );
   } catch (err) {
