@@ -12,7 +12,7 @@ interface IUser {
   address?: string;
   state?: string;
   zip?: string;
-  notificationSubscription?: /* PushManager */ string;
+  notificationSubscriptions?: string[];
 }
 
 const User = new Schema<IUser>(
@@ -62,9 +62,8 @@ const User = new Schema<IUser>(
       type: String,
       default: '',
     },
-    notificationSubscription: {
-      type: String,
-      default: '',
+    notificationSubscriptions: {
+      type: [String],
     },
   },
   { timestamps: true }
