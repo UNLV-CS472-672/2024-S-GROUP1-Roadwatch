@@ -11,6 +11,12 @@ webpush.setVapidDetails(
   process.env.NOTIFICATION_PRIVATE_KEY as string
 );
 
+interface ISendNotificationRequestBody {
+  id: string;
+  title: string;
+  options?: NotificationOptions;
+}
+
 export const saveSubscription = async (req: Request, res: Response) => {
   const { id, subscription } = req.body;
 
@@ -21,59 +27,80 @@ export const saveSubscription = async (req: Request, res: Response) => {
   }
 
   try {
-    // Ensure the user isn't already subscribed.
-    // const user = await User.findById(id);
-    // if (user?.notificationSubscription) {
-    //   throw new Error('User is already subscribed to notifications.');
-    // }
-
     await User.findByIdAndUpdate(id, {
-      notificationSubscription: subscription,
+      $addToSet: { notificationSubscriptions: subscription },
     });
-    console.log('Successfully subscribed user to receive notifications!');
+
+    res.statusMessage = 'User successfully subscribed to notifications.';
+    res.sendStatus(200);
   } catch (error) {
     console.error('Notification Subscription Error: ', error);
     return res.sendStatus(400);
   }
-
-  return res.sendStatus(200);
 };
 
-// TODO: Create unsubscribe endpoint
+// TODO: Create `sendNotificationToCommunity` endpoint.
 
-// TODO: Create "send to all users" endpoint
+export const unsubscribe = async (
+  req: Request<object, object, { id: string; subscription: PushSubscription }>,
+  res: Response
+) => {
+  const { id, subscription } = req.body;
 
-// TODO: Change `sendNotification` to POST instead of GET (that way we can use the body to send more stuff over and in a more secure way)
-
-export const sendNotification = async (req: Request, res: Response) => {
-  if (!req.query.id) {
+  if (!id) {
     return res.status(401).send({
       error: 'Unauthorized',
     });
   }
 
   try {
-    const user = await User.findById(req.query.id);
+    await User.findByIdAndUpdate(id, {
+      $pull: { notificationSubscriptions: subscription },
+    });
+
+    res.statusMessage = 'User successfully unsubscribed from notifications.';
+    res.sendStatus(200);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(400);
+  }
+};
+
+export const sendNotification = async (
+  req: Request<object, object, ISendNotificationRequestBody>,
+  res: Response
+) => {
+  if (!req.body.id) {
+    return res.status(401).send({
+      error: 'Unauthorized',
+    });
+  }
+
+  try {
+    const user = await User.findById(req.body.id);
+
+    // Type guard; removes `undefined` from `notificationSubscriptions` type.
+    if (!user?.notificationSubscriptions) {
+      throw new Error('The `notificationSubscriptions` array is undefined.');
+    }
 
     // Ensure the user is subscribed to at least one subscription service.
-    if (!user?.notificationSubscription) {
+    if (user.notificationSubscriptions.length === 0) {
       throw new Error(
         'The user must be subscribed to notifications before one can be sent to them.'
       );
     }
 
-    const subscription: webpush.PushSubscription = JSON.parse(
-      user.notificationSubscription
-    );
+    // Send notifications to all subscribed devices concurrently.
+    const notifications = user.notificationSubscriptions.map((subscription) => {
+      const subJSON: webpush.PushSubscription = JSON.parse(subscription);
+      return webpush.sendNotification(subJSON, JSON.stringify(req.body));
+    });
 
-    // TODO: Send a stringified JSON object to the user containing all the notification stuff. This can be parsed later in the `push` event using the `json()` method.
-    const response = await webpush.sendNotification(
-      subscription,
-      req.query.message as string
-    );
+    await Promise.all(notifications);
 
-    console.log('Notification sent!');
-    res.sendStatus(response.statusCode);
+    res.statusMessage = 'Notification sent successfully';
+    res.sendStatus(200);
   } catch (error) {
     console.error(error);
     res.sendStatus(400);

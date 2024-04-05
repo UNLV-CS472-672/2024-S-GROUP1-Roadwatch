@@ -1,10 +1,5 @@
 import { apiSlice } from '../api';
 
-interface INotification {
-  id: string;
-  message: string;
-}
-
 interface INotficationResponse {
   status: number;
   message: string;
@@ -15,11 +10,23 @@ interface ISubscription {
   subscription: PushSubscription;
 }
 
+interface ISendNotificationRequestBody {
+  id: string;
+  title: string;
+  options?: NotificationOptions;
+}
+
 const notification = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    sendNotification: builder.query<INotficationResponse, INotification>({
-      query: ({ id, message }) =>
-        `/push-notification/send-notification?id=${id}&message=${message}`,
+    sendNotification: builder.mutation<INotficationResponse, ISendNotificationRequestBody>({
+      query: (notification: ISendNotificationRequestBody) => ({
+        url: `/push-notification/send-notification`,
+        method: 'POST',
+        body: { ...notification },
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
     }),
     saveSubscription: builder.mutation<INotficationResponse, ISubscription>({
       query: ({ id, subscription }) => ({
@@ -34,10 +41,20 @@ const notification = apiSlice.injectEndpoints({
         },
       }),
     }),
+    unsubscribe: builder.mutation<void, ISubscription>({
+      query: ({ id, subscription }) => ({
+        url: '/push-notification/unsubscribe',
+        method: 'PUT',
+        body: { id, subscription: JSON.stringify(subscription) },
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+    }),
   }),
 });
 
-export const { useLazySendNotificationQuery } = notification;
+export const { useSendNotificationMutation } = notification;
 
 /**
  * Provides a method for subscribing the user to receive push notifications.
@@ -77,4 +94,39 @@ export const useNotificationSubscriptionMutation = () => {
   };
 
   return [notificationSubscriptionMutation, mutationData] as const;
+};
+
+/**
+ * Provides a method for subscribing the user to receive push notifications.
+ * @returns A tuple containing the trigger for initiating the subscription mutation and an object containing response information.
+ *
+ * @see {@link https://redux-toolkit.js.org/rtk-query/usage/mutations}
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/PushSubscription/unsubscribe}
+ */
+export const useNotificationUnsubscribeMutation = () => {
+  const [unsubscribe, mutationData] = notification.useUnsubscribeMutation();
+
+  const notificationUnsubscribeMutation = async ({ id }: Pick<ISubscription, 'id'>) => {
+    if (Notification.permission === 'denied') return;
+    if (Notification.permission === 'default') {
+      await Notification.requestPermission().catch((e) => console.error(e));
+    }
+
+    // If the service worker hasn't been registered yet, don't attempt subscription.
+    const registration = await navigator.serviceWorker.getRegistration();
+    if (!registration) return;
+
+    try {
+      const subscription = await registration.pushManager.getSubscription();
+      if (subscription) {
+        // Unsubscribe the user on both the server and the browser.
+        await unsubscribe({ id, subscription });
+        await subscription.unsubscribe();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return [notificationUnsubscribeMutation, mutationData] as const;
 };

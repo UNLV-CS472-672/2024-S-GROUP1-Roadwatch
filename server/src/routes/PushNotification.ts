@@ -5,6 +5,8 @@ const router = express.Router();
 
 router.post('/save-subscription', notificationController.saveSubscription);
 
-router.get('/send-notification', notificationController.sendNotification);
+router.put('/unsubscribe', notificationController.unsubscribe);
+
+router.post('/send-notification', notificationController.sendNotification);
 
 export default router;
