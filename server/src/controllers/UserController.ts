@@ -143,8 +143,6 @@ export const login = async (req: Request, res: Response) => {
     return res.sendStatus(404);
   }
 
-  console.log(user);
-
   if (!bcrypt.compareSync(password, user?.password || '')) {
     return res.sendStatus(404);
   }
