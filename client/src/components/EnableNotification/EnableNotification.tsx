@@ -8,12 +8,7 @@ import {
   useGetUserQuery,
 } from '@/store';
 
-// interface EnableNotificationProps {
-//   onAllowButtonClick: () => void;
-//   isVisible: boolean;
-// }
-
-export default function EnableNotification(/* props: EnableNotificationProps */): JSX.Element {
+export default function EnableNotification(): JSX.Element {
   const [subscribe] = useNotificationSubscriptionMutation();
   const [sendNotification] = useSendNotificationMutation();
   const { data } = useGetUserQuery();

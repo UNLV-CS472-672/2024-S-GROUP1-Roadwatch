@@ -16,7 +16,6 @@ export default function Login(): JSX.Element {
 
   // Mutation hook for login functionality
   const [login] = useLoginMutation();
-  // const [createUser] = useCreateUserMutation();
 
   // Navigation hook for redirecting users
   const navigate = useNavigate();
