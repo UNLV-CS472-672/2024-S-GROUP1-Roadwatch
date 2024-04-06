@@ -71,8 +71,10 @@ export default defineConfig({
     include: ['@emotion/styled'],
   },
   test: {
+    environment: 'jsdom',
     exclude: ['**/*.cjs', '**/index.ts'],
     coverage: {
+      provider: 'v8',
       exclude: ['**/*.cjs', '**/index.ts'],
     },
   },
