@@ -2,16 +2,25 @@ import styles from './SignUp.module.scss';
 import { useState } from 'react';
 
 import { AppBar, Toolbar, IconButton, Stack, Box, Typography } from '@mui/material';
+import { Stepper, Step, StepLabel } from '@mui/material';
 import { ArrowBackIos } from '@mui/icons-material';
 import { TextField, CustomButton } from '@/components';
 
 interface SignUpProps {
+  currentStep: number;
+  steps: string[];
   updateData: (field: string, value: string) => void;
   handleBack: () => void;
   handleSubmit: () => void;
 }
 
-export default function SignUp({ updateData, handleBack, handleSubmit }: SignUpProps): JSX.Element {
+export default function SignUp({
+  currentStep,
+  steps,
+  updateData,
+  handleBack,
+  handleSubmit,
+}: SignUpProps): JSX.Element {
   const [address, setAddressValue] = useState<string>('');
   const [city, setCityValue] = useState<string>('');
   const [state, setStateValue] = useState<string>('');
@@ -47,6 +56,14 @@ export default function SignUp({ updateData, handleBack, handleSubmit }: SignUpP
             </Typography>
           </Toolbar>
         </AppBar>
+
+        <Stepper activeStep={currentStep} alternativeLabel>
+          {steps.map((label) => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
 
         {/* create the input fields and the titles for the fields */}
         <Stack spacing={2}>
