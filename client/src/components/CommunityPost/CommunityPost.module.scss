@@ -16,6 +16,9 @@
         align-items: center;
     }
     &__markerIcon{
+        max-width: 100%;
+        width: 50px; 
+        height: auto;
         padding-right: 10px;
     }
     &__textBody{ 
@@ -34,6 +37,11 @@
         justify-content: center;
         max-height: 6.5em;
         padding-bottom: 10px;
+    }
+    &__markerBodyPreview{
+        max-width: 100%;
+        width: 100px; 
+        height: auto;
     }
 
 }

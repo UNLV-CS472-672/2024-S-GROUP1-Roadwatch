@@ -68,7 +68,6 @@ const CommunityPost: React.FC<CommunityPostProps> = ({isMarker, content, user, m
             break;
         default:
             markerIcon = Cone;
-            break;
     }
 
     return (
@@ -81,7 +80,7 @@ const CommunityPost: React.FC<CommunityPostProps> = ({isMarker, content, user, m
                             <div className={styles['CommunityPost__header']}>
                                 <div className={styles['CommunityPost__headerLeft']}>
                                     {isMarker ? (
-                                        <img className={styles['CommunityPost__markerIcon']} height={"50px"} src={markerIcon} alt={"Marker Type"}/>
+                                        <img className={styles['CommunityPost__markerIcon']} src={markerIcon} alt="Marker Type"/>
                                         ) : (
                                             null
                                         )
@@ -98,7 +97,7 @@ const CommunityPost: React.FC<CommunityPostProps> = ({isMarker, content, user, m
                             <div className={styles['CommunityPost__bodyPreview']}>
                                 {isMarker ? (   
                                     // This is the preview of a marker post
-                                    <img src={Logo} height={"100px"} alt="Roadwatch Logo" />
+                                    <img src={Logo} className={styles['CommunityPost__markerBodyPreview']} alt="Roadwatch Logo" />
                                 ) : ( 
                                     // This is the preview of a text post
                                     <StyledTypography variant="body2" color="text.secondary" className={styles['CommunityPost__textBody']}>
