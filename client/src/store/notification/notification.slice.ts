@@ -4,10 +4,10 @@ import { ISendNotificationRequestBody, ISubscription } from '@/types';
 const notification = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     sendNotification: builder.mutation<void, ISendNotificationRequestBody>({
-      query: (notification: ISendNotificationRequestBody) => ({
+      query: ({ id, title, options }) => ({
         url: `/push-notification/send-notification`,
         method: 'POST',
-        body: { ...notification },
+        body: { id, title, options },
         headers: {
           'Content-Type': 'application/json',
         },
