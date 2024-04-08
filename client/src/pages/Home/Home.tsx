@@ -45,7 +45,6 @@ export default function Home(): JSX.Element {
         <Map location={transformedLocation || { lat: 36.18811, lng: -115.176468 }} />
       ) : (
         <div>
-          <p>{Notification.permission}</p>
           <img src={warning_marker} className={styles['Home__center_image']} alt="warning icon" />
           <p className={styles['Home__alert_message']}>
             Location not available.
