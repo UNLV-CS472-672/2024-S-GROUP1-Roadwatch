@@ -6,7 +6,7 @@ import User from '../models/User';
 dotenv.config();
 
 webpush.setVapidDetails(
-  'https://cs472-roadwatch.vercel.app/', // TODO: Replace with final registered domain (e.g., https://roadwatch.com )
+  process.env.LIVE_SITE as string,
   process.env.NOTIFICATION_PUBLIC_KEY as string,
   process.env.NOTIFICATION_PRIVATE_KEY as string
 );
@@ -17,14 +17,16 @@ interface ISendNotificationRequestBody {
   options?: NotificationOptions;
 }
 
-export const saveSubscription = async (req: Request, res: Response) => {
-  const { id, subscription } = req.body;
+interface ISaveSubscriptionRequestBody {
+  id: string;
+  subscription: PushSubscription;
+}
 
-  if (!id) {
-    return res.status(401).send({
-      error: 'Unauthorized',
-    });
-  }
+export const saveSubscription = async (
+  req: Request<object, object, ISaveSubscriptionRequestBody>,
+  res: Response
+) => {
+  const { id, subscription } = req.body;
 
   try {
     await User.findByIdAndUpdate(id, {
@@ -35,23 +37,16 @@ export const saveSubscription = async (req: Request, res: Response) => {
     res.sendStatus(200);
   } catch (error) {
     console.error('Notification Subscription Error: ', error);
+    res.statusMessage = error as string;
     return res.sendStatus(400);
   }
 };
 
-// TODO: Create `sendNotificationToCommunity` endpoint.
-
 export const unsubscribe = async (
-  req: Request<object, object, { id: string; subscription: PushSubscription }>,
+  req: Request<object, object, ISaveSubscriptionRequestBody>,
   res: Response
 ) => {
   const { id, subscription } = req.body;
-
-  if (!id) {
-    return res.status(401).send({
-      error: 'Unauthorized',
-    });
-  }
 
   try {
     await User.findByIdAndUpdate(id, {
@@ -61,7 +56,8 @@ export const unsubscribe = async (
     res.statusMessage = 'User successfully unsubscribed from notifications.';
     res.sendStatus(200);
   } catch (error) {
-    console.error(error);
+    console.error('Notification Unsubscribe Error: ', error);
+    res.statusMessage = error as string;
     res.sendStatus(400);
   }
 };
@@ -70,14 +66,10 @@ export const sendNotification = async (
   req: Request<object, object, ISendNotificationRequestBody>,
   res: Response
 ) => {
-  if (!req.body.id) {
-    return res.status(401).send({
-      error: 'Unauthorized',
-    });
-  }
-
   try {
-    const user = await User.findById(req.body.id);
+    const { id, title, options } = req.body;
+
+    const user = await User.findById(id);
 
     // Type guard; removes `undefined` from `notificationSubscriptions` type.
     if (!user?.notificationSubscriptions) {
@@ -94,7 +86,10 @@ export const sendNotification = async (
     // Send notifications to all subscribed devices concurrently.
     const notifications = user.notificationSubscriptions.map((subscription) => {
       const subJSON: webpush.PushSubscription = JSON.parse(subscription);
-      return webpush.sendNotification(subJSON, JSON.stringify(req.body));
+      return webpush.sendNotification(
+        subJSON,
+        JSON.stringify({ title, options })
+      );
     });
 
     await Promise.all(notifications);
@@ -102,7 +97,8 @@ export const sendNotification = async (
     res.statusMessage = 'Notification sent successfully';
     res.sendStatus(200);
   } catch (error) {
-    console.error(error);
+    console.error('Send Notification Error: ', error);
+    res.statusMessage = error as string;
     res.sendStatus(400);
   }
 };
