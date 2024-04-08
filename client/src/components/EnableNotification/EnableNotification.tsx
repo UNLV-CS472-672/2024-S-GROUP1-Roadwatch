@@ -32,6 +32,7 @@ export default function EnableNotification(): JSX.Element {
   const handleAllowButtonClick = async (): Promise<void> => {
     if (!data?.id || !data?.firstName) {
       alert('Cannot enable notifications at this time.');
+      dialogRef.current?.close();
       return;
     }
 
