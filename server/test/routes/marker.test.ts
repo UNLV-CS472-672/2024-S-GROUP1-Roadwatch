@@ -14,7 +14,6 @@ describe('Marker Routes', () => {
   beforeEach(() => {
     app = express();
     app.use(express.json());
-    app.use('/', require('../../src/routes/Marker').default);
 
     mockRequest = {};
     mockResponse = {
@@ -22,11 +21,10 @@ describe('Marker Routes', () => {
           this.statusCode = code;
           return this;
         }),
-        json: jest.fn(function(this: Response, data: any) {
+        json: jest.fn(function(this: Response) {
           return this;
         }),
     };
-    mockNext = jest.fn();
   });
 
   describe('GET /markers', () => {
