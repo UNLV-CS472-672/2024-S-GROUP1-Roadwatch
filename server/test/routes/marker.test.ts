@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from 'express';
+import express, { Request, Response } from 'express';
 import Marker from '../../src/models/Marker';
 import * as markerController from '../../src/controllers/MarkerController';
 import { jest, describe, expect, test, beforeEach } from '@jest/globals';
