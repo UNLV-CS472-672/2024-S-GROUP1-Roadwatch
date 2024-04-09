@@ -14,7 +14,7 @@ describe('Marker Routes', () => {
   beforeEach(() => {
     app = express();
     app.use(express.json());
-    app.use('/', require('../src/../routes/Marker').default);
+    app.use('/', require('../../src/routes/Marker').default);
 
     mockRequest = {};
     mockResponse = {
