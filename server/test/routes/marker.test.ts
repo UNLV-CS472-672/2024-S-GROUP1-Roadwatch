@@ -9,7 +9,6 @@ describe('Marker Routes', () => {
   let app: express.Application;
   let mockRequest: Partial<Request>;
   let mockResponse: Partial<Response>;
-  let mockNext: jest.Mock<NextFunction>;
 
   beforeEach(() => {
     app = express();
