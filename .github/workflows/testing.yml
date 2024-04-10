@@ -58,8 +58,8 @@ jobs:
               echo PORT=3000>> .env
               echo JWT_SECRET=secret>> .env
               echo JWT_EXPIRES_IN=24hr>> .env
-              echo NOTIFICATION_PUBLIC_KEY=BHC05EkGYKU74-rDAMYw2lBgFA1U9ZfzHmGcSdBMZKkZ1kFJUPVTsoAHhqVq1nyFJvmPQ7XSYXoyT2SwZXDYzqk>> .env
-              echo NOTIFICATION_PRIVATE_KEY=hQOr5n5Z88_iIblL4y0zdYVC6pMGCL7ZKH7RbRA0DhsDB>> .env
+              echo NOTIFICATION_PUBLIC_KEY=BIQ8FWqgNZtyxHeCALbruZO8ttzxza2xT4BeNM2E4Ix9HYeAVwVDRkHWdzNqJTdhDj21uryLKRKJpOBhqnhUEr0>> .env
+              echo NOTIFICATION_PRIVATE_KEY=RBd7U-nIzTpLq-5EiPQ9VKJJiRBOBt3OuoChrLVKTNQ>> .env
               cat .env
 
           - name: Install Jest
