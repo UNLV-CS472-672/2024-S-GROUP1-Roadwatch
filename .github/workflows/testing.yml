@@ -24,17 +24,17 @@ jobs:
             working-directory: ./server
             run: |
               touch .env
-              echo NODE_ENV=development >> .env
-              echo PORT=3000 >> .env
-              echo DB_HOST=mongodb >> .env
-              echo DB_NAME=roadwatch >> .env
-              echo DB_USER=root >> .env
-              echo DB_PASSWORD=password >> .env
-              echo DB_PORT=27017 >> .env
-              echo JWT_SECRET=secret >> .env
-              echo JWT_EXPIRES_IN=24hr >> .env
-              echo NOTIFICATION_PUBLIC_KEY=BHC05EkGYKU74-rDAMYw2lBgFA1U9ZfzHmGcSdBMZKkZ1kFJUPVTsoAHhqVq1nyFJvmPQ7XSYXoyT2SwZXDYzqk >> .env
-              echo NOTIFICATION_PRIVATE_KEY=hQOr5n5Z88_iIblL4y0zdYVC6pMGCL7ZKH7RbRA0DhsDB >> .env
+              echo NODE_ENV=development>> .env
+              echo PORT=3000>> .env
+              echo DB_HOST=mongodb>> .env
+              echo DB_NAME=roadwatch>> .env
+              echo DB_USER=root>> .env
+              echo DB_PASSWORD=password>> .env
+              echo DB_PORT=27017>> .env
+              echo JWT_SECRET=secret>> .env
+              echo JWT_EXPIRES_IN=24hr>> .env
+              echo NOTIFICATION_PUBLIC_KEY=BHC05EkGYKU74-rDAMYw2lBgFA1U9ZfzHmGcSdBMZKkZ1kFJUPVTsoAHhqVq1nyFJvmPQ7XSYXoyT2SwZXDYzqk>> .env
+              echo NOTIFICATION_PRIVATE_KEY=hQOr5n5Z88_iIblL4y0zdYVC6pMGCL7ZKH7RbRA0DhsDB>> .env
               cat .env
 
           - name: Set up Docker instance
@@ -56,12 +56,12 @@ jobs:
             working-directory: ./server
             run: |
               touch .env
-              echo NODE_ENV=development >> .env
-              echo PORT=3000 >> .env
-              echo JWT_SECRET=secret >> .env
-              echo JWT_EXPIRES_IN=24hr >> .env
-              echo NOTIFICATION_PUBLIC_KEY=BHC05EkGYKU74-rDAMYw2lBgFA1U9ZfzHmGcSdBMZKkZ1kFJUPVTsoAHhqVq1nyFJvmPQ7XSYXoyT2SwZXDYzqk >> .env
-              echo NOTIFICATION_PRIVATE_KEY=hQOr5n5Z88_iIblL4y0zdYVC6pMGCL7ZKH7RbRA0DhsDB >> .env
+              echo NODE_ENV=development>> .env
+              echo PORT=3000>> .env
+              echo JWT_SECRET=secret>> .env
+              echo JWT_EXPIRES_IN=24hr>> .env
+              echo NOTIFICATION_PUBLIC_KEY=BHC05EkGYKU74-rDAMYw2lBgFA1U9ZfzHmGcSdBMZKkZ1kFJUPVTsoAHhqVq1nyFJvmPQ7XSYXoyT2SwZXDYzqk>> .env
+              echo NOTIFICATION_PRIVATE_KEY=hQOr5n5Z88_iIblL4y0zdYVC6pMGCL7ZKH7RbRA0DhsDB>> .env
               cat .env
 
 
