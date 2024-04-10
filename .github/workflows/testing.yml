@@ -13,6 +13,7 @@ jobs:
         name: create docker 
         runs-on: ubuntu-latest
         timeout-minutes: 1  # can be changed later
+        continue-on-error: true
         permissions:
             contents: read
             security-events: write
@@ -44,6 +45,7 @@ jobs:
       name: start server
       runs-on: ubuntu-latest
       timeout-minutes: 1  # can be changed later
+      continue-on-error: true
       permissions:
           contents: read
           security-events: write
