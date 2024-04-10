@@ -32,6 +32,9 @@ jobs:
               MONGODB_INITDB_DATABASE: roadwatch
               MONGODB_INITDB_ROOT_USERNAME: root
               MONGODB_INITDB_ROOT_PASSWORD: password
+              DB_NAME: roadwatch
+              DB_USER: root
+              DB_PASSWORD: password
               DB_PORT: 27017
               image: mongo:latest
               container_name: mongodb
