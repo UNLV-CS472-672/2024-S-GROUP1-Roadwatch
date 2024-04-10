@@ -64,7 +64,6 @@ jobs:
               echo NOTIFICATION_PRIVATE_KEY=hQOr5n5Z88_iIblL4y0zdYVC6pMGCL7ZKH7RbRA0DhsDB>> .env
               cat .env
 
-
           - name: Install Jest
             working-directory: ./server
             run: |
