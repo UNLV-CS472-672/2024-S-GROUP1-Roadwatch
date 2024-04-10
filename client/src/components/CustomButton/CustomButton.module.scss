@@ -1,15 +1,29 @@
 .CustomButton {
-        border-radius:  5px;
-        background-color: #fb7111 !important; //color of our logo
-        height: 50%;
-        width: 100%;
-        cursor: pointer;
-        font-weight: bold !important;
-        font-size: 20px;
-        color: white !important;
+  border-radius: 5px;
+  background-color: #fb7111 !important; //color of our logo
+  height: 50%;
+  width: 100%;
+  cursor: pointer;
+  font-weight: bold !important;
+  font-size: 1rem !important;
+  color: white !important;
 
-        &:hover {
-                background-color: #e1660e !important;
-        }
+  &--text {
+    border-radius: 5px;
+    height: 50%;
+    width: 100%;
+    cursor: pointer;
+    font-weight: bold !important;
+    font-size: 1rem !important;
+    background-color: transparent !important;
+    color: #7b7979 !important;
+
+    &:hover {
+      background-color: #d9d9d9 !important;
+    }
+  }
+
+  &:hover {
+    background-color: #e1660e !important;
+  }
 }
-  

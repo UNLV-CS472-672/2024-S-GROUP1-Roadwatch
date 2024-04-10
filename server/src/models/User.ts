@@ -1,6 +1,21 @@
 import { Schema, model } from 'mongoose';
 
-const User = new Schema(
+interface IUser {
+  firstName: string;
+  lastName: string;
+  userName: string;
+  password: string;
+  email?: string;
+  phoneNumber?: string;
+  dob?: string;
+  city?: string;
+  address?: string;
+  state?: string;
+  zip?: string;
+  notificationSubscriptions?: string[];
+}
+
+const User = new Schema<IUser>(
   {
     firstName: {
       type: String,
@@ -47,8 +62,11 @@ const User = new Schema(
       type: String,
       default: '',
     },
+    notificationSubscriptions: {
+      type: [String],
+    },
   },
   { timestamps: true }
 );
 
-export default model('User', User);
+export default model<IUser>('User', User);
