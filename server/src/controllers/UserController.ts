@@ -159,3 +159,26 @@ export const login = async (req: Request, res: Response) => {
     return res.sendStatus(500);
   }
 };
+
+export const resetPassword = async (req: Request, res: Response) => {
+  try {
+    const { email } = req.body;
+
+    const user = User.find({ email });
+
+    if (!user) {
+      return;
+    }
+
+    return res.send({
+      data: {
+        message: 'Password reset email sent',
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({
+      error: 'An error occurred',
+    });
+  }
+};

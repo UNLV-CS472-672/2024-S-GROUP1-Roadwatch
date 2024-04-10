@@ -5,11 +5,13 @@ import bodyParser from 'body-parser';
 import { connect } from './config/database';
 import userRoutes from './routes/User';
 import pushNotificationRoutes from './routes/PushNotification';
+import { initEmail } from './service/emailService';
 
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 connect();
+initEmail();
 
 // Middleware
 app.use(cors()); // cors is needed for security otherwise some things are just inaccessbile
