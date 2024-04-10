@@ -19,6 +19,20 @@ jobs:
           - name: Checkout code
             uses: actions/checkout@v3
 
+          - name: Create env
+            working-directory: ./server
+            run: |
+              touch .env
+              echo NODE_ENV=development >> .env
+              echo DB_HOST=mongodb >> .env
+              echo DB_NAME=roadwatch >> .env
+              echo DB_USER=root >> .env
+              echo DB_PASSWORD=password >> .env
+              echo DB_PORT=27017 >> .env
+              echo JWT_SECRET=secret >> .env
+              echo JWT_EXPIRES_IN=24hr >> .env
+              cat .env
+
           - name: Install Jest
             working-directory: ./server
             run: |
@@ -26,20 +40,7 @@ jobs:
 
           - name: Set up Docker instance
             working-directory: ./server
-            env:
-              # DB Connection
-              DB_HOST: mongodb
-              MONGODB_INITDB_DATABASE: roadwatch
-              MONGODB_INITDB_ROOT_USERNAME: root
-              MONGODB_INITDB_ROOT_PASSWORD: password
-              DB_NAME: roadwatch
-              DB_USER: root
-              DB_PASSWORD: password
-              DB_PORT: 27017
-              image: mongo:latest
-              container_name: mongodb
-              restart: always
-            run: docker compose up
+            run: docker-compose up
 
           - name: Start up Server
             working-directory: ./server
