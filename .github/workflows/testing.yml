@@ -32,6 +32,8 @@ jobs:
               echo DB_PORT=27017 >> .env
               echo JWT_SECRET=secret >> .env
               echo JWT_EXPIRES_IN=24hr >> .env
+              echo NOTIFICATION_PUBLIC_KEY=BHC05EkGYKU74-rDAMYw2lBgFA1U9ZfzHmGcSdBMZKkZ1kFJUPVTsoAHhqVq1nyFJvmPQ7XSYXoyT2SwZXDYzqk >> .env
+              echo NOTIFICATION_PRIVATE_KEY=hQOr5n5Z88_iIblL4y0zdYVC6pMGCL7ZKH7RbRA0DhsDB >> .env
               cat .env
 
           - name: Set up Docker instance
