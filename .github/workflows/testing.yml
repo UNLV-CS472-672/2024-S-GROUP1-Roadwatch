@@ -12,7 +12,7 @@ jobs:
         # This job will create a docker instance, so that it can be used when jest is run
         name: create docker 
         runs-on: ubuntu-latest
-        timeout-minutes: 5  # can be changed later
+        timeout-minutes: 1  # can be changed later
         permissions:
             contents: read
             security-events: write
@@ -43,7 +43,7 @@ jobs:
     server_start:
       name: start server
       runs-on: ubuntu-latest
-      timeout-minutes: 2  # can be changed later
+      timeout-minutes: 1  # can be changed later
       permissions:
           contents: read
           security-events: write
