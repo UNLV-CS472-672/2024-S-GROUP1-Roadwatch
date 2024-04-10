@@ -7,6 +7,14 @@ on:
     # The branches below must be a subset of the branches above
     branches: [ "main" ]
 
+env:
+  # DB Connection
+  DB_HOST: mongodb
+  DB_NAME: roadwatch
+  DB_USER: root
+  DB_PASSWORD: password
+  DB_PORT: 27017
+
 jobs:
     jest_run:
         name: run jest
