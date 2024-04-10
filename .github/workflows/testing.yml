@@ -23,6 +23,14 @@ jobs:
             working-directory: ./server
             run: |
               npm install
+
+          - name: Set up Docker instance
+            working-directory: ./server
+            run: docker compose up
+
+          - name: Start up Server
+            working-directory: ./server
+            run: npm run start
               
           - name: Run Jest Test
             working-directory: ./server
