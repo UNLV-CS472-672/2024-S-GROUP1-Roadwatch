@@ -41,9 +41,9 @@ jobs:
             run: docker-compose up
 
     server_start:
-      name: run jest
+      name: start server
       runs-on: ubuntu-latest
-      timeout-minutes: 5  # can be changed later
+      timeout-minutes: 2  # can be changed later
       permissions:
           contents: read
           security-events: write
@@ -110,10 +110,6 @@ jobs:
             working-directory: ./server
             run: |
               npm install
-
-          - name: Start up Server
-            working-directory: ./server
-            run: npm run start
               
           - name: Run Jest Test
             working-directory: ./server
