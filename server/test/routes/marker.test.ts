@@ -1,7 +1,8 @@
 import express, { Request, Response } from 'express';
 import Marker from '../../src/models/Marker';
 import * as markerController from '../../src/controllers/MarkerController';
-import { jest, describe, expect, test, beforeEach } from '@jest/globals';
+import { jest, describe, expect, test, beforeEach, beforeAll } from '@jest/globals';
+import axios from 'axios';
 
 jest.mock('../../src/models/Marker');
 
@@ -9,6 +10,69 @@ describe('Marker Routes', () => {
   let app: express.Application;
   let mockRequest: Partial<Request>;
   let mockResponse: Partial<Response>;
+
+  // create a test user and authenticate in order to run the rest of the tests
+  beforeAll(async () => {
+    const testUserData = {
+      userName: 'testuser',
+      password: 'password',
+    };
+  
+    async function createUser() {
+      try {
+        const response = await axios.post('http://localhost:3000/api/user', {
+          firstName: 'Test',
+          lastName: 'User',
+          userName: testUserData.userName,
+          password: testUserData.password,
+          email: 'test@example.com',
+          phoneNumber: '1234567890',
+          dob: '1990-01-01',
+          city: 'Test City',
+          address: '123 Test St',
+          state: 'Test State',
+          zip: '12345',
+        });
+  
+        console.log('User creation response status code:', response.status);
+  
+        if (response.status === 200) {
+          console.log('Test user created successfully');
+        } else {
+          console.log('New test user was not created:', response.status);
+        }
+      } catch (error: any) {
+        console.log('A new test user was not created, this is not necessarily an error');
+      }
+    }
+  
+    async function loginUser() {
+        try {
+          const response = await axios.post('http://localhost:3000/api/user/login', {
+            userInput: testUserData.userName, // Using the userInput field for login
+            password: testUserData.password,
+          });
+      
+          console.log('Login response status code:', response.status);
+      
+          if (response.status === 200) {
+            console.log('Login successful');
+          } else {
+            console.log('Login failed:', response.status);
+          }
+        } catch (error: any) {
+          console.log('Error logging in:', error.message);
+        }
+      }
+  
+    try {
+      await createUser();
+      await loginUser();
+    } catch (error) {
+      console.error('Test setup failed:', error);
+      throw error;
+    }
+  }, 10000); // Timeout value of 10 seconds
 
   beforeEach(() => {
     app = express();
@@ -24,28 +88,6 @@ describe('Marker Routes', () => {
           return this;
         }),
     };
-  });
-
-  describe('GET /markers', () => {
-    test('should return all markers', async () => {
-      const mockMarkers: never = {} as never;
-      const mockQuery = { exec: jest.fn().mockResolvedValue(mockMarkers) };
-      (Marker.find as jest.Mock).mockReturnValue(mockQuery);
-
-      await markerController.getMarkers(mockRequest as Request, mockResponse as Response);
-
-      expect(mockResponse.status).toHaveBeenCalledWith(200);
-      expect(mockResponse.json).toHaveBeenCalledWith(mockMarkers);
-    });
-
-    test('should handle errors gracefully', async () => {
-      (Marker.find as jest.Mock).mockRejectedValue(new Error('Database error') as never);
-
-      await markerController.getMarkers(mockRequest as Request, mockResponse as Response);
-
-      expect(mockResponse.status).toHaveBeenCalledWith(500);
-      expect(mockResponse.json).toHaveBeenCalledWith({ message: 'Could not get markers' });
-    });
   });
 
   describe('POST /markers', () => {
@@ -77,6 +119,28 @@ describe('Marker Routes', () => {
 
       expect(mockResponse.status).toHaveBeenCalledWith(500);
       expect(mockResponse.json).toHaveBeenCalledWith({ message: 'Could not save marker' });
+    });
+  });
+
+  describe('GET /markers', () => {
+    test('should return all markers', async () => {
+      const mockMarkers: never = {} as never;
+      const mockQuery = { exec: jest.fn().mockResolvedValue(mockMarkers) };
+      (Marker.find as jest.Mock).mockReturnValue(mockQuery);
+
+      await markerController.getMarkers(mockRequest as Request, mockResponse as Response);
+
+      expect(mockResponse.status).toHaveBeenCalledWith(200);
+      expect(mockResponse.json).toHaveBeenCalledWith(mockMarkers);
+    });
+
+    test('should handle errors gracefully', async () => {
+      (Marker.find as jest.Mock).mockRejectedValue(new Error('Database error') as never);
+
+      await markerController.getMarkers(mockRequest as Request, mockResponse as Response);
+
+      expect(mockResponse.status).toHaveBeenCalledWith(500);
+      expect(mockResponse.json).toHaveBeenCalledWith({ message: 'Could not get markers' });
     });
   });
 
