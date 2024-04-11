@@ -96,6 +96,7 @@ jobs:
             run: |
               touch .env
               echo NODE_ENV=development>> .env
+              echo LIVE_SITE=https://cs472-roadwatch.vercel.app/>> .env
               echo PORT=3000>> .env
               echo DB_HOST=mongodb>> .env
               echo DB_NAME=roadwatch>> .env
