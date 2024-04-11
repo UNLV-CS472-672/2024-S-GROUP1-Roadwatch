@@ -10,3 +10,4 @@ export { default as LocationNotification } from './LocationNotification/Location
 export { default as ResetPasswordVerify } from './ResetPasswordVerify/ResetPasswordVerify';
 export { default as CommunityCard } from './CommunityCard/CommunityCard';
 export { default as EnableNotification } from './EnableNotification/EnableNotification';
+export { default as CreatePost } from './CreatePost/CreatePost';
