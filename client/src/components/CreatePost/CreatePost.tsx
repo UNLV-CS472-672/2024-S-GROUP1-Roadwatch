@@ -13,7 +13,6 @@ import pothole from '../../assets/markers/Pothole.svg';
 import roadDamage from '../../assets/markers/RoadDamage.svg';
 import carAccident from '../../assets/markers/CarAccident.svg';
 import warning from '../../assets/markers/WarningSign.svg';
-import { MoreHoriz } from '@mui/icons-material';
 import TextFieldMulti from '@mui/material/TextField';
 import RoomOutlinedIcon from '@mui/icons-material/RoomOutlined';
 
@@ -135,15 +134,6 @@ export default function CreatePost() {
                                         alt="" />
                                 </Fab>
                             ))}
-                            {/* Separate FAB to use MoreHoriz the (...) icon for etc problems */}
-                            <Fab
-                                className={`${styles['CreatePost__fab']} ${marker === 'etc' ? styles['CreatePost__active'] : ''}`}
-                                size="large"
-                                aria-label="etc"
-                                onClick={() => markerClick('etc')}
-                            >
-                                <MoreHoriz className={styles['CreatePost__images']} />
-                            </Fab>
                         </div>
                     </div>
                     <div className={styles['CreatePost__third']}>
