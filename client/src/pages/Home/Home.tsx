@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import styles from './Home.module.scss';
 import { useGetUserQuery, selectLocation } from '@/store';
 import { useSelector } from 'react-redux';
 import { useLocation } from '@/hooks';
-import { Header, Map, CustomButton, Navbar } from '@/components';
+import { Header, Map, CustomButton, Navbar, EnableNotification } from '@/components';
 
 // Image imports
 import logo from 'src/assets/Updated_RoadWatch_Logo.svg';
 import warning_marker from 'src/assets/markers/WarningSign.svg';
 
 export default function Home(): JSX.Element {
-  const { data } = useGetUserQuery();
   useLocation();
+  const { data } = useGetUserQuery();
   const reduxLocation = useSelector(selectLocation); // Get the location from the Redux store, if available
 
   // The map will load when location is set or user asks to load.
@@ -36,6 +37,7 @@ export default function Home(): JSX.Element {
 
   return (
     <div className={styles['Home']}>
+      {createPortal(<EnableNotification />, document.getElementById('root') as HTMLElement)}
       <Navbar />
       <Header userName={data?.userName} />
       {/* Render the Map if the location is ready or if the user has requested to load the map */}
@@ -43,7 +45,7 @@ export default function Home(): JSX.Element {
         <Map location={transformedLocation || { lat: 36.18811, lng: -115.176468 }} />
       ) : (
         <div>
-          <img src={warning_marker} className={styles['Home__center_image']} alt='warning icon'/>
+          <img src={warning_marker} className={styles['Home__center_image']} alt="warning icon" />
           <p className={styles['Home__alert_message']}>
             Location not available.
             <br></br>

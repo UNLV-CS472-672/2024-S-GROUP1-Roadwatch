@@ -1,59 +1,71 @@
-.EnableNotification{
-    &__notifContainer{
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* Center horizontally */
-        justify-content: center; /* Center vertically */
-        min-height: 100vh; /* Adjust height as needed */
-        background-color: #f0f0f0;
-    }
-    &__whiteContainer{
-        background-color: white; /* Set the background color of the container */
-        padding: 20px; /* Add padding to create space between the content and the container */
-        border-radius: 10px; /* Add rounded corners to the container */
-        width: 80%; /* Adjust the width of the container */
-        max-width: 280px; /* Set maximum width for responsiveness */
-        min-height: 600px;
-    }
-    &__image {
-        padding-top: 10%;
-        display: flex;
-        justify-content: center; /* Center the image horizontally */
-        height: 200px;
-        width: 100%;
+.EnableNotification {
+  &__notifContainer {
+    &[open] {
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center horizontally */
+      justify-content: center; /* Center vertically */
+      padding: 2rem;
+      background-color: #f0f0f0;
+      border-radius: 1rem;
+      border: none;
+      animation: show-dialog 0.3s ease-in normal;
     }
 
-    &__header {
-        padding-top: 50px; /* Add padding to create space between the content and the container */
-        text-align: center;
-        font-size: 2.1rem; /* Increase font size */
+    &::backdrop {
+      background-color: rgba(0, 0, 0, 0.5);
     }
+  }
+  &__whiteContainer {
+    background-color: white; /* Set the background color of the container */
+    padding: 20px; /* Add padding to create space between the content and the container */
+    border-radius: 1rem; /* Add rounded corners to the container */
+    // width: 80%; /* Adjust the width of the container */
+    max-width: 280px; /* Set maximum width for responsiveness */
+    min-height: 600px;
+  }
+  &__image {
+    padding-top: 10%;
+    display: flex;
+    justify-content: center; /* Center the image horizontally */
+    height: 200px;
+    width: 100%;
+  }
 
-    &__headerText{
-        padding-top: 40px;
-    }
+  &__header {
+    padding-top: 50px; /* Add padding to create space between the content and the container */
+    text-align: center;
+    font-size: 2.1rem; /* Increase font size */
+  }
 
-    &__message {
-        font-size: 1.25rem; /* Decrease font size */
-        text-align: center;
-        color: #999; /* Lighter color for message */
-        padding-bottom: 20px;
-    }
+  &__headerText {
+    padding-top: 40px;
+  }
 
-    &__buttonContainer {
-        flex-direction: column; /* Stack buttons vertically */
-        padding-bottom: 20px;
-    }
+  &__message {
+    font-size: 1.25rem; /* Decrease font size */
+    text-align: center;
+    color: #999; /* Lighter color for message */
+    padding-bottom: 20px;
+  }
 
-    &__allowButton {
-        width: 100%;
+  &__buttonContainer {
+    flex-direction: column; /* Stack buttons vertically */
+    padding-bottom: 20px;
+  }
 
-    }
+  &__allowButton {
+    width: 100%;
+  }
+}
 
-    &__skipText{
-        padding-top: 0px;
-        text-align: center;
-        color: #7b7979; /* Lighter color for message */
-    }
+@keyframes show-dialog {
+  from {
+    opacity: 0;
+  }
 
+  to {
+    opacity: 1;
+  }
 }
