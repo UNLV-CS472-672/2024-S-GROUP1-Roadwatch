@@ -1,8 +1,9 @@
 import { apiSlice } from '../api';
+import { ICommunity } from '@/types';
 
 const community = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getAllCommunities: builder.query<void, void>({
+    getAllCommunities: builder.query<ICommunity[], void>({
       query: () => '/all-communities',
     }),
   }),

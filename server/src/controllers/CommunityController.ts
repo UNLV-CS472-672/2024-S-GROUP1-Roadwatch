@@ -7,7 +7,7 @@ export const getAllComunities = async (req: Request, res: Response) => {
 
     res.status(200).json({ data: communities });
   } catch (error) {
-    console.error('Get Communities Error', error);
+    console.error('Get Communities Error:', error);
     res.statusMessage = error as string;
     return res.sendStatus(400);
   }
