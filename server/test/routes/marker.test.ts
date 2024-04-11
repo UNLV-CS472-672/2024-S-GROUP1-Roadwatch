@@ -50,7 +50,7 @@ describe('Marker Routes', () => {
         } else {
           console.log('New test user was not created:', response.status);
         }
-      } catch (error: any) {
+      } catch (error) {
         console.log('A new test user was not created, this is not necessarily an error');
       }
     }
@@ -74,8 +74,8 @@ describe('Marker Routes', () => {
         } else {
           console.log('Login failed:', response.status);
         }
-      } catch (error: any) {
-        console.log('Error logging in:', error.message);
+      } catch (error) {
+        console.log('Error logging in');
       }
     }
 
