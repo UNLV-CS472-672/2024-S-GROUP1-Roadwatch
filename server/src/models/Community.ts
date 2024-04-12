@@ -5,7 +5,7 @@ const Community = new Schema(
     address: { type: String, required: true },
     users: [{ type: Types.ObjectId, ref: 'User' }],
     image: { type: String, default: '' },
-    posts: [{ type: Types.ObjectId, ref: 'Post' }], // Might need to change this later if Post Model isn't called Post.
+    posts: [{ type: Types.ObjectId, ref: 'Post' }],
     // Add more community fields as needed
   },
   { timestamps: true }

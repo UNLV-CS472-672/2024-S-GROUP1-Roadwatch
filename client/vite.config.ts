@@ -24,6 +24,8 @@ export default defineConfig({
         type: 'module',
       },
       strategies: 'injectManifest', // Allows us to use a custom service worker script.
+      srcDir: 'src/scripts',
+      filename: 'sw.ts',
       includeAssets: ['favicon.ico', 'favicon.svg', 'apple-touch-icon.png'],
       manifest: {
         name: 'Roadwatch',
@@ -69,8 +71,10 @@ export default defineConfig({
     include: ['@emotion/styled'],
   },
   test: {
+    environment: 'jsdom',
     exclude: ['**/*.cjs', '**/index.ts'],
     coverage: {
+      provider: 'v8',
       exclude: ['**/*.cjs', '**/index.ts'],
     },
   },

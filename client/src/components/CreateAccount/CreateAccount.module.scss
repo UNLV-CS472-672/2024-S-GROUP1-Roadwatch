@@ -1,16 +1,17 @@
-.lato-regular {
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
+.CreateAccount {
+  &__TopBar {
+    // Must be !important, otherwise styling doesn't work
+    background: transparent !important;
+    box-shadow: none !important;
+    color: black !important;
+  }
 
-.lato-bold {
-  font-family: "Lato", sans-serif;
-  font-weight: 600;
-  font-style: normal;
-}
+  &__CenteredTypography {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+  }
 
-.GeneralInfo {
   &__Container {
     display: flex;
     flex-direction: column;
@@ -19,6 +20,7 @@
     min-height: 100vh; /* Adjust height as needed */
     background-color: #f0f0f0;
   }
+
   &__whiteContainer {
     background-color: white; /* Set the background color of the container */
     padding: 20px; /* Add padding to create space between the content and the container */
@@ -26,23 +28,5 @@
     width: 80%; /* Adjust the width of the container */
     max-width: 280px; /* Set maximum width for responsiveness */
     min-height: 600px;
-  }
-  &__textCentered {
-    text-align: center;
-  }
-  &__continueHereContainer {
-    display: flex;
-    margin-top: 40px;
-    justify-content: center; /* Center vertically */
-  }
-  &__continueHereBtn {
-    color: green;
-  }
-
-  @media (max-height: 667px) {
-    &__whiteContainer {
-      min-height: 80vh;
-      padding: 10px;
-    }
   }
 }

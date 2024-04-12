@@ -32,8 +32,7 @@ You'll now have a local mongodb docker container running that you can use.
 # Generating VAPID Keys
 
 In order to send push notifications on `localhost`, you need to set up VAPID keys in your `.env` file.
-These keys enable a secure line of communication between the server, service worker, and client. Additionally, some browsers
-like Chrome make having them a _requirement_ to send push notifications at all.
+These keys enable a secure line of communication between the server, service worker, and client. While this isn't needed for all browsers, it's a _requirement_ for all Chromium-based browsers.
 
 To create these keys, run the following command:
 
@@ -41,16 +40,32 @@ To create these keys, run the following command:
 $ npx web-push generate-vapid-keys
 ```
 
-For the **Public Key**, add the following line to you `.env` file in the `server` folder:
+## Public Key
+
+In `server/.env`, add the following line:
 
 ```
 NOTIFICATION_PUBLIC_KEY=<your public key>
 ```
 
-For the **Private Key**, add the following line:
+In `client/.env`, add the following line:
+
+```
+VITE_NOTIFICATION_PUBLIC_KEY=<your public key>
+```
+
+## Private Key
+
+In `server/.env`, add the following line:
 
 ```
 NOTIFICATION_PRIVATE_KEY=<your private key>
+```
+
+In `client/.env`, add the following line:
+
+```
+VITE_NOTIFICATION_PRIVATE_KEY=<your private key>
 ```
 
 Adding these keys should allow you to successfully send push notifications within the PWA.
