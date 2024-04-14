@@ -2,13 +2,21 @@ import styles from './ResetPassword.module.scss';
 import { CustomButton, PasswordField } from '@/components';
 import { useState } from 'react';
 import logo from '../../assets/Updated_RoadWatch_Logo.svg';
+import { useResetPasswordMutation } from '@/store';
+import { useParams } from 'react-router-dom';
 
 export default function ResetPassword() {
   const [newPassword, setNewPassword] = useState('');
   const [verifyPassword, setVerifyPassword] = useState('');
+  const { token } = useParams();
+  const [resetPassword] = useResetPasswordMutation();
 
-  const handlePasswordReset = () => {
-    console.log('handling reset');
+  const handlePasswordReset = async () => {
+    await resetPassword({
+      password: newPassword,
+      confirmPassword: verifyPassword,
+      token: token || '',
+    });
   };
 
   return (

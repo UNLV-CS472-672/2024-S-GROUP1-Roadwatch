@@ -181,11 +181,17 @@ export const forgotPassword = async (req: Request, res: Response) => {
     const TokenExpier = new Date();
     TokenExpier.setMinutes(TokenExpier.getMinutes() + 2);
 
-    await ResetPassword.create({
-      user: user.id,
-      token,
-      validTime: TokenExpier,
-    });
+    await ResetPassword.findOneAndUpdate(
+      {
+        user: user.id,
+      },
+      {
+        user: user.id,
+        token,
+        validTime: TokenExpier,
+      },
+      { upsert: true, new: true }
+    );
 
     // Send the password reset email with a temporary token
     sendPasswordReset(email, token);
@@ -223,12 +229,9 @@ export const resetPassword = async (req: Request, res: Response) => {
   try {
     const newPassword = await bcrypt.hash(password, 3);
 
-    await User.findOneAndUpdate(
-      { id: userReset.user },
-      {
-        password: newPassword,
-      }
-    );
+    await User.findByIdAndUpdate(userReset.user, {
+      password: newPassword,
+    });
 
     await ResetPassword.deleteOne({ token });
   } catch (err) {
