@@ -1,16 +1,21 @@
 import styles from './CreateAccount.module.scss';
 import { useState } from 'react';
 import { IconButton, Typography, AppBar, Toolbar, Box, Stack } from '@mui/material';
+import { Stepper, Step, StepLabel } from '@mui/material';
 import { ArrowBackIos } from '@mui/icons-material';
 import { CustomButton, PasswordField } from '@/components';
 
 interface CreateAccountProps {
+  currentStep: number;
+  steps: string[];
   updateData: (field: string, value: string) => void;
   handleBack: () => void;
   handleSubmit: () => void;
 }
 
 export default function CreateAccount({
+  currentStep,
+  steps,
   updateData,
   handleBack,
   handleSubmit,
@@ -46,6 +51,15 @@ export default function CreateAccount({
             </Typography>
           </Toolbar>
         </AppBar>
+
+        <Stepper activeStep={currentStep} alternativeLabel>
+          {steps.map((label) => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+
         <Stack spacing={2}>
           <PasswordField header="Password" setInputValue={setPassword} />
           <PasswordField header="Confirm Password" setInputValue={setConfirmPassword} />

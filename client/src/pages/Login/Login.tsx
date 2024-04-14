@@ -31,7 +31,7 @@ export default function Login(): JSX.Element {
       if ('data' in res) {
         const { user_id } = res.data;
         if (user_id) {
-          navigate('/');
+          navigate('/', { replace: true });
         }
       }
     } catch (err) {
@@ -43,20 +43,20 @@ export default function Login(): JSX.Element {
   // Render login form
   return (
     <div className={styles['Login__LoginContainer']}>
-      <div className={styles['Login__whiteContainer']}>
-        <div className={styles['Login__logo']}>
+      <div className={styles['Login__whiteContainer']} data-testid={'Login-textField'}>
+        <div className={styles['Login__logo']} data-testid={'Login-logo'}>
           <img src={logo} alt={'Roadwatch Logo'} />
         </div>
         <TextField header="Username or Email" setInputValue={setUserInput} />
         <PasswordField header="Password" setInputValue={setPassword} />
-        <div className={styles['Login__textCentered']}>
+        <div className={styles['Login__textCentered']} data-testid={'Login-btns'}>
           <CustomButton onClick={handleLogin}>Login</CustomButton>
           <br />
           <br />
           <b>Forgot Password</b>
           <br />
           <br />
-          <div className={styles['Login__registerHereContainer']}>
+          <div className={styles['Login__registerHereContainer']} data-testid={'Login-register'}>
             <p>
               {' '}
               {"Don't have an account? "}
