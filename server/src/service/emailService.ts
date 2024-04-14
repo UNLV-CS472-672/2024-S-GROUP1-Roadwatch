@@ -40,8 +40,9 @@ export const sendEmail = async ({
 export const sendPasswordReset = (email: string, token: string) => {
   const subject = 'Password Reset';
   const templateId = process.env.SEND_GRID_RESET_PASSWORD_TEMPLATE || '';
-  const dynamicTemplateData = {};
+  const dynamicTemplateData = {
+    resetPasswordLink: `${process.env.LIVE_SITE}/reset-password/${token}`,
+  };
 
-  // TODO: provide arguments to the dynamic template for a specific link dedicated to the user so they can update their password.
-  // sendEmail({ to: email, subject, templateId, dynamicTemplateData });
+  sendEmail({ to: email, subject, templateId, dynamicTemplateData });
 };
