@@ -18,3 +18,6 @@ export * from './Instructions/Instructions';
 
 export { default as Register } from './Register/Register';
 export * from './Register/Register';
+
+export { default as ResetPassword } from './ResetPassword/ResetPassword';
+export * from './ResetPassword/ResetPassword';

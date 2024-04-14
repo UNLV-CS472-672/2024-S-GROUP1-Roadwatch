@@ -2,32 +2,46 @@ import sendgrid from '@sendgrid/mail';
 
 interface Email {
   to: string;
-  from: string;
   subject: string;
-  text: string;
-  html: string;
+  templateId: string;
+  dynamicTemplateData: Record<string, string>;
 }
 
 export const initEmail = () => {
   sendgrid.setApiKey(`${process.env.SEND_GRID_API_KEY}`);
 };
 
-export const sendEmail = async ({ to, subject, text, html }: Email) => {
+export const sendEmail = async ({
+  to,
+  subject,
+  templateId,
+  dynamicTemplateData,
+}: Email) => {
+  if (process.env.SEND_GRID_FROM === undefined) {
+    console.error('No sender in environment. Not sending email.');
+    return;
+  }
+
   const msg = {
     to,
-    from: 'cs472.roadwatch@gmail.com',
+    from: process.env.SEND_GRID_FROM,
     subject,
-    text,
-    html,
+    templateId,
+    dynamicTemplateData,
   };
 
   try {
     await sendgrid.send(msg);
   } catch (error) {
     console.error(error);
-
-    if (error.response) {
-      console.error(error.response.body);
-    }
   }
+};
+
+export const sendPasswordReset = (email: string, token: string) => {
+  const subject = 'Password Reset';
+  const templateId = process.env.SEND_GRID_RESET_PASSWORD_TEMPLATE || '';
+  const dynamicTemplateData = {};
+
+  // TODO: provide arguments to the dynamic template for a specific link dedicated to the user so they can update their password.
+  // sendEmail({ to: email, subject, templateId, dynamicTemplateData });
 };
