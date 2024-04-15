@@ -10,7 +10,7 @@ export default function Register(): JSX.Element {
   const [currentStep, setCurrentStep] = useState(0);
   const [createUser] = useCreateUserMutation();
   const navigate = useNavigate();
-  const [formData, setFormData] = useState<User>({
+  const [, setFormData] = useState<User>({
     firstName: '',
     lastName: '',
     userName: '',
@@ -24,12 +24,17 @@ export default function Register(): JSX.Element {
     password: '',
   });
 
-  const updateFormData = (field: string, value: string) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      [field]: value,
-    }));
+  // ai-gen start (ChatGPT-3.5, 0)
+  const updateFormData = (field: string, value: string, callback?: (data: User) => void) => {
+    setFormData((prevData) => {
+      const newData = { ...prevData, [field]: value };
+      if (callback) {
+        callback(newData);
+      }
+      return newData;
+    });
   };
+  // ai-gen end
 
   const handleNext = () => {
     setCurrentStep((prevStep) => prevStep + 1);
@@ -39,12 +44,16 @@ export default function Register(): JSX.Element {
     setCurrentStep((prevStep) => prevStep - 1);
   };
 
-  const handleCreateAccount = () => {
-    createUser(formData)
-      .unwrap()
-      .then(() => navigate('/'))
-      .catch((error) => console.error('rejected', error));
+  // ai-gen start (ChatGPT-3.5, 2)
+  const handleCreateAccount = (password: string) => {
+    updateFormData('password', password, (updatedData) => {
+      createUser(updatedData)
+        .unwrap()
+        .then(() => navigate('/'))
+        .catch((error) => console.error('rejected', error));
+    });
   };
+  // ai-gen end
 
   const getStepContent = () => {
     switch (currentStep) {
@@ -72,7 +81,6 @@ export default function Register(): JSX.Element {
           <CreateAccount
             currentStep={currentStep}
             steps={steps}
-            updateData={updateFormData}
             handleBack={handleBack}
             handleSubmit={handleCreateAccount}
           />

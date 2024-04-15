@@ -8,15 +8,13 @@ import { CustomButton, PasswordField } from '@/components';
 interface CreateAccountProps {
   currentStep: number;
   steps: string[];
-  updateData: (field: string, value: string) => void;
   handleBack: () => void;
-  handleSubmit: () => void;
+  handleSubmit: (password: string) => void;
 }
 
 export default function CreateAccount({
   currentStep,
   steps,
-  updateData,
   handleBack,
   handleSubmit,
 }: CreateAccountProps): JSX.Element {
@@ -34,8 +32,7 @@ export default function CreateAccount({
       return;
     }
 
-    updateData('password', password);
-    handleSubmit();
+    handleSubmit(password);
   };
 
   return (
