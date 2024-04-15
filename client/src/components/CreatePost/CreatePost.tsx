@@ -13,6 +13,7 @@ import TextFieldMulti from '@mui/material/TextField';
 import RoomOutlinedIcon from '@mui/icons-material/RoomOutlined';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
+
 // Type for the marker IDs
 type MarkerId = 'cone' | 'pothole' | 'roadDamage' | 'carAccident' | 'warningSign' | 'etc'
 
