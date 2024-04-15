@@ -20,8 +20,8 @@ export default function CreateAccount({
   handleBack,
   handleSubmit,
 }: CreateAccountProps): JSX.Element {
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
 
   const handleClick = () => {
     if (!password || !confirmPassword) {
@@ -29,8 +29,12 @@ export default function CreateAccount({
       return;
     }
 
+    if (password != confirmPassword) {
+      alert('Passwords must match!');
+      return;
+    }
+
     updateData('password', password);
-    updateData('confirmPassword', confirmPassword);
     handleSubmit();
   };
 

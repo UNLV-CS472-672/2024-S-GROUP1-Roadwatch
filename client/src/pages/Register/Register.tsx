@@ -1,23 +1,27 @@
 import styles from './Register.module.scss';
 import { GeneralInfo, SignUp, CreateAccount } from '@/components';
+import { useCreateUserMutation } from '@/store';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { User } from '@/types';
 
 export default function Register(): JSX.Element {
   const steps = ['General Info', 'Location', 'Create Account'];
   const [currentStep, setCurrentStep] = useState(0);
-  const [formData, setFormData] = useState({
+  const [createUser] = useCreateUserMutation();
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState<User>({
     firstName: '',
     lastName: '',
     userName: '',
     email: '',
-    phone: '',
-    DoB: '',
+    phoneNumber: '',
+    dob: '',
     address: '',
     city: '',
     state: '',
     zip: '',
     password: '',
-    confirmPassword: '',
   });
 
   const updateFormData = (field: string, value: string) => {
@@ -36,9 +40,10 @@ export default function Register(): JSX.Element {
   };
 
   const handleCreateAccount = () => {
-    // TODO: Create the User
-    console.log(formData);
-    return 'Account Created';
+    createUser(formData)
+      .unwrap()
+      .then(() => navigate('/'))
+      .catch((error) => console.error('rejected', error));
   };
 
   const getStepContent = () => {
@@ -69,7 +74,7 @@ export default function Register(): JSX.Element {
             steps={steps}
             updateData={updateFormData}
             handleBack={handleBack}
-            handleSubmit={handleNext}
+            handleSubmit={handleCreateAccount}
           />
         );
       default:
@@ -77,13 +82,5 @@ export default function Register(): JSX.Element {
     }
   };
 
-  return (
-    <div className={styles['Register']}>
-      {currentStep === steps.length ? (
-        <div>{handleCreateAccount()}</div>
-      ) : (
-        <div>{getStepContent()}</div>
-      )}
-    </div>
-  );
+  return <div className={styles['Register']}>{getStepContent()}</div>;
 }
