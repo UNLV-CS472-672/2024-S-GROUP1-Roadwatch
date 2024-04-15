@@ -1,16 +1,16 @@
 import styles from './CommunityX.module.scss';
-import { CustomButton, CommunityPost } from '@/components';
+import { CommunityPost, CreatePost} from '@/components';
 import { IconButton } from '@mui/material';
 import { ArrowBackIos } from '@mui/icons-material';
 import { useNavigate } from "react-router-dom";
 
+/**
+ *  This function displays the CommunityX page. CommunityX is the specific community that a user selects to interact with.
+ */
 export default function CommunityX(): JSX.Element {
-    const onCreatePost = () => {
-        // replace this with the create post component
-        console.log("Post Created")
-    }
 
     // replace this to get the posts corresponding to the community
+    // This is dummy data for now!!!
     const postArray = [
         {
             /** Boolean which tells if its a marker post or text post*/
@@ -95,10 +95,8 @@ export default function CommunityX(): JSX.Element {
             
         </div>
         <div className={styles['CommunityX__createPostButton']}>
-            <CustomButton onClick={onCreatePost}>Create Post</CustomButton>
+            <CreatePost/>
         </div>
     </div>
-        
-    
   );
 }
