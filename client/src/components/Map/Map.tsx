@@ -1,5 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Map.module.scss';
+import SpeedDial from '@mui/material/SpeedDial';
+import SpeedDialAction from '@mui/material/SpeedDialAction';
+import SpeedDialIcon from '@mui/material/SpeedDialIcon';
+import { LocationOn as LocationOnIcon } from '@mui/icons-material';
 
 // Initialize initMap as a global function
 declare global {
@@ -18,8 +22,7 @@ interface MapProps {
   location: Location;
 }
 
-
-const Map: React.FC<MapProps> = ({location}) => {
+const Map: React.FC<MapProps> = ({ location }) => {
   useEffect(() => {
     const initMap = async () => {
       // Ensure the Google Maps API script has loaded
