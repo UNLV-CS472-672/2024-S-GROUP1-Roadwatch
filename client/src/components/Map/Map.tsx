@@ -95,16 +95,17 @@ const Map: React.FC<MapProps> = ({ location }) => {
   };
 
   return (
-    <div>
-      <div id="map" className={styles['mapContainer']}></div>
+    <div className={styles['mapContainer']}>
+      <div id="map"></div>
       <SpeedDial
-        ariaLabel="SpeedDial"
-        sx={{ position: 'absolute', bottom: 16, right: 16 }}
         icon={<SpeedDialIcon />}
+        ariaLabel="SpeedDial"
+        sx={{ position: 'absolute', bottom: 80, right: 24 }}
         onClose={handleClose}
         onOpen={handleOpen}
         open={open}
         direction="up"
+        classes={{ root: styles.customSpeedDial }}
       >
         {actions.map((action) => (
           <SpeedDialAction

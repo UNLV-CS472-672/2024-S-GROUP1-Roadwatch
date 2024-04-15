@@ -56,7 +56,6 @@ export default function Home(): JSX.Element {
           </div>
         </div>
       )}
-      <img src={logo} alt="RoadWatch Logo" className={styles['Home__logo']} />
     </div>
   );
 }
