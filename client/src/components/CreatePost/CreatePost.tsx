@@ -1,10 +1,6 @@
-import * as React from 'react';
-import { useState, forwardRef } from 'react';
+import { useState } from 'react';
 import styles from './CreatePost.module.scss';
 import CustomButton from '../CustomButton/CustomButton.tsx';
-import Dialog from '@mui/material/Dialog';
-import Slide from '@mui/material/Slide';
-import { TransitionProps } from '@mui/material/transitions';
 import CloseIcon from '@mui/icons-material/Close';
 import { Fab, IconButton, InputAdornment } from '@mui/material';
 import TextField from '../TextField/TextField.tsx';
@@ -15,32 +11,23 @@ import carAccident from '../../assets/markers/CarAccident.svg';
 import warning from '../../assets/markers/WarningSign.svg';
 import TextFieldMulti from '@mui/material/TextField';
 import RoomOutlinedIcon from '@mui/icons-material/RoomOutlined';
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
-// Transition component for the MUI Dialog component animation
-const Transition = forwardRef(function Transition(
-    props: TransitionProps & {
-        children: React.ReactElement;
-    },
-    ref: React.Ref<unknown>,
-) {
-    return <Slide direction="up" ref={ref} {...props} />;
-});
 
 // Type for the marker IDs
 type MarkerId = 'cone' | 'pothole' | 'roadDamage' | 'carAccident' | 'warningSign' | 'etc'
 
 export default function CreatePost() {
     // State Variables
-    const [open, setOpen] = useState(false);
+    const [drawerOpen, setDrawerOpen] = useState(false);
     const [postName, setPostName] = useState('');
     const [marker, setMarker] = useState<MarkerId | null>(null);
     const [date, setDate] = useState('');
     const [description, setDescription] = useState('');
     const [location, setLocation] = useState('');
 
-    // Function to handle opening CreatePost component
-    const handleClickOpen = () => {
-        setOpen(true);
+    // Function to handle initialize data
+    const initializeData = () => {
         setPostName('');
         setMarker(null);
         setDate(new Date().toISOString().split('T')[0]);
@@ -71,8 +58,7 @@ export default function CreatePost() {
         setDescription('');
 
     }
-    // Function to handle closing CreatePost component
-    const handleClose = () => setOpen(false);
+
 
     // Functions to handle input changes to each data point 
     // (postName, marker, date, description, and location)
@@ -92,26 +78,36 @@ export default function CreatePost() {
             console.log('Date:', date);
             console.log('Selected Marker:', marker);
             console.log('Location:', location);
-            handleClose();
+            handleDrawerClose();
         }
     }
+
+    // Function to handle opening the Drawer popup
+    const handleDrawerOpen = () => {
+        // Calls initializeData() function
+        setDrawerOpen(true);
+        initializeData();
+    };
+
+    // Function to handle closing the Drawer popup
+    const handleDrawerClose = () => setDrawerOpen(false);
 
     return (
         <>
             <div className={styles['CreatePost__postContainer']}>
                 {/* Button to open dialog */}
                 <CustomButton
-                    onClick={handleClickOpen}>
+                    onClick={handleDrawerOpen}>
                     Create Post
                 </CustomButton>
             </div>
-            {/* MUI Dialog for creating post */}
-            <Dialog
-                fullScreen
-                open={open}
-                onClose={handleClose}
-                TransitionComponent={Transition}
-                className={styles['CreatePost__dialog']}
+            {/* MUI SwipeableDrawer for creating post */}
+            <SwipeableDrawer
+                anchor="bottom"
+                open={drawerOpen}
+                onClose={handleDrawerClose}
+                onOpen={handleDrawerOpen}
+                swipeAreaWidth={20}
             >
                 <div className={styles['CreatePost__container']}>
                     <div className={styles['CreatePost__first']}>
@@ -122,7 +118,7 @@ export default function CreatePost() {
                         {/* Button to close dialog (CloseIcon) */}
                         <IconButton
                             className={styles['CreatePost__backButton']}
-                            onClick={handleClose}
+                            onClick={handleDrawerClose}
                             size="small">
                             <CloseIcon
                                 className={styles['CreatePost__close']}
@@ -211,7 +207,7 @@ export default function CreatePost() {
                         </CustomButton>
                     </div>
                 </div>
-            </Dialog >
+            </SwipeableDrawer>
         </>
     );
 }
