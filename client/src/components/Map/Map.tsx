@@ -23,6 +23,8 @@ interface MapProps {
 }
 
 const Map: React.FC<MapProps> = ({ location }) => {
+  const [open, setOpen] = useState(false);
+
   useEffect(() => {
     const initMap = async () => {
       // Ensure the Google Maps API script has loaded
@@ -79,7 +81,42 @@ const Map: React.FC<MapProps> = ({ location }) => {
     loadGoogleMapsScript();
   }, [location]); // Dependency array to re-run the effect if the location prop changes
 
-  return <div id="map" className={styles['mapContainer']}></div>;
+  const actions = [
+    { icon: <LocationOnIcon />, name: 'Location' },
+    // Add more actions as needed
+  ];
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <div>
+      <div id="map" className={styles['mapContainer']}></div>
+      <SpeedDial
+        ariaLabel="SpeedDial"
+        sx={{ position: 'absolute', bottom: 16, right: 16 }}
+        icon={<SpeedDialIcon />}
+        onClose={handleClose}
+        onOpen={handleOpen}
+        open={open}
+        direction="up"
+      >
+        {actions.map((action) => (
+          <SpeedDialAction
+            key={action.name}
+            icon={action.icon}
+            tooltipTitle={action.name}
+            onClick={handleClose}
+          />
+        ))}
+      </SpeedDial>
+    </div>
+  );
 };
 
 export default Map;
