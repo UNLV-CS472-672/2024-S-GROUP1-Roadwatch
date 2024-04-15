@@ -58,7 +58,6 @@ export default function CreatePost() {
 
     }
 
-
     // Functions to handle input changes to each data point 
     // (postName, marker, date, description, and location)
     const handlePostNameChange = (value: string) => setPostName(value);
