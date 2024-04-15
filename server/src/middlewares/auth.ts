@@ -16,9 +16,7 @@ export const validateToken = (
 
   try {
     const payload = verifyToken(token);
-    req.body = {
-      user_id: payload.user_id,
-    };
+    req.body.user_id = payload.user_id;
 
     next();
   } catch (err) {
