@@ -14,3 +14,4 @@ export { default as CreateAccount } from './CreateAccount/CreateAccount';
 export { default as SignUp } from './SignUp/SignUp';
 export { default as GeneralInfo } from './SignUp/GeneralInfo/GeneralInfo';
 export { default as CommunityPost } from './CommunityPost/CommunityPost';
+export { default as CreatePost } from './CreatePost/CreatePost';
