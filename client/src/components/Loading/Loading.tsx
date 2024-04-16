@@ -1,5 +1,5 @@
 import styles from './Loading.module.scss';
-import logo from '../../assets/Temp_Roadwatch_logo.svg';
+import logo from '../../assets/Updated_Roadwatch_Logo.svg';
 
 export default function Loading(): JSX.Element {
   return (
