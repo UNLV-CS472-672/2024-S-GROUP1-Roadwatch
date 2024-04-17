@@ -6,6 +6,7 @@ import { connect } from './config/database';
 import userRoutes from './routes/User';
 import pushNotificationRoutes from './routes/PushNotification';
 import markerRoutes from './routes/Marker';
+import communityRoutes from './routes/Community';
 import { initEmail } from './service/emailService';
 
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(bodyParser.json()); // this is needed to parse body of requests
 app.use('/api/user', userRoutes);
 app.use('/api/push-notification', pushNotificationRoutes);
 app.use('/api/marker', markerRoutes);
+app.use('/api/community', communityRoutes);
 
 // server start
 app.listen(port, () => {
