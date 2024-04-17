@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import User from '../models/User';
 import { signToken } from '../utils';
+import { sendPasswordReset } from '../service/emailService';
+import ResetPassword from '../models/ResetPassword';
 
 // Retrieves logged in user based on their userId
 // this could eventually be different from getting a user in the other route I think
@@ -160,4 +162,82 @@ export const login = async (req: Request, res: Response) => {
     console.error(err);
     return res.sendStatus(500);
   }
+};
+
+export const forgotPassword = async (req: Request, res: Response) => {
+  try {
+    const { email } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(500).send({
+        error: 'An error occurred',
+      });
+    }
+
+    // create a temp token and save it
+    const token = Math.floor(Math.random() * 100000000).toString();
+    const TokenExpier = new Date();
+    TokenExpier.setMinutes(TokenExpier.getMinutes() + 2);
+
+    await ResetPassword.findOneAndUpdate(
+      {
+        user: user.id,
+      },
+      {
+        user: user.id,
+        token,
+        validTime: TokenExpier,
+      },
+      { upsert: true, new: true }
+    );
+
+    // Send the password reset email with a temporary token
+    sendPasswordReset(email, token);
+
+    return res.send({
+      data: {
+        message: 'Password reset email sent',
+      },
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send({
+      error: 'An error occurred',
+    });
+  }
+};
+
+export const resetPassword = async (req: Request, res: Response) => {
+  const { password, confirmPassword, token } = req.body;
+
+  const userReset = await ResetPassword.findOne({ token });
+
+  if (!userReset) {
+    return res.status(400).send({ error: 'An error occured.' });
+  }
+
+  if (userReset.validTime.getTime() - new Date().getTime() < 0) {
+    return res.status(400).send({ error: 'Wrong token or token is expired.' });
+  }
+
+  if (password !== confirmPassword) {
+    return res.status(400).send({ error: 'Password does not match' });
+  }
+
+  try {
+    const newPassword = await bcrypt.hash(password, 3);
+
+    await User.findByIdAndUpdate(userReset.user, {
+      password: newPassword,
+    });
+
+    await ResetPassword.deleteOne({ token });
+  } catch (err) {
+    console.error(err);
+    return res.status(400).send({ error: 'An error occured.' });
+  }
+
+  return res.send(200);
 };
