@@ -48,7 +48,6 @@ export default function Register(): JSX.Element {
   const handleCreateAccount = (password: string) => {
     updateFormData('password', password, (updatedData) => {
       createUser(updatedData)
-        .unwrap()
         .then(() => navigate('/'))
         .catch((error) => console.error('rejected', error));
     });
