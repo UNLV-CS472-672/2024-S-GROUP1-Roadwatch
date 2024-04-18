@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get(
   '/all-communities',
-  validateToken,
+  // validateToken,
   communityController.getAllComunities
 );
 
