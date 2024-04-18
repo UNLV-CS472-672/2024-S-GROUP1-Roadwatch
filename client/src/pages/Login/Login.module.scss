@@ -32,4 +32,14 @@
     &__registerHereBtn{
         color: green;
     }
+
+    &__forgotPasswordBtn {
+        color: black;
+        text-decoration: none;
+        transition: color 0.3s; // Smooth transition for color change
+  
+            &:hover {
+                color: lighten(black, 35%); // Lighten the color by 20% when hovering
+            }
+    }
 }
