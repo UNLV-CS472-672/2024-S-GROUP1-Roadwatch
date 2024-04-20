@@ -1,6 +1,9 @@
 import { Request, Response } from 'express';
 import Post from '../models/Post';
 
+/* Used ChatGPT to understand how to write the following functions */
+// The following functions are used to get all posts, delete a post, and create a post.
+
 // getAllPosts function
 export const getAllPosts = async (req: Request, res: Response) => {
     try {
@@ -18,7 +21,6 @@ export const getAllPosts = async (req: Request, res: Response) => {
 export const deletePost = async (req: Request, res: Response) => {
     const {id} = req.params;
 
-
     try {
         if (!id) {
             res.statusMessage = 'Bad request, missing post ID.';
@@ -27,7 +29,7 @@ export const deletePost = async (req: Request, res: Response) => {
 
         await Post.findByIdAndDelete(id);
 
-        res.sendStatus(204);
+        res.sendStatus(204); // Returns no content, 204 status meaning success.
         } catch (error) {
         console.error('Delete Post Error:', error);
         res.statusMessage = error as string;
@@ -47,17 +49,18 @@ export const savePost = async (req: Request, res: Response) => {
 
     try {
 
+        /* These validations were suggested and writen by ChatGPT */
         // Validate the request
         if (!community || !user || !type || !content) {
             res.statusMessage = 'Bad request, missing required fields.';
             return res.sendStatus(400);
         }
-
         // Validate Marker
         if (type === 'marker' && !marker) {
             res.statusMessage = 'Bad request, missing marker ID for marker post';
             return res.sendStatus(400);
         }
+        /* End of ChatGPT code */
 
         const post = await Post.create({
             community,
