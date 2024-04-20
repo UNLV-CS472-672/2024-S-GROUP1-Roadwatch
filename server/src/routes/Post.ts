@@ -10,4 +10,16 @@ router.get(
   postController.getAllPosts
 );
 
+router.post(
+  '/save-post',
+  validateToken,
+  postController.savePost
+);
+
+router.delete(
+  '/delete-post',
+  validateToken,
+  postController.deletePost
+);
+
 export default router;

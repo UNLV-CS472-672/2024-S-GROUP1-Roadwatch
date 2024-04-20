@@ -15,7 +15,7 @@ export const getAllPosts = async (req: Request, res: Response) => {
 };
 
 // getPostById function
-export const getPostById = async (req: Request, res: Response) => {
+export const deletePost = async (req: Request, res: Response) => {
     try {
         const post = await Post.findById(req.params.id);
     
@@ -28,7 +28,7 @@ export const getPostById = async (req: Request, res: Response) => {
 }
 
 // createPost function
-export const createPost = async (req: Request, res: Response) => {
+export const savePost = async (req: Request, res: Response) => {
     const {
         community,
         user,
@@ -38,7 +38,6 @@ export const createPost = async (req: Request, res: Response) => {
       } = req.body;
 
     try {
-
 
         // Validate the request
         if (!community || !user || !type || !content) {
