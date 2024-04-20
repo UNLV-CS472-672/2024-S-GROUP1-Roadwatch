@@ -14,18 +14,26 @@ export const getAllPosts = async (req: Request, res: Response) => {
     }
 };
 
-// getPostById function
+// deletePost function
 export const deletePost = async (req: Request, res: Response) => {
+    const {id} = req.params;
+
+
     try {
-        const post = await Post.findById(req.params.id);
-    
-        res.status(200).json({ data: post });
+        if (!id) {
+            res.statusMessage = 'Bad request, missing post ID.';
+            return res.sendStatus(400);
+        }
+
+        await Post.findByIdAndDelete(id);
+
+        res.sendStatus(204);
         } catch (error) {
-        console.error('Get Post Error:', error);
+        console.error('Delete Post Error:', error);
         res.statusMessage = error as string;
         return res.sendStatus(400);
     }
-}
+};
 
 // createPost function
 export const savePost = async (req: Request, res: Response) => {

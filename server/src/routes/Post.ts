@@ -17,7 +17,7 @@ router.post(
 );
 
 router.delete(
-  '/delete-post',
+  '/delete-post/:id',
   validateToken,
   postController.deletePost
 );
