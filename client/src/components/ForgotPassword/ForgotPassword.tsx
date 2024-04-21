@@ -5,6 +5,8 @@ import CustomButton from '../CustomButton/CustomButton.tsx';
 import logo from '../../assets/Updated_RoadWatch_Logo.svg';
 import { useNavigate, useLocation } from "react-router-dom";
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
+import { useForgotPasswordMutation } from '@/store';
+
 /** 
  * ForgotPassword Component
  * Represents a form field for resetting password with email input and basic validation.
@@ -20,14 +22,9 @@ export default function ForgotPassword(): JSX.Element {
     const [openConfirmation, setOpenConfirmation] = useState(false);
     const [email, setEmail] = useState('');
     const [isEmailTouched, setIsEmailTouched] = useState(false);
+    const [forgotPassword] = useForgotPasswordMutation();
 
-    /**
-     * handleChange Function
-     * Handles changes in the email input field.
-     * Validates the entered email format.
-     * Updates the isValidEmail state
-     * @param (string) value - the value of the email input field
-     */
+    //handleChange function
     const handleChange = (value: string) => {
         // Basic email format validation
         const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -49,9 +46,11 @@ export default function ForgotPassword(): JSX.Element {
     if (location === 'login')
         location = 'login';
 
-    const handleOpen = () => {
-        if (isValidEmail)
+    const handleOpen = async () => {
+        if (isValidEmail) {
+            await forgotPassword({ email: email });
             setOpenConfirmation(true);
+        }
     }
 
     const handleClose = () => {
