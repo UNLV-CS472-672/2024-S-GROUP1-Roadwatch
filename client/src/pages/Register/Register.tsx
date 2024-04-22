@@ -49,7 +49,10 @@ export default function Register(): JSX.Element {
     updateFormData('password', password, (updatedData) => {
       createUser(updatedData)
         .then(() => navigate('/'))
-        .catch((error) => console.error('rejected', error));
+        .catch((error) => {
+          const errorMsg: Error = error as Error;
+          alert(`Unable to create account.\nReason: ${errorMsg.message}`);
+        });
     });
   };
   // ai-gen end
