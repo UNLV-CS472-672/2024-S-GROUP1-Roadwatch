@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import styles from './CommunityCard.module.scss';
 import {
   Avatar,
@@ -11,7 +9,7 @@ import {
   Typography,
 } from '@mui/material';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
-import { red, blue, orange } from '@mui/material/colors';
+import { red } from '@mui/material/colors';
 import communityImage from '../../assets/Updated_RoadWatch_Logo.svg';
 
 interface CommunityCardProps {
@@ -30,7 +28,7 @@ export default function CommunityCard({
   const first3Users = users.slice(0, 3);
 
   return (
-    <div className={styles['CommunityCard']} onClick={onClick}>
+    <div role="presentation" className={styles['CommunityCard']} onClick={onClick}>
       <Card>
         <CardContent>
           <Stack direction="row">
