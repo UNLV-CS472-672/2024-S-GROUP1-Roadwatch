@@ -3,8 +3,7 @@ import { getAccessToken } from '@/utils';
 
 export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
-    // baseUrl: import.meta.env.VITE_API_BASE_URL,
-    baseUrl: 'http://localhost:3000/api',
+    baseUrl: import.meta.env.VITE_API_BASE_URL,
     prepareHeaders: (headers) => {
       const accessToken = getAccessToken();
       if (accessToken) {

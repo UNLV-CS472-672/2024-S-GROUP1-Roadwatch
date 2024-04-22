@@ -5,19 +5,7 @@ import { useGetAllCommunitiesQuery } from '@/store';
 
 export default function Community(): JSX.Element {
   const [search, setSearch] = useState('');
-  const { data: communitie, isLoading } = useGetAllCommunitiesQuery();
-
-  const communities = communitie?.concat([
-    {
-      id: '73891',
-      name: 'extra',
-      address: { street: 'extraStreet', city: 'las', state: 'NV', zip: '12' },
-      users: [],
-      radius: 6,
-      longitude: 1,
-      latitude: 2,
-    },
-  ]);
+  const { data: communities, isLoading } = useGetAllCommunitiesQuery();
 
   return (
     <div className={styles['Community']}>
@@ -33,7 +21,7 @@ export default function Community(): JSX.Element {
                   <CommunityCard
                     key={c.id}
                     name={c.name}
-                    street={c.address.street}
+                    street={c.street}
                     users={c.users || []}
                     onClick={() => {
                       console.log('redirect to specific community');
@@ -44,7 +32,7 @@ export default function Community(): JSX.Element {
                 <CommunityCard
                   key={c.id}
                   name={c.name}
-                  street={c.address.street}
+                  street={c.street}
                   users={c.users || []}
                   onClick={() => {
                     console.log('redirect to specific community');

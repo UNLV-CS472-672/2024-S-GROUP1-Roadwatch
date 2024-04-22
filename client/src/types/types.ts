@@ -1,10 +1,3 @@
-interface IAddress {
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
-}
-
 export interface User {
   id?: string;
   firstName: string;
@@ -78,7 +71,7 @@ export type TPost = IUniversalPost & (ITextPost | IMarkerPost);
 export interface ICommunity {
   id: string;
   name: string;
-  address: IAddress;
+  street: string;
   longitude: number;
   latitude: number;
   radius: number;

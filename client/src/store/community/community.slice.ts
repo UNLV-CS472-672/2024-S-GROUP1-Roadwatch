@@ -1,24 +1,27 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { apiSlice } from '../api';
 import { ICommunity } from '@/types';
 
-const transformCommunityResponse = (response: any[]) =>
-  response.map((community: any) => ({
+interface CommunityResponse {
+  _id: string;
+  name: string;
+  street: string;
+  longitude: number;
+  latitude: number;
+  radius: number;
+  users: [{ firstName: string }];
+  image: string;
+  posts: [];
+}
+
+const transformCommunityResponse = (response: CommunityResponse[]) =>
+  response.map((community: CommunityResponse) => ({
     id: community._id,
     name: community.name,
-    address: {
-      street: community.street,
-      city: community.city,
-      state: community.state,
-      zip: community.zip,
-    },
+    street: community.street,
     longitude: community.longitude,
     latitude: community.latitude,
     radius: community.radius,
-    users: community.users.map((u: any) => u.firstName as string),
+    users: community.users.map((u) => u.firstName),
     image: community.image,
     posts: community.posts,
   }));
