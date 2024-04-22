@@ -8,9 +8,13 @@ import Pothole from '../../assets/markers/Pothole.svg';
 import RoadDamage from '../../assets/markers/RoadDamage.svg';
 import WarningSign from '../../assets/markers/WarningSign.svg';
 import Logo from '../../assets/Updated_RoadWatch_Logo.svg';
+import { useNavigate } from 'react-router-dom';
+import { Reply } from '../../types/types';
 
 /** Parameters for the CommunityPost */
 interface CommunityPostProps {
+    /** ID of the post */
+    id: string;
     /** Boolean which tells if its a marker post or text post*/
     isMarker: boolean;
     /** Content of the post, Title and Body */
@@ -19,6 +23,8 @@ interface CommunityPostProps {
     user: string; //change this to our user. 
     /** If marker post, pass in the marker information */
     marker?: Marker;
+    /** Replies to the post */
+    replies: Reply[];
 }
 
 /** Marker model */
@@ -42,12 +48,14 @@ interface Content {
 const StyledTypography = styled(Typography)()
 
 /** Creates a CommunityPost component */
-const CommunityPost: React.FC<CommunityPostProps> = ({isMarker, content, user, marker}: CommunityPostProps )  => {
+const CommunityPost: React.FC<CommunityPostProps> = ({id, isMarker, content, user, marker}: CommunityPostProps )  => {
     /** OnClick function to view post
      *  Need to update so that the full post is shown when this is called
     */
-    const viewPost = ()=> {
-        console.log("View Post")
+    const navigate = useNavigate();
+
+    const viewPost = () => {
+        navigate(`/post/${id}`);
     }
     const {title, body} = content;
 
