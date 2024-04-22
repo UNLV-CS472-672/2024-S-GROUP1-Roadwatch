@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { IUniversalPost, Reply } from '../../types/types.ts';
 import { CommunityPost } from '@/components';
+import { Loading } from '@/components';
 
 interface PostDiscussionProps {
   id: string;
@@ -61,7 +62,7 @@ const PostDiscussion: React.FC<PostDiscussionProps> = () => {
   };
 
   if (!post) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (
