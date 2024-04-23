@@ -3,7 +3,6 @@ import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useNavigate, useLocation } from "react-router-dom";
-import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import PeopleIcon from '@mui/icons-material/People';
 import SettingsIcon from '@mui/icons-material/Settings';
 import styles from './Navbar.module.scss';
