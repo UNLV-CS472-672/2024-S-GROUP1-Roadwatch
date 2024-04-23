@@ -47,15 +47,6 @@ export default function Navbar() {
     >
       <BottomNavigationAction
         className={styles['Navbar__text']}
-        label="Chat"
-        value="chat"
-        icon={<ChatBubbleIcon className={styles['Navbar__icon']} />}
-        onClick={() => {
-          navigate('/chat');
-        }}
-      />
-      <BottomNavigationAction
-        className={styles['Navbar__text']}
         label="Community"
         value="community"
         icon={<PeopleIcon className={styles['Navbar__icon']} />}
