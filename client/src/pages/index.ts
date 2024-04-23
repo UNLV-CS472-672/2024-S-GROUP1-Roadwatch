@@ -4,6 +4,9 @@ export * from './Chat/Chat';
 export { default as Community } from './Community/Community';
 export * from './Community/Community';
 
+export { default as CommunityX } from './CommunityX/CommunityX';
+export * from './CommunityX/CommunityX';
+
 export { default as Home } from './Home/Home';
 export * from './Home/Home';
 

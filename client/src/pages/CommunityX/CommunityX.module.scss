@@ -1,0 +1,50 @@
+.CommunityX {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    &__header{
+        display: flex;
+        width: 384px;
+        padding: 10px;
+    }
+
+    &__backButton{
+        height: 100%;
+        align-self: flex-start;
+        padding-left: 10px;
+    }
+
+    &__name{
+        padding-left: 40px;
+        font-size: 40px;
+    }
+    
+    &__body{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-y: auto;
+    }
+
+    &__map{
+        padding: 5px;
+    }
+
+    &__users{
+        padding: 5px;
+    }
+
+    &__showPosts{
+    }
+
+    
+
+    &__createPostButton{
+        width: 384px;
+        margin: 10px;
+    }
+}
