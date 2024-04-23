@@ -13,6 +13,7 @@ import {
   Register,
   ResetPassword,
   CommunityX,
+  Forgot,
 } from '@/pages';
 import { PrivateRoute } from '@/utils';
 
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
   {
     path: '/reset-password/:token',
     element: <ResetPassword />,
+  },
+  {
+    path: '/forgot-password',
+    element: <Forgot />,
   },
 ]);
 

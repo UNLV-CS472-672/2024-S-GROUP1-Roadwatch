@@ -53,7 +53,7 @@ export default function Login(): JSX.Element {
           <CustomButton onClick={handleLogin}>Login</CustomButton>
           <br />
           <br />
-          <b>Forgot Password</b>
+          <a href="/forgot-password" className={styles['Login__forgotPasswordBtn']}><b>Forgot Password</b></a>
           <br />
           <br />
           <div className={styles['Login__registerHereContainer']} data-testid={'Login-register'}>
