@@ -1,6 +1,6 @@
 .CustomButton {
-  border-radius: 5px;
-  background-color: #fb7111 !important; //color of our logo
+  border-radius: 0.25rem;
+  background-color: #fb7111 !important; // color of our logo
   height: 50%;
   width: 100%;
   cursor: pointer;
@@ -9,7 +9,7 @@
   color: white !important;
 
   &--text {
-    border-radius: 5px;
+    border-radius: 0.25rem;
     height: 50%;
     width: 100%;
     cursor: pointer;
