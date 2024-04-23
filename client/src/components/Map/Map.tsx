@@ -26,6 +26,8 @@ interface MapProps {
 }
 
 const Map: React.FC<MapProps> = ({location, posts}) => { // Add posts to the destructured props
+  const navigate = useNavigate();
+
   useEffect(() => {
     const initMap = async () => {
       // Ensure the Google Maps API script has loaded
@@ -52,7 +54,10 @@ const Map: React.FC<MapProps> = ({location, posts}) => { // Add posts to the des
       posts.forEach(post => {
         const markerPosition = { lat: post.location.lat, lng: post.location.lng };
 
-        const marker = new AdvancedMarkerElement({
+        // Define the type for AdvancedMarkerElement
+        type AdvancedMarkerElement = InstanceType<typeof window.google.maps.AdvancedMarkerElement>;
+
+        const marker: AdvancedMarkerElement = new window.google.maps.AdvancedMarkerElement({
           map: map,
           position: markerPosition,
           title: 'Post Marker',
@@ -67,7 +72,6 @@ const Map: React.FC<MapProps> = ({location, posts}) => { // Add posts to the des
           }
 
           const postData = await response.json();
-          const navigate = useNavigate();
           navigate(`/posts/${postData.id}`);
         });
       });
