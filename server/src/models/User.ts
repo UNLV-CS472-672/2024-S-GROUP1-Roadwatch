@@ -13,6 +13,7 @@ interface IUser {
   state?: string;
   zip?: string;
   notificationSubscriptions?: string[];
+  community: Schema.Types.ObjectId;
 }
 
 const User = new Schema<IUser>(
@@ -64,6 +65,10 @@ const User = new Schema<IUser>(
     },
     notificationSubscriptions: {
       type: [String],
+    },
+    community: {
+      type: Schema.Types.ObjectId,
+      ref: 'Community',
     },
   },
   { timestamps: true }

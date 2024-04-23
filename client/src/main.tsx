@@ -3,7 +3,17 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Chat, Community, Home, Login, Profile, Instructions, Register } from '@/pages';
+import {
+  Chat,
+  Community,
+  Home,
+  Login,
+  Profile,
+  Instructions,
+  Register,
+  ResetPassword,
+  Forgot,
+} from '@/pages';
 import { PrivateRoute } from '@/utils';
 
 // Collection of paths for the site.
@@ -39,6 +49,14 @@ const router = createBrowserRouter([
   {
     path: '/register/',
     element: <Register />,
+  },
+  {
+    path: '/reset-password/:token',
+    element: <ResetPassword />,
+  },
+  {
+    path: '/forgot-password',
+    element: <Forgot />,
   },
 ]);
 

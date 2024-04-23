@@ -14,4 +14,7 @@ router.put('/:id', validateToken, userController.updateUser);
 
 router.delete('/:id', validateToken, userController.deleteUser);
 
+router.post('/forgot-password', userController.forgotPassword);
+router.post('/reset-password', userController.resetPassword);
+
 export default router;
