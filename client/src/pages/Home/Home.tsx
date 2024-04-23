@@ -18,6 +18,7 @@ export default function Home(): JSX.Element {
   // The map will load when location is set or user asks to load.
   const [isLocationReady, setIsLocationReady] = useState(false);
   const [forceLoadMap, setForceLoadMap] = useState(false);
+  const [posts, setPosts] = useState([]); // Initialize posts as an empty array
 
   // Standardize the location object to match the expected format for the Map component
   const transformedLocation = reduxLocation
@@ -29,6 +30,14 @@ export default function Home(): JSX.Element {
       setIsLocationReady(true); // sets the location to ready.
     }
   }, [transformedLocation]); // Depend on transformedLocation
+
+  // Fetch posts when the component mounts
+  useEffect(() => {
+    fetch('/api/posts')
+      .then(response => response.json())
+      .then(data => setPosts(data))
+      .catch(error => console.error('Error:', error));
+  }, []); // Add this useEffect to fetch posts
 
   // When the button is clicked, set forceLoadMap to true
   const handleLoadMapClick = () => {
@@ -42,7 +51,7 @@ export default function Home(): JSX.Element {
       <Header userName={data?.userName} />
       {/* Render the Map if the location is ready or if the user has requested to load the map */}
       {isLocationReady || forceLoadMap ? (
-        <Map location={transformedLocation || { lat: 36.18811, lng: -115.176468 }} />
+        <Map location={transformedLocation || { lat: 36.18811, lng: -115.176468 }} posts={posts} />
       ) : (
         <div>
           <img src={warning_marker} className={styles['Home__center_image']} alt="warning icon" />
