@@ -68,10 +68,6 @@ const router = createBrowserRouter([
     path: '/post/:id',
     element: <PostDiscussion id="id" />,
   },
-  {
-    path: '/forgot-password',
-    element: <Forgot />,
-  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
