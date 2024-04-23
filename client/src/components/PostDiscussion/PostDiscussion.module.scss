@@ -1,23 +1,46 @@
 .PostDiscussion {
-  // Styles for the PostDiscussion component
-}
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-.MainPost {
-  // Styles for the main post
-}
+  &__container {
+    padding: 20px;
+  }
 
-.Reply {
-  // Styles for the replies
-}
+  &__title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
 
-.ReplyForm {
-  // Styles for the reply form
-}
+  &__body {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
 
-.ReplyInput {
-  // Styles for the reply input
-}
+  &__replyForm {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
 
-.ReplyButton {
-  // Styles for the reply button
+    &__input {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    &__button {
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      background-color: #fb7111;
+      color: white;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #feb979;
+      }
+    }
+  }
 }

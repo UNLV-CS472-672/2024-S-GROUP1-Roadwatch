@@ -13,4 +13,7 @@ router.post('/:postId/replies', validateToken, postController.addReply);
 
 router.delete('/:postId/replies/:replyId', validateToken, postController.deleteReply);
 
+router.post('/', validateToken, postController.createPost);
+
+
 export default router;

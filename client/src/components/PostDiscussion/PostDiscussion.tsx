@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { IUniversalPost, Reply } from '../../types/types.ts';
 import { CommunityPost } from '@/components';
 import { Loading } from '@/components';
+import styles from './PostDiscussion.module.scss';
 
 interface PostDiscussionProps {
   id: string;
@@ -15,7 +16,6 @@ const PostDiscussion: React.FC<PostDiscussionProps> = () => {
 
   useEffect(() => {
     // Fetch the post data based on the ID
-    // Replace this with your actual data fetching logic
     fetch(`/api/posts/${id}`)
       .then(response => response.json())
       .then(data => setPost(data))
@@ -66,16 +66,16 @@ const PostDiscussion: React.FC<PostDiscussionProps> = () => {
   }
 
   return (
-    <div>
-      <h1>{post.content.title}</h1>
-      <p>{post.content.body}</p>
+    <div className={styles.PostDiscussion__container}>
+      <h1 className={styles.PostDiscussion__title}>{post.content.title}</h1>
+      <p className={styles.PostDiscussion__body}>{post.content.body}</p>
       <CommunityPost id={post.id} isMarker={post.marker !== undefined} content={post.content} user={post.user.userName} replies={post.replies} />
       {post.replies.map((reply: Reply, index: number) => (
         <CommunityPost key={index} id={reply.id} isMarker={false} content={{ title: 'Reply', body: reply.content }} user={reply.user.userName} replies={[]} />
       ))}
-      <form onSubmit={handleReplySubmit}>
-        <input type="text" value={newReply} onChange={handleReplyChange} />
-        <button type="submit">Post Reply</button>
+      <form onSubmit={handleReplySubmit} className={styles.PostDiscussion__replyForm}>
+        <input type="text" value={newReply} onChange={handleReplyChange} className={styles.PostDiscussion__replyForm__input} />
+        <button type="submit" className={styles.PostDiscussion__replyForm__button}>Post Reply</button>
       </form>
     </div>
   );
