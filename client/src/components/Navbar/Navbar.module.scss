@@ -1,3 +1,5 @@
+@import "../../index.css";
+
 .Navbar {
   &__container {
     display: flex;
@@ -12,5 +14,13 @@
     width: 7.5rem;
     height: 70%;
     appearance: none;
+  }
+
+  &__text {
+    color: black !important;
+  }
+
+  &__icon {
+    color: #fb7111 !important;
   }
 }
