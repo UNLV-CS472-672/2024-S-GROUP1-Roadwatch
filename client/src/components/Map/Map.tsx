@@ -54,10 +54,7 @@ const Map: React.FC<MapProps> = ({location, posts}) => { // Add posts to the des
       posts.forEach(post => {
         const markerPosition = { lat: post.location.lat, lng: post.location.lng };
 
-        // Define the type for AdvancedMarkerElement
-        type AdvancedMarkerElement = InstanceType<typeof window.google.maps.AdvancedMarkerElement>;
-
-        const marker: AdvancedMarkerElement = new window.google.maps.AdvancedMarkerElement({
+        const marker = new AdvancedMarkerElement({
           map: map,
           position: markerPosition,
           title: 'Post Marker',
