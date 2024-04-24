@@ -245,6 +245,14 @@ export const resetPassword = async (req: Request, res: Response) => {
 // Updates specific user fields without modifying password or notification subscriptions
 export const updateUserProfile = async (req: Request, res: Response) => {
   const { id } = req.params;
+
+  console.log("Update User Profile Requested for ID:", id);
+
+  // If no id is provided, return an error
+  if (!id) {
+    return res.status(400).send({ error: 'No user ID provided' });
+  }
+
   const {
     firstName,
     lastName,
@@ -288,11 +296,10 @@ export const updateUserProfile = async (req: Request, res: Response) => {
 
 // Updates the logged-in user's password
 export const updatePassword = async (req: Request, res: Response) => {
-  console.log('password update requested');
   const { id } = req.params;
   const { currentPassword, newPassword } = req.body;
-  
-  console.log("Received ID:", id);
+
+  console.log("Update Password Requested for ID:", id);
 
   try {
     const user = await User.findById(id);

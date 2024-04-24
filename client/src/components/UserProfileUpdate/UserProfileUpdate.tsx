@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useGetUserQuery, useUpdateUserProfileMutation } from '@/store';
 
 import styles  from './UserProfileUpdate.module.scss';
@@ -27,6 +27,8 @@ export default function UserProfileUpdate({ userId }: UserProfileProps) {
     zip: ''
   });
 
+  const [message, setMessage] = useState('');
+
   // Update state when user data is fetched
   useEffect(() => {
     if (user) {
@@ -46,11 +48,8 @@ export default function UserProfileUpdate({ userId }: UserProfileProps) {
     }
   }, [user]);
 
-  // set userId
+  // set userid
   userId = userData.id;
-
-  console.log("UserID:", userData.id);
-
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -59,8 +58,13 @@ export default function UserProfileUpdate({ userId }: UserProfileProps) {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("UserID:", userId);
-    await updateUserProfile({ id: userId, userData });
+    try {
+      const response= await updateUserProfile({ id: userId, userData }).unwrap();
+      setMessage('Profile updated successfully!');
+    }
+    catch (error: any) {
+      setMessage('Failed to update profile. Please try again.');
+    }
   };
 
   if (isLoading) return <p>Loading...</p>;
@@ -68,9 +72,8 @@ export default function UserProfileUpdate({ userId }: UserProfileProps) {
 
   return (
     <div className={styles['userProfileUpdate__container']}>
-      <h2 className={styles['userProfileUpdate__heading']}>
-        User Profile Update
-      </h2>
+      <h2 className={styles['userProfileUpdate__heading']}> User Profile Update </h2>
+      {message && <p className={styles[message === "Profile updated successfully!" ? 'success_message' : 'error_message']}>{message}</p>}
       <form onSubmit={handleSubmit} className={styles['userProfileUpdate__form_container']}>
             <div className={styles['userProfileUpdate__field_wrapper']}>
               <div className={styles['userProfileUpdate__field_container']}>
