@@ -38,6 +38,7 @@ export default function Navbar() {
       width: '100%', 
       position: 'fixed', 
       bottom: 0, 
+      height: 60,
       left: 0, 
       right: 0,
       backgroundColor: '#f5f5f5',
@@ -74,7 +75,7 @@ export default function Navbar() {
         value="settings"
         icon={<SettingsIcon />}
         onClick={() => { 
-          navigate('/general-info');
+          navigate('/settings');
         }}
       />
     </BottomNavigation>
