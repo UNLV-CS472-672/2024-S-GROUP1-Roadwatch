@@ -54,6 +54,7 @@ const Map: React.FC<MapProps> = ({location, posts}) => { // Add posts to the des
       posts.forEach(post => {
         const markerPosition = { lat: post.location.lat, lng: post.location.lng };
 
+        // eslint-disable-next-line
         const marker = new AdvancedMarkerElement({
           map: map,
           position: markerPosition,
@@ -61,6 +62,7 @@ const Map: React.FC<MapProps> = ({location, posts}) => { // Add posts to the des
         });
 
         // Add a click event listener to the marker
+        // eslint-disable-next-line
         marker.addListener('click', async () => {
           const response: Response = await fetch(`/markers/${post.id}/post`);
           if (!response.ok) {
@@ -68,7 +70,9 @@ const Map: React.FC<MapProps> = ({location, posts}) => { // Add posts to the des
             return;
           }
 
+          // eslint-disable-next-line
           const postData = await response.json();
+          // eslint-disable-next-line
           navigate(`/posts/${postData.id}`);
         });
       });
