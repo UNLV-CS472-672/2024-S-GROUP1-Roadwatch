@@ -12,6 +12,7 @@ import {
   Instructions,
   Register,
   ResetPassword,
+  SettingsPage,
 } from '@/pages';
 import { PrivateRoute } from '@/utils';
 
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
   {
     path: '/reset-password/:token',
     element: <ResetPassword />,
+  },
+  {
+    path: '/settings',
+    element: <SettingsPage />,
   },
 ]);
 

@@ -21,3 +21,6 @@ export * from './Register/Register';
 
 export { default as ResetPassword } from './ResetPassword/ResetPassword';
 export * from './ResetPassword/ResetPassword';
+
+export { default as SettingsPage } from './SettingsPage/SettingsPage';
+export * from './SettingsPage/SettingsPage';
