@@ -17,7 +17,6 @@ import {
 } from '@/pages';
 import { PrivateRoute } from '@/utils';
 import PostDiscussion from './components/PostDiscussion/PostDiscussion';
-import './index.css';
 
 // Collection of paths for the site.
 const router = createBrowserRouter([
