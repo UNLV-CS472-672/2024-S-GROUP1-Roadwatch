@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 .Login {
     &__LoginContainer{
         display: flex;
@@ -44,7 +46,7 @@
         transition: color 0.3s; // Smooth transition for color change
   
             &:hover {
-                color: color.adjust(black, $white: 35%) // Lighten the color by 20% when hovering
+                color: color.adjust(black, $whiteness: 35%) // Lighten the color by 20% when hovering
             }
     }
 }
