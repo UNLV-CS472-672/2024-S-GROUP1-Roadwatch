@@ -59,7 +59,7 @@ export default function UserProfileUpdate({ userId }: UserProfileProps) {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const response= await updateUserProfile({ id: userId, userData }).unwrap();
+      await updateUserProfile({ id: userId, userData }).unwrap();
       setMessage('Profile updated successfully!');
     }
     catch (error: any) {
