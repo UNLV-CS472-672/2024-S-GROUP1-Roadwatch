@@ -5,6 +5,10 @@ import styles from './UpdatePassword.module.scss';
 
 interface UpdatePasswordProps {}
 
+interface UpdatePasswordResponse {
+  message: string;
+}
+
 const UpdatePassword: React.FC<UpdatePasswordProps> = () => {
   const [currentPassword, setCurrentPassword] = useState<string>('');
   const [newPassword, setNewPassword] = useState<string>('');
@@ -28,7 +32,7 @@ const UpdatePassword: React.FC<UpdatePasswordProps> = () => {
     }
 
     try {
-      const response = await updatePassword({
+      const response: UpdatePasswordResponse = await updatePassword({
         id: user.id,
         currentPassword,
         newPassword,
@@ -43,9 +47,9 @@ const UpdatePassword: React.FC<UpdatePasswordProps> = () => {
         setNewPassword('');
         setConfirmPassword('');
       }
-    } catch (apiError: any) {
+    } catch (apiError) {
       // Handle potential errors from the API call
-      setMessage(apiError.data?.message || "Failed to update password. Please try again.");
+      setMessage("Failed to update password. Please try again.");
     }
   };
 
