@@ -1,12 +1,15 @@
-import { Schema, model, Types } from 'mongoose';
+import { Schema, model } from 'mongoose';
 
 const Community = new Schema(
   {
-    address: { type: String, required: true },
-    users: [{ type: Types.ObjectId, ref: 'User' }],
+    longitude: { type: Number, required: true },
+    latitude: { type: Number, required: true },
+    radius: { type: Number, required: true },
+    street: { type: String, required: true },
+    name: { type: String, required: true },
+    users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     image: { type: String, default: '' },
-    posts: [{ type: Types.ObjectId, ref: 'Post' }],
-    // Add more community fields as needed
+    posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
   },
   { timestamps: true }
 );

@@ -3,9 +3,14 @@ import Community from '../models/Community';
 
 export const getAllComunities = async (req: Request, res: Response) => {
   try {
-    const communities = await Community.find({});
+    const communities = await Community.find({}).populate([
+      {
+        path: 'users',
+        select: 'firstName',
+      },
+    ]);
 
-    res.status(200).json({ data: communities });
+    res.status(200).json(communities);
   } catch (error) {
     console.error('Get Communities Error:', error);
     res.statusMessage = error as string;

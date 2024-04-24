@@ -1,31 +1,40 @@
 import styles from './Register.module.scss';
 import { GeneralInfo, SignUp, CreateAccount } from '@/components';
+import { useCreateUserMutation } from '@/store';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { User } from '@/types';
 
 export default function Register(): JSX.Element {
   const steps = ['General Info', 'Location', 'Create Account'];
   const [currentStep, setCurrentStep] = useState(0);
-  const [formData, setFormData] = useState({
+  const [createUser] = useCreateUserMutation();
+  const navigate = useNavigate();
+  const [, setFormData] = useState<User>({
     firstName: '',
     lastName: '',
     userName: '',
     email: '',
-    phone: '',
-    DoB: '',
+    phoneNumber: '',
+    dob: '',
     address: '',
     city: '',
     state: '',
     zip: '',
     password: '',
-    confirmPassword: '',
   });
 
-  const updateFormData = (field: string, value: string) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      [field]: value,
-    }));
+  // ai-gen start (ChatGPT-3.5, 0)
+  const updateFormData = (field: string, value: string, callback?: (data: User) => void) => {
+    setFormData((prevData) => {
+      const newData = { ...prevData, [field]: value };
+      if (callback) {
+        callback(newData);
+      }
+      return newData;
+    });
   };
+  // ai-gen end
 
   const handleNext = () => {
     setCurrentStep((prevStep) => prevStep + 1);
@@ -35,11 +44,18 @@ export default function Register(): JSX.Element {
     setCurrentStep((prevStep) => prevStep - 1);
   };
 
-  const handleCreateAccount = () => {
-    // TODO: Create the User
-    console.log(formData);
-    return 'Account Created';
+  // ai-gen start (ChatGPT-3.5, 2)
+  const handleCreateAccount = (password: string) => {
+    updateFormData('password', password, (updatedData) => {
+      createUser(updatedData)
+        .then(() => navigate('/'))
+        .catch((error) => {
+          const errorMsg: Error = error as Error;
+          alert(`Unable to create account.\nReason: ${errorMsg.message}`);
+        });
+    });
   };
+  // ai-gen end
 
   const getStepContent = () => {
     switch (currentStep) {
@@ -67,9 +83,8 @@ export default function Register(): JSX.Element {
           <CreateAccount
             currentStep={currentStep}
             steps={steps}
-            updateData={updateFormData}
             handleBack={handleBack}
-            handleSubmit={handleNext}
+            handleSubmit={handleCreateAccount}
           />
         );
       default:
@@ -77,13 +92,5 @@ export default function Register(): JSX.Element {
     }
   };
 
-  return (
-    <div className={styles['Register']}>
-      {currentStep === steps.length ? (
-        <div>{handleCreateAccount()}</div>
-      ) : (
-        <div>{getStepContent()}</div>
-      )}
-    </div>
-  );
+  return <div className={styles['Register']}>{getStepContent()}</div>;
 }

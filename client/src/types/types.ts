@@ -69,8 +69,13 @@ interface IUniversalPost {
 export type TPost = IUniversalPost & (ITextPost | IMarkerPost);
 
 export interface ICommunity {
-  address: string;
-  users?: User[];
+  id: string;
+  name: string;
+  street: string;
+  longitude: number;
+  latitude: number;
+  radius: number;
+  users?: string[];
   image?: string;
   posts?: TPost[];
 }
