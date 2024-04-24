@@ -98,7 +98,7 @@ export const user = apiSlice.injectEndpoints({
       invalidatesTags: ['User'],
     }),
     updatePassword: builder.mutation({
-      query: ({ id, currentPassword, newPassword }) => ({
+      query: ({ id, currentPassword, newPassword }: { id: string; currentPassword: string; newPassword: string }) => ({
         url: `/user/security/update-password/${id}`,
         method: 'PUT',
         body: {

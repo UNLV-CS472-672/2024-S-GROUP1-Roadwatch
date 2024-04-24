@@ -62,7 +62,7 @@ export default function UserProfileUpdate({ userId }: UserProfileProps) {
       await updateUserProfile({ id: userId, userData }).unwrap();
       setMessage('Profile updated successfully!');
     }
-    catch (error: any) {
+    catch (error: unknown) {
       setMessage('Failed to update profile. Please try again.');
     }
   };
