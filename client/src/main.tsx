@@ -12,6 +12,7 @@ import {
   Instructions,
   Register,
   ResetPassword,
+  SettingsPage,
   CommunityX,
   Forgot,
 } from '@/pages';
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
   {
     path: '/reset-password/:token',
     element: <ResetPassword />,
+  },
+  {
+    path: '/settings',
+    element: <SettingsPage />,
   },
   {
     path: '/forgot-password',
