@@ -90,7 +90,7 @@ export const user = apiSlice.injectEndpoints({
       }),
     }),
     updateUserProfile: builder.mutation({
-      query: ({ id, userData }) => ({
+      query: ({ id, userData }: { id: string; userData: User }) => ({
         url: `/user/profile/${id}`,
         method: 'PUT',
         body: userData,
