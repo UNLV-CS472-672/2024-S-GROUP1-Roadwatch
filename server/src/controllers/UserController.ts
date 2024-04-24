@@ -241,3 +241,80 @@ export const resetPassword = async (req: Request, res: Response) => {
 
   return res.send(200);
 };
+
+// Updates specific user fields without modifying password or notification subscriptions
+export const updateUserProfile = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const {
+    firstName,
+    lastName,
+    userName,
+    email,
+    phoneNumber,
+    dob,
+    city,
+    address,
+    state,
+    zip
+  } = req.body;
+
+  try {
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: id },
+      {
+        firstName,
+        lastName,
+        userName,
+        email,
+        phoneNumber,
+        dob,
+        city,
+        address,
+        state,
+        zip
+      },
+      { new: true } // Returns the modified document
+    );
+    if (updatedUser) {
+      res.json({ data: updatedUser });
+    } else {
+      res.status(404).send({ error: 'User not found' });
+    }
+  } catch (err) {
+    console.error('Update User Profile Error: ', err);
+    res.status(500).send({ error: 'Internal server error' });
+  }
+};
+
+// Updates the logged-in user's password
+export const updatePassword = async (req: Request, res: Response) => {
+  console.log('password update requested');
+  const { id } = req.params;
+  const { currentPassword, newPassword } = req.body;
+  
+  console.log("Received ID:", id);
+
+  try {
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).send({ error: 'User not found' });
+    }
+
+    // Verify current password
+    if (!bcrypt.compareSync(currentPassword, user.password)) {
+      return res.status(403).send({ error: 'Current password is incorrect' });
+    }
+
+    // Hash new password
+    const hashedNewPassword = await bcrypt.hash(newPassword, 3);
+
+    // Save new password
+    user.password = hashedNewPassword;
+    await user.save();
+
+    res.status(200).send({ message: 'Password updated successfully' });
+  } catch (err) {
+    console.error('Update Password Error: ', err);
+    res.status(500).send({ error: 'Internal server error' });
+  }
+};
