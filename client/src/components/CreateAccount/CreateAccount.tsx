@@ -8,20 +8,18 @@ import { CustomButton, PasswordField } from '@/components';
 interface CreateAccountProps {
   currentStep: number;
   steps: string[];
-  updateData: (field: string, value: string) => void;
   handleBack: () => void;
-  handleSubmit: () => void;
+  handleSubmit: (password: string) => void;
 }
 
 export default function CreateAccount({
   currentStep,
   steps,
-  updateData,
   handleBack,
   handleSubmit,
 }: CreateAccountProps): JSX.Element {
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
 
   const handleClick = () => {
     if (!password || !confirmPassword) {
@@ -29,9 +27,12 @@ export default function CreateAccount({
       return;
     }
 
-    updateData('password', password);
-    updateData('confirmPassword', confirmPassword);
-    handleSubmit();
+    if (password != confirmPassword) {
+      alert('Passwords must match!');
+      return;
+    }
+
+    handleSubmit(password);
   };
 
   return (

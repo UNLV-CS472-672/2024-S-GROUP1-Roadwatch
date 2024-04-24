@@ -1,12 +1,7 @@
 .CreatePost {
     &__postContainer {
         @media screen and (min-width: 600px) {
-            padding-left: 450px;
-            padding-right: 450px;
         }
-
-        padding-left: 13px;
-        padding-right: 13px;
     }
 
     &__dialog {

@@ -22,12 +22,12 @@ function GeneralInfo({
   const [lastName, setLastName] = useState<string>('');
   const [userName, setUserName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
-  const [phone, setPhone] = useState<string>('');
-  const [DoB, setDoB] = useState<string>('');
+  const [phoneNumber, setPhone] = useState<string>('');
+  const [dob, setDoB] = useState<string>('');
 
   // Function to handle button click
   const handleClick = () => {
-    if (!firstName || !lastName || !userName || !email || !phone || !DoB) {
+    if (!firstName || !lastName || !userName || !email || !phoneNumber || !dob) {
       alert('Please fill in all required fields.');
       return;
     }
@@ -37,8 +37,8 @@ function GeneralInfo({
     updateData('lastName', lastName);
     updateData('userName', userName);
     updateData('email', email);
-    updateData('phone', phone);
-    updateData('DoB', DoB);
+    updateData('phoneNumber', phoneNumber);
+    updateData('dob', dob);
     handleSubmit();
   };
 
