@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { Header, Navbar, UserProfileUpdate, UpdatePassword } from '@/components'; // Assuming you have an AccountSettings component
 import styles from './SettingsPage.module.scss';
@@ -18,7 +18,7 @@ export default function SettingsPage(): JSX.Element {
   const renderActiveComponent = (): JSX.Element => {
     switch (activeComponent) {
       case 'ProfileSettings':
-        return <UserProfileUpdate userId={''} />;
+        return <UserProfileUpdate />;
       case 'SecuritySettings':
         return <UpdatePassword />;
       default:
