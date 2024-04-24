@@ -17,6 +17,7 @@ import {
   Forgot,
 } from '@/pages';
 import { PrivateRoute } from '@/utils';
+import './index.css';
 
 // Collection of paths for the site.
 const router = createBrowserRouter([
