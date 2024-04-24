@@ -1,3 +1,4 @@
+// ai-gen start (ChatGPT-3.5, 0)
 import { Forgot } from "@/pages"
 import { describe, test, assert, afterEach} from "vitest";
 import { render, screen, cleanup } from '@testing-library/react';
@@ -28,3 +29,4 @@ describe("Forgot.tsx", () => {
     });
 
 });
+// ai-gen end
