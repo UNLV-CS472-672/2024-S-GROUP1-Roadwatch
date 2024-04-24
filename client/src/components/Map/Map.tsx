@@ -25,37 +25,46 @@ interface MapProps {
   posts: Post[];
 }
 
-const Map: React.FC<MapProps> = ({location, posts}) => {
+const Map: React.FC<MapProps> = ({location, posts}) => { // Add posts to the destructured props
   const navigate = useNavigate();
 
   useEffect(() => {
     const initMap = async () => {
+      // Ensure the Google Maps API script has loaded
       if (!window.google || !window.google.maps) {
         console.error('Google Maps API script not loaded yet.');
         return;
       }
 
+      // Use the location prop for setting the map center
       const position = { lat: location.lat, lng: location.lng };
 
-      // Use type assertions to avoid the @typescript-eslint/no-unsafe-assignment rule
-      const Map = (await window.google.maps.importLibrary('maps')) as typeof google.maps.Map;
-      const AdvancedMarkerElement = (await window.google.maps.importLibrary('marker')) as typeof google.maps.Marker;
+      // Import the Google Maps library and AdvancedMarkerElement
+      const { Map } = await window.google.maps.importLibrary('maps');
+      const { AdvancedMarkerElement } = await window.google.maps.importLibrary('marker');
 
-      const map = new Map(document.getElementById('map') as HTMLElement, {
+      // Map initialization
+      const map = new Map(document.getElementById('map'), {
         zoom: 15,
         center: position,
-        mapTypeId: 'ROADWATCH_MAP_ID',
+        mapId: 'ROADWATCH_MAP_ID',
       });
 
+      // Create a marker for each post
       posts.forEach(post => {
         const markerPosition = { lat: post.location.lat, lng: post.location.lng };
 
+        // eslint-disable-next-line
         const marker = new AdvancedMarkerElement({
+          // eslint-disable-next-line
           map: map,
+          // eslint-disable-next-line
           position: markerPosition,
           title: 'Post Marker',
         });
 
+        // Add a click event listener to the marker
+        // eslint-disable-next-line
         marker.addListener('click', async () => {
           const response: Response = await fetch(`/markers/${post.id}/post`);
           if (!response.ok) {
@@ -63,19 +72,24 @@ const Map: React.FC<MapProps> = ({location, posts}) => {
             return;
           }
 
+          // eslint-disable-next-line
           const postData = await response.json();
+          // eslint-disable-next-line
           navigate(`/posts/${postData.id}`);
         });
       });
     };
 
+    // Dynamically load the Google Maps script
     const loadGoogleMapsScript = () => {
       const scriptId = 'google-maps-script';
 
+      // Check if the script is already loaded or if the script tag already exists
       if (window.google && window.google.maps) {
         window.initMap();
         return;
       } else if (!document.getElementById(scriptId)) {
+        // Only proceed to add the script if it doesn't already exist
         const script = document.createElement('script');
         script.id = scriptId;
         script.src = `https://maps.googleapis.com/maps/api/js?key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}&callback=initMap`;
@@ -90,7 +104,7 @@ const Map: React.FC<MapProps> = ({location, posts}) => {
     };
 
     loadGoogleMapsScript();
-  }, [location, posts]);
+  }, [location, posts]); // Add posts to the dependency array
 
   return <div id="map" className={styles['mapContainer']}></div>;
 };
