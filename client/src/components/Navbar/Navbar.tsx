@@ -40,6 +40,7 @@ export default function Navbar() {
         left: 0,
         right: 0,
         backgroundColor: '#f5f5f5',
+        paddingBottom: '2rem',
       }}
       value={value}
       onChange={handleChange}
