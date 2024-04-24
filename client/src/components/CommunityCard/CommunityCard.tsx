@@ -1,6 +1,5 @@
 import styles from './CommunityCard.module.scss';
 import {
-  Avatar,
   AvatarGroup,
   Card,
   CardContent,
@@ -9,7 +8,6 @@ import {
   Typography,
 } from '@mui/material';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
-import { red } from '@mui/material/colors';
 import communityImage from '../../assets/Updated_RoadWatch_Logo.svg';
 import ProfileIcon from '../ProfileIcon/ProfileIcon';
 
