@@ -32,6 +32,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
+    "@types/google.maps": "^3.55.7",
     "@types/js-cookie": "^3.0.6",
     "@types/jsdom-global": "^3.0.7",
     "@types/node": "^20.11.19",
