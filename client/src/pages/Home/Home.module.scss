@@ -1,7 +1,8 @@
 .Home {
   overflow-x: hidden;
+
     &__alert_message {
-        margin-top: 20px;
+        margin-top: 1.25rem;
         text-align: center;
         font-size: 1.5rem;
         font-weight: bold;
@@ -13,8 +14,8 @@
         display: block;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 50px;
-        width: 150px;
+        margin-top: 3.25rem;
+        width: 9.50rem;
         height: auto;
     }
 
@@ -22,7 +23,7 @@
         position: fixed;
         bottom: 0;
         right: 0;
-        margin: 10px;
+        margin: 0.75rem;
         width: 15vw;
         height: auto;
         z-index: 1000;
