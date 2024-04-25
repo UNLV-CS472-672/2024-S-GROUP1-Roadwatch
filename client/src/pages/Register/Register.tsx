@@ -92,5 +92,5 @@ export default function Register(): JSX.Element {
     }
   };
 
-  return <div className={styles['Register']}>{getStepContent()}</div>;
+  return <div className={styles['Register']} data-testid={'Register-page'}>{getStepContent()}</div>;
 }
