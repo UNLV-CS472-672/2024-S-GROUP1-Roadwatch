@@ -68,7 +68,7 @@ export interface IUniversalPost {
     title: string;
     body: string;
   };
-  replies?: Reply[];
+  replies: Reply[];
 }
 
 /**

@@ -32,10 +32,7 @@ export default function CreatePost({ communityId }: CreatePostParameters) {
   const [savePost] = useSavePostMutation();
 
   const reduxLocation = useSelector(selectLocation);
-  console.log(reduxLocation);
   const { data: user } = useSelector(selectUser);
-  console.log(user);
-  console.log(reduxLocation);
 
   // Function to handle initialize data
   const initializeData = () => {
