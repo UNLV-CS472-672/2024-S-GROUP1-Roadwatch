@@ -12,8 +12,18 @@ const Marker = new Schema(
     },
     type: {
       type: String,
-      enum: ['cone', 'pothole', 'RoadDamage', 'CarAccident', 'WarningSign'], // Add more types as needed
-      default: 'cone',
+      enum: [
+        'default',
+        'pothole',
+        'sbump',
+        'closure',
+        'xwalk',
+        'cone',
+        'carAccident',
+        'roadDamage',
+        'warningSign',
+      ], // Add more types as needed
+      default: 'default',
     },
   },
   { timestamps: true }

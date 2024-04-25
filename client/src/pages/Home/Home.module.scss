@@ -1,39 +1,49 @@
 .Home {
   overflow-x: hidden;
+  &__alert_message {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: black;
+    font-style: italic;
+  }
 
-    &__alert_message {
-        margin-top: 1.25rem;
-        text-align: center;
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: black;
-        font-style: italic;
-    }
+  &__center_image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    width: 150px;
+    height: auto;
+  }
 
-    &__center_image {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 3.25rem;
-        width: 9.50rem;
-        height: auto;
-    }
+  &__logo {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 10px;
+    width: 15vw;
+    height: auto;
+    z-index: 1000;
+  }
 
-    &__logo {
-        position: fixed;
-        bottom: 0;
-        right: 0;
-        margin: 0.75rem;
-        width: 15vw;
-        height: auto;
-        z-index: 1000;
-    }
+  &__button_container {
+    width: 50%;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+  }
+}
 
-    &__button_container {
-        width: 50%;
-        height: auto;
-        margin: 0 auto;
-        display: block;
-    }
+.SpeedDial {
+  &__icon {
+    text-align: center;
+  }
 
+  &__iconImg {
+    display: flex;
+    height: inherit;
+    width: inherit;
+  }
 }
