@@ -66,7 +66,7 @@ const PostDiscussion: React.FC<PostDiscussionProps> = () => {
   }
 
   return (
-    <div className={styles.PostDiscussion__container}>
+    <div className={styles.PostDiscussion__container} data-testid={'PostDiscussion'}>
       <h1 className={styles.PostDiscussion__title}>{post.content.title}</h1>
       <p className={styles.PostDiscussion__body}>{post.content.body}</p>
       <CommunityPost id={post.id} isMarker={post.marker !== undefined} content={post.content} user={post.user.userName} replies={post.replies} />

@@ -32,6 +32,7 @@ export default function Navbar() {
   };
 
   return (
+    <div data-testid={'Navbar'}>
     <BottomNavigation
       sx={{
         width: '100%',
@@ -73,5 +74,6 @@ export default function Navbar() {
         }}
       />
     </BottomNavigation>
+    </div>
   );
 }

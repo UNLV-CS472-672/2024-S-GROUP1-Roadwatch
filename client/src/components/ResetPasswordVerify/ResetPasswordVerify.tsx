@@ -6,7 +6,7 @@ import { Button } from '@mui/material'
 export default function ResetPasswordVerify(): JSX.Element {
 
     return (
-        <div className={styles['ResetPasswordVerify__container']}>
+        <div className={styles['ResetPasswordVerify__container']} data-testid={'ResetPasswordVerify'}>
             <div className={styles["ResetPasswordVerify__protectionDiv"]} />
             <div className={styles['ResetPasswordVerify__logoContainer']}>
                 <img
