@@ -12,5 +12,9 @@
     "dev-server": "npm run start -w server"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@types/googlemaps": "^3.43.3",
+    "postman": "^0.2.0"
+  }
 }

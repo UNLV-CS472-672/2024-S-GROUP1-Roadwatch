@@ -32,3 +32,4 @@ node_modules
 # Test Coverage
 coverage
 .nyc_output
+*/package-lock.json

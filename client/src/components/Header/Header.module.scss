@@ -8,14 +8,14 @@ body {
 .Header {
   &__wrapper {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    align-content: center;
-    height: 5vh;
+    place-content: center space-between;
+    height: 3.75rem;
     width: auto;
-    padding: 10px;
-    border-bottom: orangered 5px solid;
+    padding: 0.75rem;
+    border-bottom: orangered 0.25rem solid;
   }
+
   &__horizontal_container {
     display: flex;
     flex-direction: row;
@@ -24,15 +24,16 @@ body {
     height: 100%;
     width: auto;
   }
+
   &__vertical_container {
     margin-left: 0.75rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    align-content: flex-start;
+    place-content: center flex-start;
     height: 100%;
   }
+
   &__block {
     display: block;
     align-items: left;
@@ -55,20 +56,20 @@ body {
     width: 80%;
     height: auto;
     appearance: none;
-    margin-top: -10px;
+    margin-top: -0.75rem;
   }
 
   &__quick_action_wrapper {
     display: flex;
     width: auto;
     flex-direction: row;
-    gap: 10px;
-    padding: 10px;
+    gap: 0.75rem;
+    padding: 0.75rem;
     align-items: center;
   }
 
   &__quick_action_button {
-    width: 40px;
+    width: 2.50rem;
     height: auto;
     appearance: none;
   }
