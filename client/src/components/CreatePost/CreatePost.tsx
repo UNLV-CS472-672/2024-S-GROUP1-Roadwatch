@@ -132,7 +132,7 @@ export default function CreatePost({ communityId }: CreatePostParameters) {
             <p className={styles['CreatePost__text']}>Select Marker</p>
             <div className={styles['CreatePost__buttons']}>
               {/* MUI FAB components for markers */}
-              {['cone', 'pothole', 'roadDamage', 'carAccident', 'warningSign'].map((id) => (
+              {['cone', 'pothole', 'RoadDamage', 'CarAccident', 'WarningSign'].map((id) => (
                 <Fab
                   key={id}
                   className={`${styles['CreatePost__fab']} ${marker === id ? styles['CreatePost__active'] : ''}`}
@@ -141,7 +141,7 @@ export default function CreatePost({ communityId }: CreatePostParameters) {
                   onClick={() => markerClick(id)}
                 >
                   <img
-                    className={`${styles['CreatePost__images']} ${id === 'carAccident' ? styles['CreatePost__images2'] : ''}`}
+                    className={`${styles['CreatePost__images']} ${id === 'CarAccident' ? styles['CreatePost__images2'] : ''}`}
                     src={
                       id === 'cone'
                         ? cone
