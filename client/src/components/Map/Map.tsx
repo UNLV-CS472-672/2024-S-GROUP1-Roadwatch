@@ -135,6 +135,7 @@ const Map: React.FC<MapProps> = ({ location, markers }: MapProps) => {
       }).element;
     };
 
+    // @ts-expect-error: implicitly any type
     window.google.maps.importLibrary('marker').then(({ AdvancedMarkerElement }) => {
       // Your existing map initialization code...
       markers.forEach((marker) => {
