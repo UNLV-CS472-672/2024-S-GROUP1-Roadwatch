@@ -11,10 +11,6 @@ export default function ProfileIcon() {
     // Extract the user's first name from the fetched data
     const firstName = user ? user.firstName : '';
 
-    // Log user data for debugging
-    console.log("user", user);
-    console.log("first name:", firstName);
-
     // Generates a random hex color
     // Adapted from ChatGPT
     const getRandomColor = () => {
