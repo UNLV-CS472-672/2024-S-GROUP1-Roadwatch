@@ -48,8 +48,17 @@ interface IMarkerPost {
   marker: IMarker;
 }
 
+/** Defines the fields required for every reply in the Community page. */
+export interface Reply {
+  id: string;
+  user: User;
+  content: string;
+  // ... other properties of a reply
+}
+
 /** Defines the fields required for every post in the Community page. */
-interface IUniversalPost {
+export interface IUniversalPost {
+  id: string;
   community: ICommunity;
   user: User;
   marker?: IMarker; // Only defining this here so it can also be defined in the Schema.
@@ -58,6 +67,7 @@ interface IUniversalPost {
     title: string;
     body: string;
   };
+  replies: Reply[];
 }
 
 /**

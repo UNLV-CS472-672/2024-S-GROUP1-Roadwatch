@@ -88,9 +88,16 @@ export default function CommunityX(): JSX.Element {
                 Users
             </div>
             <div className={styles['CommunityX_showPosts']}>
-                {postArray.map((e,index) => (
-                <CommunityPost key={index} isMarker={e.isMarker} content={e.content} user={e.user}/>
-                ))}
+            {postArray.map((e,index) => (
+                <CommunityPost 
+                    key={index} 
+                    id={index.toString()} // not 100% sure if correct
+                    isMarker={e.isMarker} 
+                    content={e.content} 
+                    user={e.user}
+                    replies={[]}
+                />
+            ))}
             </div>
             
         </div>
