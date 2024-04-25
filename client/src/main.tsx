@@ -5,7 +5,6 @@ import { store } from './store';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import {
   Chat,
-  Community,
   Home,
   Login,
   Profile,
@@ -17,6 +16,7 @@ import {
   Forgot,
 } from '@/pages';
 import { PrivateRoute } from '@/utils';
+import { CommunityRouter } from './routers/CommunityRouter';
 import PostDiscussion from './components/PostDiscussion/PostDiscussion';
 
 // Collection of paths for the site.
@@ -26,8 +26,8 @@ const router = createBrowserRouter([
     element: <PrivateRoute component={<Home />} />,
   },
   {
-    path: '/community',
-    element: <Community />,
+    path: '/community/*',
+    element: <CommunityRouter />,
   },
   {
     path: '/communityX',
