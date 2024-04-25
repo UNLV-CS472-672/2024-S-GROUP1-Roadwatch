@@ -25,7 +25,7 @@ app.use('/api/user', userRoutes);
 app.use('/api/push-notification', pushNotificationRoutes);
 app.use('/api/marker', markerRoutes);
 app.use('/api/community', communityRoutes);
-app.use('/api/post', postRoutes);
+app.use('/api/posts', postRoutes);
 
 // server start
 app.listen(port, () => {

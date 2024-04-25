@@ -11,4 +11,7 @@ router.post('/', validateToken, markerController.saveMarker);
 
 router.delete('/', validateToken, markerController.deleteMarker);
 
+// route to fetch a post by marker ID
+router.get('/:markerId/post', validateToken, markerController.getPostByMarker);
+
 export default router; 

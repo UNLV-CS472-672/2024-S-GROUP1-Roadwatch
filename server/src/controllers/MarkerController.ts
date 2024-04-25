@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import Marker from '../models/Marker';
+import Post from '../models/Post';
 
 // GET endpoint to retrieve all markers with longitude and latitude
 export const getMarkers = async (req: Request, res: Response) => {
@@ -51,3 +52,21 @@ export const deleteMarker = async (req: Request, res: Response) => {
         res.status(500).json({ message: 'Could not delete user' }); // Handle errors gracefully
     }
 };
+
+// Function to get a post by marker ID
+export const getPostByMarker = async (req: Request, res: Response) => {
+    const { markerId } = req.params;
+  
+    try {
+      const post = await Post.findOne({ marker: markerId });
+  
+      if (!post) {
+        return res.status(404).json({ error: 'Post not found' });
+      }
+  
+      res.json(post);
+    } catch (err) {
+      console.error('Could not get post: ', err);
+      return res.status(500).json({ message: 'Could not get post' });
+    }
+  };
