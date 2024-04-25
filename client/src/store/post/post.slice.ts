@@ -1,22 +1,5 @@
 import { apiSlice } from '../api';
-import { IMarker, TPost } from '@/types';
-
-interface PostResponse {
-  _id: string;
-  user: {
-    _id: string;
-    firstName: string;
-    lastName: string;
-    userName: string;
-  };
-  likeCount: number;
-  type: string;
-  marker: object;
-  content: {
-    title: string;
-    body: string;
-  };
-}
+import { TPost } from '@/types';
 
 interface SavePost {
   user: string;
@@ -32,30 +15,11 @@ interface SavePost {
   };
 }
 
-const transformPostResponse = (response: PostResponse[]) =>
-  response.map((post) => ({
-    id: post._id,
-    user: {
-      id: post.user._id,
-      firstName: post.user.firstName,
-      lastName: post.user.lastName,
-      userName: post.user.userName,
-    },
-    likeCount: post.likeCount,
-    type: post.type,
-    marker: post.marker,
-    content: {
-      title: post.content.title,
-      body: post.content.body,
-    },
-  }));
-
 const post = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     // Get community posts query
     getCommunityPosts: builder.query<TPost[], string>({
       query: (communityId) => `/community/${communityId}/posts`,
-      transformResponse: transformPostResponse,
       providesTags: ['Post'],
     }),
 

@@ -59,6 +59,7 @@ export interface Reply {
 /** Defines the fields required for every post in the Community page. */
 export interface IUniversalPost {
   id: string;
+  _id?: string;
   community?: ICommunity;
   user: User;
   marker?: IMarker; // Only defining this here so it can also be defined in the Schema.
@@ -67,7 +68,7 @@ export interface IUniversalPost {
     title: string;
     body: string;
   };
-  replies: Reply[];
+  replies?: Reply[];
 }
 
 /**
