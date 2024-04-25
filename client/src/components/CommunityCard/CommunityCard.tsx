@@ -1,6 +1,5 @@
 import styles from './CommunityCard.module.scss';
 import {
-  Avatar,
   AvatarGroup,
   Card,
   CardContent,
@@ -9,8 +8,8 @@ import {
   Typography,
 } from '@mui/material';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
-import { red } from '@mui/material/colors';
 import communityImage from '../../assets/Updated_RoadWatch_Logo.svg';
+import ProfileIcon from '../ProfileIcon/ProfileIcon';
 
 interface CommunityCardProps {
   name: string;
@@ -44,9 +43,7 @@ export default function CommunityCard({
               <CardActions disableSpacing>
                 <AvatarGroup max={3} spacing="small">
                   {first3Users.map((name) => (
-                    <Avatar key={name} sx={{ bgcolor: red[500] }}>
-                      {name[0].toUpperCase()}
-                    </Avatar>
+                    <ProfileIcon key={name} />
                   ))}
                 </AvatarGroup>
                 <Stack>

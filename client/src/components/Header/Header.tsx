@@ -1,8 +1,8 @@
 import styles from './Header.module.scss';
-import { CustomButton } from '@/components';
+import { CustomButton, ProfileIcon } from '@/components';
 import notification_icon from 'src/assets/icons/notification-icon.svg';
 import help_icon from 'src/assets/icons/help-icon.svg';
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 interface HeaderProps {
@@ -21,8 +21,8 @@ export default function Header(props: HeaderProps): JSX.Element {
   }
 
   // Route for help button 
-  const navigateHelp = useNavigate(); 
-  const onClick_helpButton =() => { 
+  const navigateHelp = useNavigate();
+  const onClick_helpButton = () => {
     navigateHelp('/instructions');
   }
 
@@ -30,11 +30,7 @@ export default function Header(props: HeaderProps): JSX.Element {
     <div className={styles['Header__wrapper']} data-testid={'Header'}>
       <div className={styles['Header__horizontal_container']}>
         {/* Profile Image */}
-        <img
-          className={styles['Header__profile_picture']}
-          src="/images/UNLV.png"
-          alt="Profile"
-        />
+        <ProfileIcon />
 
         {/* Welcome message and logout button */}
         <div className={styles['Header__vertical_container']}>

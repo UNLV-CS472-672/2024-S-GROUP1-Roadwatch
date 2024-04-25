@@ -2,10 +2,12 @@ import { useState } from 'react';
 import styles from './Community.module.scss';
 import { CommunityCard, Navbar, TextField } from '@/components';
 import { useGetAllCommunitiesQuery } from '@/store';
+import { useNavigate } from 'react-router-dom';
 
 export default function Community(): JSX.Element {
   const [search, setSearch] = useState('');
   const { data: communities, isLoading } = useGetAllCommunitiesQuery();
+  const navigate = useNavigate();
 
   return (
     <div className={styles['Community']}>
@@ -24,7 +26,7 @@ export default function Community(): JSX.Element {
                     street={c.street}
                     users={c.users || []}
                     onClick={() => {
-                      console.log('redirect to specific community');
+                      navigate(`./${c.id}`, { state: { community: c } });
                     }}
                   />
                 ))
@@ -34,9 +36,7 @@ export default function Community(): JSX.Element {
                   name={c.name}
                   street={c.street}
                   users={c.users || []}
-                  onClick={() => {
-                    console.log('redirect to specific community');
-                  }}
+                  onClick={() => navigate(`./${c.id}`, { state: { community: c } })}
                 />
               ))}
         </div>
