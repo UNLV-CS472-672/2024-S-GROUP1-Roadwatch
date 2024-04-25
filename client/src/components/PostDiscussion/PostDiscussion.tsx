@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Card, CardContent, Typography, Avatar } from '@mui/material';
+import styles from './PostDiscussion.module.css';
+import CommunityPost from '../CommunityPost/CommunityPost';
+import Loading from '../Loading/Loading';
 import { IUniversalPost, Reply } from '../../types/types.ts';
-import { CommunityPost } from '@/components';
-import { Loading } from '@/components';
-import styles from './PostDiscussion.module.scss';
 
 interface PostDiscussionProps {
   id: string;
@@ -66,16 +67,33 @@ const PostDiscussion: React.FC<PostDiscussionProps> = () => {
   }
 
   return (
-    <div className={styles.PostDiscussion__container} data-testid={'PostDiscussion'}>
-      <h1 className={styles.PostDiscussion__title}>{post.content.title}</h1>
-      <p className={styles.PostDiscussion__body}>{post.content.body}</p>
+    <div className={styles['PostDiscussion__container']} data-testid={'PostDiscussion'}>
+      <Card className={styles['PostDiscussion__card']}>
+        <CardContent className={styles['PostDiscussion__contentContainer']}>
+          <div className={styles['PostDiscussion__header']}>
+            <div className={styles['PostDiscussion__headerLeft']}>
+              <Typography variant="h5" component="h2">
+                {post.content.title}
+              </Typography>
+            </div>
+            <div className={styles['PostDiscussion__headerRight']}>
+              <Avatar>{post.user.userName.substring(0, 1).toUpperCase()}</Avatar>
+            </div>
+          </div>
+          <div className={styles['PostDiscussion__body']}>
+            <Typography variant="body2" color="text.secondary" className={styles['PostDiscussion__textBody']}>
+              {post.content.body}
+            </Typography>
+          </div>
+        </CardContent>
+      </Card>
       <CommunityPost id={post.id} isMarker={post.marker !== undefined} content={post.content} user={post.user.userName} replies={post.replies} />
       {post.replies.map((reply: Reply, index: number) => (
         <CommunityPost key={index} id={reply.id} isMarker={false} content={{ title: 'Reply', body: reply.content }} user={reply.user.userName} replies={[]} />
       ))}
-      <form onSubmit={handleReplySubmit} className={styles.PostDiscussion__replyForm}>
-        <input type="text" value={newReply} onChange={handleReplyChange} className={styles.PostDiscussion__replyForm__input} />
-        <button type="submit" className={styles.PostDiscussion__replyForm__button}>Post Reply</button>
+      <form onSubmit={handleReplySubmit} className={styles['PostDiscussion__replyForm']}>
+        <input type="text" value={newReply} onChange={handleReplyChange} className={styles['PostDiscussion__replyForm__input']} />
+        <button type="submit" className={styles['PostDiscussion__replyForm__button']}>Post Reply</button>
       </form>
     </div>
   );
