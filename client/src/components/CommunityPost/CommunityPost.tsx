@@ -7,7 +7,6 @@ import CarAccident from '../../assets/markers/CarAccident.svg';
 import Pothole from '../../assets/markers/Pothole.svg';
 import RoadDamage from '../../assets/markers/RoadDamage.svg';
 import WarningSign from '../../assets/markers/WarningSign.svg';
-import Logo from '../../assets/Updated_RoadWatch_Logo.svg';
 import { useNavigate } from 'react-router-dom';
 import { Reply } from '../../types/types';
 
@@ -49,17 +48,19 @@ const StyledTypography = styled(Typography)();
 
 /** Creates a CommunityPost component */
 const CommunityPost: React.FC<CommunityPostProps> = ({
+  id,
   isMarker,
   content,
   user,
   marker,
-  replies,
 }: CommunityPostProps) => {
   /** OnClick function to view post
    *  Need to update so that the full post is shown when this is called
    */
+  const navigate = useNavigate();
+
   const viewPost = () => {
-    console.log('View Post');
+    navigate(`/post/${id}`);
   };
   const { title, body } = content;
 

@@ -47,6 +47,7 @@ export default function CommunityX(): JSX.Element {
             {posts.map((p) => (
               <CommunityPost
                 key={p.id}
+                id={p.id}
                 isMarker={p.type === 'marker'}
                 content={p.content}
                 user={p.user.userName}
