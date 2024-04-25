@@ -1,12 +1,62 @@
 import { apiSlice } from '../api';
-import { TPost } from '@/types';
+import { IMarker, TPost } from '@/types';
+
+interface PostResponse {
+  _id: string;
+  user: {
+    _id: string;
+    firstName: string;
+    lastName: string;
+    userName: string;
+  };
+  likeCount: number;
+  type: string;
+  marker: object;
+  content: {
+    title: string;
+    body: string;
+  };
+}
+
+interface SavePost {
+  user: string;
+  community: string;
+  type: string;
+  marker?: {
+    longitude: number;
+    latitude: number;
+  };
+  content: {
+    title: string;
+    body: string;
+  };
+}
+
+const transformPostResponse = (response: PostResponse[]) =>
+  response.map((post) => ({
+    id: post._id,
+    user: {
+      id: post.user._id,
+      firstName: post.user.firstName,
+      lastName: post.user.lastName,
+      userName: post.user.userName,
+    },
+    likeCount: post.likeCount,
+    type: post.type,
+    marker: post.marker,
+    content: {
+      title: post.content.title,
+      body: post.content.body,
+    },
+  }));
 
 const post = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-
     // Get all posts query
-    getAllPosts: builder.query<{ data: TPost[] }, void>({
-      query: () => '/all-posts',
+    getCommunityPosts: builder.query<TPost[], string>({
+      query: (communityId) => `/post/community/${communityId}`,
+      transformResponse: transformPostResponse,
+      providesTags: ['Post'],
     }),
 
     // Save post mutation
@@ -21,12 +71,13 @@ const post = apiSlice.injectEndpoints({
         }
       } 
     */
-    savePost: builder.mutation<void, TPost>({
+    savePost: builder.mutation<void, SavePost>({
       query: (body) => ({
-        url: '/save-post',
+        url: 'post/save-post',
         method: 'POST',
         body: body,
       }),
+      invalidatesTags: ['Post'],
     }),
 
     // Delete post mutation
@@ -38,12 +89,9 @@ const post = apiSlice.injectEndpoints({
         url: `/delete-post/${id}`,
         method: 'DELETE',
       }),
+      invalidatesTags: ['Post'],
     }),
   }),
 });
 
-export const {
-  useGetAllPostsQuery,
-  useSavePostMutation,
-  useDeletePostMutation
-} = post;
+export const { useGetCommunityPostsQuery, useSavePostMutation, useDeletePostMutation } = post;
