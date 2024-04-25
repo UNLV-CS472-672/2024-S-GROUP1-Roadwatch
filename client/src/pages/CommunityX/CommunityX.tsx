@@ -51,6 +51,7 @@ export default function CommunityX(): JSX.Element {
                 content={p.content}
                 user={p.user.userName}
                 marker={p.marker}
+                replies={[]}
               />
             ))}
           </div>

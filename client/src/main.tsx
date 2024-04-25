@@ -17,6 +17,7 @@ import {
 } from '@/pages';
 import { PrivateRoute } from '@/utils';
 import { CommunityRouter } from './routers/CommunityRouter';
+import PostDiscussion from './components/PostDiscussion/PostDiscussion';
 
 // Collection of paths for the site.
 const router = createBrowserRouter([
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
   {
     path: '/forgot-password',
     element: <Forgot />,
+  },
+  {
+    path: '/post/:id',
+    element: <PostDiscussion id="id" />,
   },
 ]);
 

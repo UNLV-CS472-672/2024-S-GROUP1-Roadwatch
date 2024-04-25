@@ -1,21 +1,20 @@
 .CreatePost {
     &__postContainer {
-        @media screen and (min-width: 600px) {
-        }
+        @media screen and (width >= 37.50rem) { /* empty */ }
     }
 
     &__dialog {
-        @media screen and (min-width: 600px) {margin-top: 0px;}
+        @media screen and (width >= 37.50rem) {margin-top: 0;}
 
-        margin-top: 85px;
+        margin-top: 5.25rem;
     }
 
     &__container {
-        margin: 25px;
+        margin: 1.50rem;
 
-        @media screen and (min-width: 600px) {
-            padding-left: 200px;
-            padding-right: 200px;
+        @media screen and (width >= 37.50rem) {
+            padding-left: 12.50rem;
+            padding-right: 12.50rem;
         }
     }
 
@@ -29,7 +28,7 @@
     &__title {
         font-weight: bold;
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 25px;
+        font-size: 1.50rem;
     }
 
     &__backButton {
@@ -38,29 +37,29 @@
 
     &__close {
         color: black;
-        size: 5px;
+        size: 0.25rem;
     }
 
     &__second {
-        padding-right: 10px;
+        padding-right: 0.75rem;
     }
 
     &__text {
         font-weight: 600;
         font-family: Arial, Helvetica, sans-serif;
-        margin-bottom: 8px;
+        margin-bottom: 0.50rem;
     }
 
     &__buttons {
         display: flex;
 
-        @media screen and (min-width: 600px) {
+        @media screen and (width >= 37.50rem) {
             justify-content: left;
-            gap: 15px;
+            gap: 1.00rem;
         }
 
         justify-content: space-evenly;
-        padding-bottom: 25px;
+        padding-bottom: 1.50rem;
 
     }
 
@@ -73,23 +72,23 @@
     }
 
     &__images {
-        width: 34px;
-        height: 34px;
+        width: 2.25rem;
+        height: 2.25rem;
     }
 
     &__images2 {
-        width: 50px;
-        height: 50px;
+        width: 3.25rem;
+        height: 3.25rem;
     }
 
     &__date {
-        width: 200px;
-        height: 40px;
+        width: 12.50rem;
+        height: 2.50rem;
         color: grey;
     }
 
     &__third {
-        padding-bottom: 5px;
+        padding-bottom: 0.25rem;
     }
 
     &__multi {
@@ -97,29 +96,29 @@
     }
 
     &__fourth {
-        padding-bottom: 30px;
+        padding-bottom: 2.00rem;
     }
 
     &__multi2 {
         width: 100%;
 
-        @media screen and (min-width: 600px) {
-            width: 500px;
+        @media screen and (width >= 37.50rem) {
+            width: 31.25rem;
         }
     }
 
     &__text3 {
         font-weight: bold;
         font-family: Arial, Helvetica, sans-serif;
-        margin-bottom: 10px;
+        margin-bottom: 0.75rem;
     }
 
     &__lastButton {
-        padding-top: 35px;
+        padding-top: 2.25rem;
 
-        @media screen and (min-width: 600px) {
-            padding-left: 225px;
-            padding-right: 225px;
+        @media screen and (width >= 37.50rem) {
+            padding-left: 14.00rem;
+            padding-right: 14.00rem;
         }
 
     }

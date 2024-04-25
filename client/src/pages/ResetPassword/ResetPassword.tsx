@@ -21,10 +21,10 @@ export default function ResetPassword() {
 
   return (
     <div className={styles['page_container']}>
-      <div className={styles['logo_container']}>
+      <div className={styles['logo_container']} data-testid={'ResetPassword-logo'}>
         <img src={logo} alt={'Roadwatch Logo'} />
       </div>
-      <div className={styles['field_container']}>
+      <div className={styles['field_container']} data-testid={'ResetPassword-field'}>
         <PasswordField header="New Password" setInputValue={setNewPassword} />
         <PasswordField header="Verify Password" setInputValue={setVerifyPassword} />
         <CustomButton onClick={handlePasswordReset}>Reset Password</CustomButton>
