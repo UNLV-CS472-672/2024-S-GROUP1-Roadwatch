@@ -74,9 +74,10 @@ function Instructions() {
       {/* Main container for the Instructions component */}
       <div className={Styles['Instructions__center']}>
         {/* Centered container for the logo and carousel */}
-        <img src={logo} alt={'Roadwatch'} className={Styles['Instructions__cimage']} />
+        <img src={logo} alt={'Roadwatch'} className={Styles['Instructions__cimage']} data-testid={'Instructions-logo'} />
         <div className={Styles['Instructions__whiteContainer']}>
           {/* Container for the carousel and button */}
+          <div data-testid={'Instructions-carousel'}>
           <Carousel
             navButtonsAlwaysInvisible={true} // Hide navigation buttons
             autoPlay={false} // Disable auto-play
@@ -102,7 +103,8 @@ function Instructions() {
               />
             ))}
           </Carousel>
-          <div style={{ marginTop: '20px' }}>
+          </div>
+          <div style={{ marginTop: '20px' }} data-testid={'Instructions-button'} >
             {/* Button component with onClick event to navigate */}
             <CustomButton onClick={navigateHome}> Lets Go! </CustomButton>
           </div>
