@@ -6,7 +6,7 @@ import { IMarker } from '@/types';
 export const marker = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getMarkers: builder.query<IMarker[], void>({
-      query: () => '/marker/all-markers',
+      query: () => '/marker',
     }),
     saveMarker: builder.mutation<void, IMarker>({
       query: (body) => ({
