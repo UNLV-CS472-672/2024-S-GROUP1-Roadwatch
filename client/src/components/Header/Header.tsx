@@ -27,7 +27,7 @@ export default function Header(props: HeaderProps): JSX.Element {
   }
 
   return (
-    <div className={styles['Header__wrapper']}>
+    <div className={styles['Header__wrapper']} data-testid={'Header'}>
       <div className={styles['Header__horizontal_container']}>
         {/* Profile Image */}
         <ProfileIcon />

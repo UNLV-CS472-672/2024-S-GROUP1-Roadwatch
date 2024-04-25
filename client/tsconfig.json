@@ -34,7 +34,9 @@
       "@/utils": ["./src/utils/index.ts"],
       "@/utils/*": ["./src/utils/*"],
       "@/hooks": ["./src/hooks/index.ts"],
-      "@/hooks/*": ["./src/hooks/*"]
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/routers/": ["./src/routers/*"],
+      "@/routers/*": ["./src/routers/*"]
     }
   },
   "include": ["src", "tests"],

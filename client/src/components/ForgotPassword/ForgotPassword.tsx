@@ -60,7 +60,7 @@ export default function ForgotPassword(): JSX.Element {
 
     return (
         <>
-            <body className={styles['ForgotPassword__body']}>
+            <body className={styles['ForgotPassword__body']} data-testid={'ForgotPassword'}>
                 <div className={styles['ForgotPassword__container']}>
                     <div className={styles['ForgotPassword__component']}>
                         <div className={styles['ForgotPassword__buttonContainer']}>

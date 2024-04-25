@@ -1,6 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Map.module.scss';
-import { useNavigate } from 'react-router-dom';
+import cone from '../../assets/markers/Cone.svg';
+import pothole from '../../assets/markers/Pothole.svg';
+import roadDamage from '../../assets/markers/RoadDamage.svg';
+import carAccident from '../../assets/markers/CarAccident.svg';
+import warning from '../../assets/markers/WarningSign.svg';
+import roadblock from '../../assets/markers/Roadblock.svg';
+import { IMarker } from '@/types';
 
 // Initialize initMap as a global function
 declare global {
@@ -15,69 +21,52 @@ interface Location {
   lng: number;
 }
 
-interface Post {
-  id: string;
-  location: Location;
-}
-
 interface MapProps {
   location: Location;
-  posts: Post[];
+  markers: IMarker[] | undefined;
 }
 
-const Map: React.FC<MapProps> = ({location, posts}) => { // Add posts to the destructured props
-  const navigate = useNavigate();
+const Map: React.FC<MapProps> = ({ location, markers }: MapProps) => {
+  const [map, setMap] = useState();
 
   useEffect(() => {
     const initMap = async () => {
       // Ensure the Google Maps API script has loaded
-      if (!window.google || !window.google.maps) {
+
+      if (!window.google) {
         console.error('Google Maps API script not loaded yet.');
         return;
       }
 
-      // Use the location prop for setting the map center
+      if (!window.google.maps) {
+        console.error('Google Maps API script not loaded yet.');
+        return;
+      }
+
+      // Use the location prop for setting the map center and marker
       const position = { lat: location.lat, lng: location.lng };
 
       // Import the Google Maps library and AdvancedMarkerElement
       const { Map } = await window.google.maps.importLibrary('maps');
-      const { AdvancedMarkerElement } = await window.google.maps.importLibrary('marker');
 
       // Map initialization
-      const map = new Map(document.getElementById('map'), {
+      const newMap = new Map(document.getElementById('map') as HTMLElement, {
         zoom: 15,
         center: position,
         mapId: 'ROADWATCH_MAP_ID',
+        disableDefaultUI: true,
       });
 
-      // Create a marker for each post
-      posts.forEach(post => {
-        const markerPosition = { lat: post.location.lat, lng: post.location.lng };
+      setMap(newMap);
 
-        // eslint-disable-next-line
-        const marker = new AdvancedMarkerElement({
-          // eslint-disable-next-line
-          map: map,
-          // eslint-disable-next-line
-          position: markerPosition,
-          title: 'Post Marker',
-        });
+      //Test marker
+      // new AdvancedMarkerElement({
+      //   map: map,
+      //   position: position,
+      //   title: 'Test Marker',
+      // });
 
-        // Add a click event listener to the marker
-        // eslint-disable-next-line
-        marker.addListener('click', async () => {
-          const response: Response = await fetch(`/markers/${post.id}/post`);
-          if (!response.ok) {
-            console.error(`Error fetching post: ${response.statusText}`);
-            return;
-          }
-
-          // eslint-disable-next-line
-          const postData = await response.json();
-          // eslint-disable-next-line
-          navigate(`/posts/${postData.id}`);
-        });
-      });
+      // Check if markers exist and are an array
     };
 
     // Dynamically load the Google Maps script
@@ -104,9 +93,66 @@ const Map: React.FC<MapProps> = ({location, posts}) => { // Add posts to the des
     };
 
     loadGoogleMapsScript();
-  }, [location, posts]); // Add posts to the dependency array
+  }, [location]); // Dependency array to re-run the effect if the location prop changes
 
-  return <div id="map" className={styles['mapContainer']}></div>;
+  useEffect(() => {
+    if (!window.google) return;
+    if (!window.google?.maps) return;
+    if (!markers) return;
+
+    const svgToTypeMap = {
+      carAccident: {
+        source: carAccident,
+        color: '#C70039',
+      },
+      cone: {
+        source: cone,
+        color: '#555555',
+      },
+      pothole: { source: pothole, color: '#8F65AB' },
+      closure: { source: roadblock, color: '#ECCC37' },
+      roadDamage: { source: roadDamage, color: '#58AC62' },
+      default: { source: warning, color: '#405CD8' },
+      sbump: { source: warning, color: '#405CD8' },
+      xwalk: { source: warning, color: '#405CD8' },
+      warningSign: { source: warning, color: '#405CD8' },
+    };
+
+    const resolveSVGs = async (type: keyof typeof svgToTypeMap) => {
+      const parser = new DOMParser();
+      const { PinElement } = (await window.google.maps.importLibrary(
+        'marker'
+      )) as google.maps.MarkerLibrary;
+      const svg = await fetch(svgToTypeMap[type].source);
+      const svgText = await svg.text();
+      const svgString = parser.parseFromString(svgText, 'image/svg+xml').documentElement;
+
+      return new PinElement({
+        glyph: svgString,
+        background: svgToTypeMap[type].color,
+        borderColor: 'black',
+        scale: 2,
+      }).element;
+    };
+
+    window.google.maps.importLibrary('marker').then(({ AdvancedMarkerElement }) => {
+      // Your existing map initialization code...
+      markers.forEach((marker) => {
+        resolveSVGs(marker.type)
+          .then((markerIcon) => {
+            new AdvancedMarkerElement({
+              map,
+              position: { lat: marker.latitude, lng: marker.longitude },
+              title: marker.type,
+              content: markerIcon,
+            });
+          })
+          .catch((e) => console.error(e));
+      });
+    });
+  }, [markers, map]);
+
+  return <div id="map" className={styles['mapContainer']} data-testid={'Map'}></div>;
 };
 
 export default Map;

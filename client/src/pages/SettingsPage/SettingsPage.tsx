@@ -18,7 +18,7 @@ export default function SettingsPage(): JSX.Element {
   const renderActiveComponent = (): JSX.Element => {
     switch (activeComponent) {
       case 'ProfileSettings':
-        return <UserProfileUpdate />;
+        return <UserProfileUpdate userId={''} />;
       case 'SecuritySettings':
         return <UpdatePassword />;
       default:

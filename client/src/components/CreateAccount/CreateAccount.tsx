@@ -36,7 +36,7 @@ export default function CreateAccount({
   };
 
   return (
-    <div className={styles['CreateAccount__Container']}>
+    <div className={styles['CreateAccount__Container']} data-testid={'CreateAccount'}>
       <Box className={styles['CreateAccount__whiteContainer']} sx={{ width: '75%', maxWidth: 500 }}>
         <AppBar position="static" className={styles['CreateAccount__TopBar']}>
           <Toolbar>

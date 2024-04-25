@@ -29,7 +29,7 @@ export default function ResetPassword(): JSX.Element {
     };
 
     return (
-        <div className={styles['ResetPassword__container']}>
+        <div className={styles['ResetPassword__container']} data-testid={'ResetPassword'}>
             <div className={styles['ResetPassword_protectionDiv']} />
             <div className={styles['ResetPassword__buttonContainer']}>
                 <Button className={styles['ResetPassword__backButton']}>

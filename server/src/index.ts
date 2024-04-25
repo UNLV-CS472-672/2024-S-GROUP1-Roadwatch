@@ -7,7 +7,7 @@ import userRoutes from './routes/User';
 import pushNotificationRoutes from './routes/PushNotification';
 import markerRoutes from './routes/Marker';
 import communityRoutes from './routes/Community';
-import postRoutes from './routes/Post';
+import postRoutes from './routes/Posts';
 import { initEmail } from './service/emailService';
 
 dotenv.config();

@@ -1,12 +1,26 @@
 import { apiSlice } from '../api';
 import { TPost } from '@/types';
 
+interface SavePost {
+  user: string;
+  community: string;
+  type: string;
+  marker?: {
+    longitude: number;
+    latitude: number;
+  };
+  content: {
+    title: string;
+    body: string;
+  };
+}
+
 const post = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-
-    // Get all posts query
-    getAllPosts: builder.query<{ data: TPost[] }, void>({
-      query: () => '/all-posts',
+    // Get community posts query
+    getCommunityPosts: builder.query<TPost[], string>({
+      query: (communityId) => `/community/${communityId}/posts`,
+      providesTags: ['Post'],
     }),
 
     // Save post mutation
@@ -21,12 +35,13 @@ const post = apiSlice.injectEndpoints({
         }
       } 
     */
-    savePost: builder.mutation<void, TPost>({
+    savePost: builder.mutation<void, SavePost>({
       query: (body) => ({
-        url: '/save-post',
+        url: 'posts/',
         method: 'POST',
         body: body,
       }),
+      invalidatesTags: ['Post'],
     }),
 
     // Delete post mutation
@@ -35,15 +50,12 @@ const post = apiSlice.injectEndpoints({
     */
     deletePost: builder.mutation<void, string>({
       query: (id) => ({
-        url: `/delete-post/${id}`,
+        url: `posts/${id}`,
         method: 'DELETE',
       }),
+      invalidatesTags: ['Post'],
     }),
   }),
 });
 
-export const {
-  useGetAllPostsQuery,
-  useSavePostMutation,
-  useDeletePostMutation
-} = post;
+export const { useGetCommunityPostsQuery, useSavePostMutation, useDeletePostMutation } = post;

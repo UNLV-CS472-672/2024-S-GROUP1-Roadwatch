@@ -10,4 +10,10 @@ router.get(
   communityController.getAllComunities
 );
 
+router.get(
+  '/:communityId/posts',
+  validateToken,
+  communityController.getCommunityPosts
+);
+
 export default router;

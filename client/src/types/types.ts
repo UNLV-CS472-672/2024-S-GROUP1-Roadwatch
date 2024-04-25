@@ -17,8 +17,16 @@ export interface User {
 export interface IMarker {
   longitude: number;
   latitude: number;
-  timestamp: Date;
-  type: 'default' | 'pothole' | 'sbump' | 'closure' | 'xwalk';
+  type:
+    | 'default'
+    | 'pothole'
+    | 'sbump'
+    | 'closure'
+    | 'xwalk'
+    | 'roadDamage'
+    | 'cone'
+    | 'carAccident'
+    | 'warningSign';
 }
 
 export interface Auth {
@@ -59,7 +67,8 @@ export interface Reply {
 /** Defines the fields required for every post in the Community page. */
 export interface IUniversalPost {
   id: string;
-  community: ICommunity;
+  _id?: string;
+  community?: ICommunity;
   user: User;
   marker?: IMarker; // Only defining this here so it can also be defined in the Schema.
   likeCount?: number; // Optional because the default is zero.
@@ -85,7 +94,7 @@ export interface ICommunity {
   longitude: number;
   latitude: number;
   radius: number;
-  users?: string[];
+  users: string[];
   image?: string;
-  posts?: TPost[];
+  posts: TPost[];
 }

@@ -12,7 +12,7 @@ const LocationNotification: React.FC<LocationNotificationProps> = ({
     onCancelButtonClick }) => { 
 
         return (
-            <div className={styles['LocationNotification__container']}>
+            <div className={styles['LocationNotification__container']} data-testid={'LocationNotification'}>
               <div className={styles['LocationNotification__image']}>
                 <img
                   src={UpdatedRoadWatchLogo}

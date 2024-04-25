@@ -15,7 +15,6 @@ export const marker = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getMarkers: builder.query<IMarker[], void>({
       query: () => '/marker/all-markers',
-      transformResponse: transformMarkerResponse,
     }),
     saveMarker: builder.mutation<void, IMarker>({
       query: (body) => ({
@@ -34,4 +33,9 @@ export const marker = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetMarkersQuery, useSaveMarkerMutation, useDeleteMarkerMutation } = marker;
+export const {
+  useGetMarkersQuery,
+  useSaveMarkerMutation,
+  useDeleteMarkerMutation,
+  useLazyGetMarkersQuery,
+} = marker;
