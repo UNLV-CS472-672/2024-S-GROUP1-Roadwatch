@@ -17,6 +17,7 @@ import {
 } from '@/pages';
 import { PrivateRoute } from '@/utils';
 import { CommunityRouter } from './routers/CommunityRouter';
+import './index.css';
 import PostDiscussion from './components/PostDiscussion/PostDiscussion';
 
 // Collection of paths for the site.
