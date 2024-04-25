@@ -19,10 +19,10 @@ export const saveMarker = async (req: Request, res: Response) => {
   const { longitude, latitude, type } = req.body;
 
   // Check if longitude and latitude are provided
-  if (!longitude || !latitude) {
+  if (!longitude || !latitude || !type) {
     return res
       .status(400)
-      .json({ message: 'Longitude and Latitude are required' });
+      .json({ message: 'Longitude, Latitude, and Type are required' });
   }
 
   try {

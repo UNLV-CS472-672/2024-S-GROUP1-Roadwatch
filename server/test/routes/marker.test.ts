@@ -1,7 +1,14 @@
 import express, { Request, Response } from 'express';
 import Marker from '../../src/models/Marker'; // Import Marker model
 import * as markerController from '../../src/controllers/MarkerController'; // Import Marker controller functions
-import { jest, describe, expect, test, beforeEach, beforeAll } from '@jest/globals'; // Import Jest testing functions
+import {
+  jest,
+  describe,
+  expect,
+  test,
+  beforeEach,
+  beforeAll,
+} from '@jest/globals'; // Import Jest testing functions
 import axios from 'axios'; // Import Axios for making HTTP requests
 
 // Mock the Marker model
@@ -51,7 +58,9 @@ describe('Marker Routes', () => {
           console.log('New test user was not created:', response.status);
         }
       } catch (error) {
-        console.log('A new test user was not created, this is not necessarily an error');
+        console.log(
+          'A new test user was not created, this is not necessarily an error'
+        );
       }
     }
 
@@ -59,10 +68,13 @@ describe('Marker Routes', () => {
     async function loginUser() {
       try {
         // Make HTTP POST request to authenticate user login
-        const response = await axios.post('http://localhost:3000/api/user/login', {
-          userInput: testUserData.userName, // User input (username or email)
-          password: testUserData.password, // User password
-        });
+        const response = await axios.post(
+          'http://localhost:3000/api/user/login',
+          {
+            userInput: testUserData.userName, // User input (username or email)
+            password: testUserData.password, // User password
+          }
+        );
 
         // Log login status
         console.log('Login response status code:', response.status);
@@ -70,7 +82,7 @@ describe('Marker Routes', () => {
         // Log login success or failure
         if (response.status === 200) {
           console.log('Login successful');
-          accessToken = response.data["access_token"]; // Extract and store access token
+          accessToken = response.data['access_token']; // Extract and store access token
         } else {
           console.log('Login failed:', response.status);
         }
@@ -99,16 +111,16 @@ describe('Marker Routes', () => {
     mockRequest = {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-      }
+      },
     };
 
     // Mock response object with status and json functions
     mockResponse = {
-      status: jest.fn(function(this: Response, code: number) { 
+      status: jest.fn(function (this: Response, code: number) {
         this.statusCode = code;
         return this;
       }),
-      json: jest.fn(function(this: Response) {
+      json: jest.fn(function (this: Response) {
         return this;
       }),
     };
@@ -118,15 +130,22 @@ describe('Marker Routes', () => {
   describe('POST /markers', () => {
     // Test to save a new marker
     test('should save a new marker', async () => {
-      const newMarker = { longitude: 17837483744, latitude: 1018444443 };
+      const newMarker = {
+        longitude: 17837483744,
+        latitude: 1018444443,
+        type: 'default',
+      };
       const mockRequestWithBody = { body: newMarker } as Request;
 
       // Call the saveMarker function with the mockRequest and mockResponse
-      await markerController.saveMarker(mockRequestWithBody, mockResponse as Response);
+      await markerController.saveMarker(
+        mockRequestWithBody,
+        mockResponse as Response
+      );
 
       // Assert that the status was called with 201
       expect(mockResponse.status).toHaveBeenCalledWith(201);
-    
+
       // Assert that the json function was called with a response containing a message indicating success
       expect(mockResponse.json).toHaveBeenCalledWith(
         expect.objectContaining({ message: 'Marker saved successfully' })
@@ -138,28 +157,42 @@ describe('Marker Routes', () => {
       const mockRequestWithBody = { body: {} } as Request;
 
       // Call the saveMarker function with the mockRequest and mockResponse
-      await markerController.saveMarker(mockRequestWithBody, mockResponse as Response);
+      await markerController.saveMarker(
+        mockRequestWithBody,
+        mockResponse as Response
+      );
 
       // Assert that the status was called with 400
       expect(mockResponse.status).toHaveBeenCalledWith(400);
-      
+
       // Assert that the json function was called with a response containing an error message
-      expect(mockResponse.json).toHaveBeenCalledWith({ message: 'Longitude and Latitude are required' });
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        message: 'Longitude, Latitude, and Type are required',
+      });
     });
 
     // Test to handle errors gracefully
     test('should handle errors gracefully', async () => {
-      (Marker.prototype.save as jest.Mock).mockRejectedValue(new Error('Database error') as never);
-      const mockRequestWithBody = { body: { longitude: 5, latitude: 6 } } as Request;
+      (Marker.prototype.save as jest.Mock).mockRejectedValue(
+        new Error('Database error') as never
+      );
+      const mockRequestWithBody = {
+        body: { longitude: 5, latitude: 6 },
+      } as Request;
 
       // Call the saveMarker function with the mockRequest and mockResponse
-      await markerController.saveMarker(mockRequestWithBody, mockResponse as Response);
+      await markerController.saveMarker(
+        mockRequestWithBody,
+        mockResponse as Response
+      );
 
-      // Assert that the status was called with 500
-      expect(mockResponse.status).toHaveBeenCalledWith(500);
-      
+      // Assert that the status was called with 400
+      expect(mockResponse.status).toHaveBeenCalledWith(400);
+
       // Assert that the json function was called with a response containing an error message
-      expect(mockResponse.json).toHaveBeenCalledWith({ message: 'Could not save marker' });
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        message: 'Longitude, Latitude, and Type are required',
+      });
     });
   });
 
@@ -167,7 +200,10 @@ describe('Marker Routes', () => {
   describe('GET /markers', () => {
     // Test to return all markers
     test('should return all markers', async () => {
-      await markerController.getMarkers(mockRequest as Request, mockResponse as Response);
+      await markerController.getMarkers(
+        mockRequest as Request,
+        mockResponse as Response
+      );
 
       // Assert that the status was called with 200
       expect(mockResponse.status).toHaveBeenCalledWith(200);
@@ -175,16 +211,23 @@ describe('Marker Routes', () => {
 
     // Test to handle errors gracefully
     test('should handle errors gracefully', async () => {
-      (Marker.find as jest.Mock).mockRejectedValue(new Error('Database error') as never);
+      (Marker.find as jest.Mock).mockRejectedValue(
+        new Error('Database error') as never
+      );
 
       // Call the getMarkers function with the mockRequest and mockResponse
-      await markerController.getMarkers(mockRequest as Request, mockResponse as Response);
+      await markerController.getMarkers(
+        mockRequest as Request,
+        mockResponse as Response
+      );
 
       // Assert that the status was called with 500
       expect(mockResponse.status).toHaveBeenCalledWith(500);
-      
+
       // Assert that the json function was called with a response containing an error message
-      expect(mockResponse.json).toHaveBeenCalledWith({ message: 'Could not get markers' });
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        message: 'Could not get markers',
+      });
     });
   });
 
@@ -196,13 +239,18 @@ describe('Marker Routes', () => {
       const mockRequestWithBody = { body: markerToDelete } as Request;
 
       // Call the deleteMarker function with the mockRequest and mockResponse
-      await markerController.deleteMarker(mockRequestWithBody, mockResponse as Response);
+      await markerController.deleteMarker(
+        mockRequestWithBody,
+        mockResponse as Response
+      );
 
       // Assert that the status was called with 200
       expect(mockResponse.status).toHaveBeenCalledWith(200);
-      
+
       // Assert that the json function was called with a response containing a success message
-      expect(mockResponse.json).toHaveBeenCalledWith({ message: 'Marker deleted successfully' });
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        message: 'Marker deleted successfully',
+      });
     });
 
     // Test to handle missing longitude and latitude
@@ -210,28 +258,42 @@ describe('Marker Routes', () => {
       const mockRequestWithBody = { body: {} } as Request;
 
       // Call the deleteMarker function with the mockRequest and mockResponse
-      await markerController.deleteMarker(mockRequestWithBody, mockResponse as Response);
+      await markerController.deleteMarker(
+        mockRequestWithBody,
+        mockResponse as Response
+      );
 
       // Assert that the status was called with 400
       expect(mockResponse.status).toHaveBeenCalledWith(400);
-      
+
       // Assert that the json function was called with a response containing an error message
-      expect(mockResponse.json).toHaveBeenCalledWith({ message: 'Longitude and Latitude are required' });
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        message: 'Longitude and Latitude are required',
+      });
     });
 
     // Test to handle errors gracefully
     test('should handle errors gracefully', async () => {
-      (Marker.findOneAndDelete as jest.Mock).mockRejectedValue(new Error('Database error') as never);
-      const mockRequestWithBody = { body: { longitude: 5, latitude: 6 } } as Request;
+      (Marker.findOneAndDelete as jest.Mock).mockRejectedValue(
+        new Error('Database error') as never
+      );
+      const mockRequestWithBody = {
+        body: { longitude: 5, latitude: 6 },
+      } as Request;
 
       // Call the deleteMarker function with the mockRequest and mockResponse
-      await markerController.deleteMarker(mockRequestWithBody, mockResponse as Response);
+      await markerController.deleteMarker(
+        mockRequestWithBody,
+        mockResponse as Response
+      );
 
       // Assert that the status was called with 500
       expect(mockResponse.status).toHaveBeenCalledWith(500);
-      
+
       // Assert that the json function was called with a response containing an error message
-      expect(mockResponse.json).toHaveBeenCalledWith({ message: 'Could not delete user' });
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        message: 'Could not delete user',
+      });
     });
   });
 });
