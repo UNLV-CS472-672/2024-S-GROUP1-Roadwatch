@@ -12,10 +12,12 @@ import {
   Instructions,
   Register,
   ResetPassword,
+  SettingsPage,
   CommunityX,
   Forgot,
 } from '@/pages';
 import { PrivateRoute } from '@/utils';
+import PostDiscussion from './components/PostDiscussion/PostDiscussion';
 
 // Collection of paths for the site.
 const router = createBrowserRouter([
@@ -60,8 +62,16 @@ const router = createBrowserRouter([
     element: <ResetPassword />,
   },
   {
+    path: '/settings',
+    element: <SettingsPage />,
+  },
+  {
     path: '/forgot-password',
     element: <Forgot />,
+  },
+  {
+    path: '/post/:id',
+    element: <PostDiscussion id="id" />,
   },
 ]);
 

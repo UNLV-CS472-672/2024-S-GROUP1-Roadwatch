@@ -33,6 +33,7 @@ module.exports = {
         checksVoidReturn: false,
       },
     ],
+    'react/prop-types': 'off',
   },
 
   // Removes TypeScript linting from all JavaScript files while preserving ESLint's linting rules.
