@@ -2,8 +2,7 @@ import styles from './Header.module.scss';
 import { CustomButton, ProfileIcon } from '@/components';
 import notification_icon from 'src/assets/icons/notification-icon.svg';
 import help_icon from 'src/assets/icons/help-icon.svg';
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate } from 'react-router-dom';
 
 interface HeaderProps {
   userName?: string; // Optional prop
@@ -20,11 +19,11 @@ export default function Header(props: HeaderProps): JSX.Element {
     throw new Error('Function not implemented.');
   }
 
-  // Route for help button 
+  // Route for help button
   const navigateHelp = useNavigate();
   const onClick_helpButton = () => {
     navigateHelp('/instructions');
-  }
+  };
 
   return (
     <div className={styles['Header__wrapper']} data-testid={'Header'}>
@@ -42,7 +41,8 @@ export default function Header(props: HeaderProps): JSX.Element {
       {/* Quick action buttons */}
       <div className={styles['Header__horizontal_container']}>
         <div className={styles['Header__quick_action_wrapper']}>
-          <div className={styles['Header__block']}
+          <div
+            className={styles['Header__block']}
             role="button"
             onClick={throwError}
             tabIndex={0}
@@ -59,7 +59,8 @@ export default function Header(props: HeaderProps): JSX.Element {
               className={styles['Header__quick_action_button']}
             />
           </div>
-          <div className={styles['Header__block']}
+          <div
+            className={styles['Header__block']}
             role="button"
             onClick={onClick_helpButton}
             tabIndex={0}
