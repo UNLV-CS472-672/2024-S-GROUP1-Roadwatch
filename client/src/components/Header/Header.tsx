@@ -27,13 +27,13 @@ export default function Header(props: HeaderProps): JSX.Element {
   }
 
   return (
-    <div className={styles['Header__wrapper']}>
+    <div className={styles['Header__wrapper']} data-testid={'Header'}>
       <div className={styles['Header__horizontal_container']}>
         {/* Profile Image */}
         <img
           className={styles['Header__profile_picture']}
           src="/images/UNLV.png"
-          alt="Profile Picture"
+          alt="Profile"
         />
 
         {/* Welcome message and logout button */}

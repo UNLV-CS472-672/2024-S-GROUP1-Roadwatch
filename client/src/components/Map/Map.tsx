@@ -106,7 +106,7 @@ const Map: React.FC<MapProps> = ({location, posts}) => { // Add posts to the des
     loadGoogleMapsScript();
   }, [location, posts]); // Add posts to the dependency array
 
-  return <div id="map" className={styles['mapContainer']}></div>;
+  return <div id="map" className={styles['mapContainer']} data-testid={'Map'}></div>;
 };
 
 export default Map;

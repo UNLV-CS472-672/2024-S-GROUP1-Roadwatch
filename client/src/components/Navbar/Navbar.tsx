@@ -33,51 +33,53 @@ export default function Navbar() {
   };
 
   return (
-    <BottomNavigation 
-    sx={{ 
-      width: '100%', 
-      position: 'fixed', 
-      bottom: 0, 
-      height: 60,
-      left: 0, 
-      right: 0,
-      backgroundColor: '#f5f5f5',
-    }} 
-    value={value} 
-    onChange={handleChange}
-  >
-      <BottomNavigationAction
-        label="Chat"
-        value="chat"
-        icon={<ChatBubbleIcon />}
-        onClick={() => { 
-          navigate('/chat');
-        }}
-      />
-      <BottomNavigationAction
-        label="Community"
-        value="community"
-        icon={<PeopleIcon />}
-        onClick={() => { 
-          navigate('/community');
-        }}
-      />
-      <BottomNavigationAction
-        label="Map"
-        value="home"
-        icon={<LocationOnIcon />}
-        onClick={() => { 
-          navigate('/');
-        }}
-      />
-      <BottomNavigationAction
-        label="Settings"
-        value="settings"
-        icon={<SettingsIcon />}
-        onClick={() => { 
-          navigate('/settings');
-        }}
-      />
-    </BottomNavigation>
+    <div data-testid={'Navbar'}>
+      <BottomNavigation 
+      sx={{ 
+        width: '100%', 
+        position: 'fixed', 
+        bottom: 0, 
+        height: 60,
+        left: 0, 
+        right: 0,
+        backgroundColor: '#f5f5f5',
+      }} 
+      value={value} 
+      onChange={handleChange}
+    >
+        <BottomNavigationAction
+          label="Chat"
+          value="chat"
+          icon={<ChatBubbleIcon />}
+          onClick={() => { 
+            navigate('/chat');
+          }}
+        />
+        <BottomNavigationAction
+          label="Community"
+          value="community"
+          icon={<PeopleIcon />}
+          onClick={() => { 
+            navigate('/community');
+          }}
+        />
+        <BottomNavigationAction
+          label="Map"
+          value="home"
+          icon={<LocationOnIcon />}
+          onClick={() => { 
+            navigate('/');
+          }}
+        />
+        <BottomNavigationAction
+          label="Settings"
+          value="settings"
+          icon={<SettingsIcon />}
+          onClick={() => { 
+            navigate('/settings');
+          }}
+        />
+      </BottomNavigation>
+    </div>
   );
 }

@@ -28,7 +28,7 @@ export default function CommunityCard({
   const first3Users = users.slice(0, 3);
 
   return (
-    <div role="presentation" className={styles['CommunityCard']} onClick={onClick}>
+    <div role="presentation" className={styles['CommunityCard']} onClick={onClick} data-testid={'CommunityCard'}>
       <Card>
         <CardContent>
           <Stack direction="row">
