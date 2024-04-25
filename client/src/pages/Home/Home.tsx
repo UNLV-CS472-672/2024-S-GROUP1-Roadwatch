@@ -177,7 +177,7 @@ export default function Home(): JSX.Element {
       <SpeedDial
         icon={<SpeedDialIcon />}
         ariaLabel="SpeedDial"
-        sx={{ position: 'absolute', bottom: 80, right: 30 }}
+        sx={{ position: 'absolute', bottom: 125, right: 30 }}
         FabProps={{
           sx: {
             bgcolor: '#FB7110',
