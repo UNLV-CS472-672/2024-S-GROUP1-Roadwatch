@@ -16,7 +16,7 @@ export const getMarkers = async (req: Request, res: Response) => {
 
 // POST endpoint to save a marker to the database
 export const saveMarker = async (req: Request, res: Response) => {
-  const { longitude, latitude } = req.body;
+  const { longitude, latitude, type } = req.body;
 
   // Check if longitude and latitude are provided
   if (!longitude || !latitude) {
@@ -27,8 +27,7 @@ export const saveMarker = async (req: Request, res: Response) => {
 
   try {
     // Create a new marker instance and save it to the database
-    const newMarker = new Marker({ longitude, latitude });
-    await newMarker.save();
+    const newMarker = await Marker.create({ longitude, latitude, type });
     res
       .status(201)
       .json({ message: 'Marker saved successfully', marker: newMarker }); // Respond with success message and saved marker
