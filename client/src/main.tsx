@@ -19,6 +19,19 @@ import { PrivateRoute } from '@/utils';
 import { CommunityRouter } from './routers/CommunityRouter';
 import './index.css';
 import PostDiscussion from './components/PostDiscussion/PostDiscussion';
+import { useParams } from 'react-router-dom';
+
+// Wrapper component for PostDiscussion
+function PostDiscussionWrapper() {
+  const { id } = useParams();
+  
+  // Check if id is defined
+  if (!id) {
+    return null; // or return some placeholder component
+  }
+
+  return <PostDiscussion id={id} />;
+}
 
 // Collection of paths for the site.
 const router = createBrowserRouter([
@@ -72,7 +85,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/post/:id',
-    element: <PostDiscussion id="id" />,
+    element: <PostDiscussionWrapper />,
   },
 ]);
 

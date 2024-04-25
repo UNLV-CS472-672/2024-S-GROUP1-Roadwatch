@@ -60,7 +60,7 @@ const CommunityPost: React.FC<CommunityPostProps> = ({
   const navigate = useNavigate();
 
   const viewPost = () => {
-    navigate(`api/posts/${id}`);
+    navigate(`/post/${id}`);
   };
 
   const { title, body } = content;
