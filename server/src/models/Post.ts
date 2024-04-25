@@ -21,6 +21,7 @@ interface IUniversalPost {
     title: string;
     body: string;
   };
+  replies: Types.ObjectId[]; // Array of replies
 }
 
 /**
@@ -72,6 +73,10 @@ const Post = new Schema<TPostModel>(
         return this.type === 'marker';
       },
     },
+    replies: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Reply',
+    }],
   },
   { timestamps: true }
 );

@@ -23,10 +23,10 @@
 
   &__whiteContainer {
     background-color: white; /* Set the background color of the container */
-    padding: 20px; /* Add padding to create space between the content and the container */
-    border-radius: 10px; /* Add rounded corners to the container */
+    padding: 1.25rem; /* Add padding to create space between the content and the container */
+    border-radius: 0.75rem; /* Add rounded corners to the container */
     width: 80%; /* Adjust the width of the container */
-    max-width: 280px; /* Set maximum width for responsiveness */
-    min-height: 600px;
+    max-width: 17.50rem; /* Set maximum width for responsiveness */
+    min-height: 37.50rem;
   }
 }

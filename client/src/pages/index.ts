@@ -4,6 +4,9 @@ export * from './Chat/Chat';
 export { default as Community } from './Community/Community';
 export * from './Community/Community';
 
+export { default as CommunityX } from './CommunityX/CommunityX';
+export * from './CommunityX/CommunityX';
+
 export { default as Home } from './Home/Home';
 export * from './Home/Home';
 
@@ -18,3 +21,12 @@ export * from './Instructions/Instructions';
 
 export { default as Register } from './Register/Register';
 export * from './Register/Register';
+
+export { default as ResetPassword } from './ResetPassword/ResetPassword';
+export * from './ResetPassword/ResetPassword';
+
+export { default as SettingsPage } from './SettingsPage/SettingsPage';
+export * from './SettingsPage/SettingsPage';
+
+export { default as Forgot } from './Forgot/Forgot';
+export * from './Forgot/Forgot'

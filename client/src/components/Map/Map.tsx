@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './Map.module.scss';
-import SpeedDial from '@mui/material/SpeedDial';
-import SpeedDialAction from '@mui/material/SpeedDialAction';
-import SpeedDialIcon from '@mui/material/SpeedDialIcon';
-import { LocationOn as LocationOnIcon } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 // Initialize initMap as a global function
 declare global {
@@ -18,12 +15,18 @@ interface Location {
   lng: number;
 }
 
-interface MapProps {
+interface Post {
+  id: string;
   location: Location;
 }
 
-const Map: React.FC<MapProps> = ({ location }) => {
-  const [open, setOpen] = useState(false);
+interface MapProps {
+  location: Location;
+  posts: Post[];
+}
+
+const Map: React.FC<MapProps> = ({location, posts}) => { // Add posts to the destructured props
+  const navigate = useNavigate();
 
   useEffect(() => {
     const initMap = async () => {
@@ -33,7 +36,7 @@ const Map: React.FC<MapProps> = ({ location }) => {
         return;
       }
 
-      // Use the location prop for setting the map center and marker
+      // Use the location prop for setting the map center
       const position = { lat: location.lat, lng: location.lng };
 
       // Import the Google Maps library and AdvancedMarkerElement
@@ -47,11 +50,33 @@ const Map: React.FC<MapProps> = ({ location }) => {
         mapId: 'ROADWATCH_MAP_ID',
       });
 
-      // Test marker
-      new AdvancedMarkerElement({
-        map: map,
-        position: position,
-        title: 'Test Marker',
+      // Create a marker for each post
+      posts.forEach(post => {
+        const markerPosition = { lat: post.location.lat, lng: post.location.lng };
+
+        // eslint-disable-next-line
+        const marker = new AdvancedMarkerElement({
+          // eslint-disable-next-line
+          map: map,
+          // eslint-disable-next-line
+          position: markerPosition,
+          title: 'Post Marker',
+        });
+
+        // Add a click event listener to the marker
+        // eslint-disable-next-line
+        marker.addListener('click', async () => {
+          const response: Response = await fetch(`/markers/${post.id}/post`);
+          if (!response.ok) {
+            console.error(`Error fetching post: ${response.statusText}`);
+            return;
+          }
+
+          // eslint-disable-next-line
+          const postData = await response.json();
+          // eslint-disable-next-line
+          navigate(`/posts/${postData.id}`);
+        });
       });
     };
 
@@ -79,7 +104,7 @@ const Map: React.FC<MapProps> = ({ location }) => {
     };
 
     loadGoogleMapsScript();
-  }, [location]); // Dependency array to re-run the effect if the location prop changes
+  }, [location, posts]); // Add posts to the dependency array
 
   const actions = [
     { icon: <LocationOnIcon />, name: 'Location' },

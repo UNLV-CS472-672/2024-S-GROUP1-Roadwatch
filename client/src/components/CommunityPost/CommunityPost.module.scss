@@ -2,45 +2,54 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
     &__card{
-        width: 384px;
-        margin: 16px;
+        width: 24.00rem;
+        margin: 1.00rem;
     }
+
     &__contentContainer{
-        max-height: 2000px;
+        max-height: 125.00rem;
     }
+
     &__header{
         display: flex;
-        padding-bottom: 10px;
+        padding-bottom: 0.75rem;
         justify-content: space-between;
         align-items: center;
     }
+
     &__markerIcon{
         max-width: 100%;
-        width: 50px; 
+        width: 3.25rem; 
         height: auto;
-        padding-right: 10px;
+        padding-right: 0.75rem;
     }
+
     &__textBody{ 
-        max-height: 6.5em;
+        max-height: 6.5rem;
         overflow-y: auto;
     }
+
     &__headerLeft{
         display: flex;
         align-items: center;
     }
+
     &__headerRight{
         display: flex;
     }
+
     &__bodyPreview{
         display: flex;
         justify-content: center;
-        max-height: 6.5em;
-        padding-bottom: 10px;
+        max-height: 6.5rem;
+        padding-bottom: 0.75rem;
     }
+
     &__markerBodyPreview{
         max-width: 100%;
-        width: 100px; 
+        width: 6.25rem; 
         height: auto;
     }
 

@@ -1,0 +1,125 @@
+.CreatePost {
+    &__postContainer {
+        @media screen and (width >= 37.50rem) { /* empty */ }
+    }
+
+    &__dialog {
+        @media screen and (width >= 37.50rem) {margin-top: 0;}
+
+        margin-top: 5.25rem;
+    }
+
+    &__container {
+        margin: 1.50rem;
+
+        @media screen and (width >= 37.50rem) {
+            padding-left: 12.50rem;
+            padding-right: 12.50rem;
+        }
+    }
+
+    &__first {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        
+    }
+
+    &__title {
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1.50rem;
+    }
+
+    &__backButton {
+        border: 2px solid black !important;
+    }
+
+    &__close {
+        color: black;
+        size: 0.25rem;
+    }
+
+    &__second {
+        padding-right: 0.75rem;
+    }
+
+    &__text {
+        font-weight: 600;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-bottom: 0.50rem;
+    }
+
+    &__buttons {
+        display: flex;
+
+        @media screen and (width >= 37.50rem) {
+            justify-content: left;
+            gap: 1.00rem;
+        }
+
+        justify-content: space-evenly;
+        padding-bottom: 1.50rem;
+
+    }
+
+    &__fab {
+        background-color: white !important;
+    }
+
+    &__active {
+        background-color: lightgrey !important;
+    }
+
+    &__images {
+        width: 2.25rem;
+        height: 2.25rem;
+    }
+
+    &__images2 {
+        width: 3.25rem;
+        height: 3.25rem;
+    }
+
+    &__date {
+        width: 12.50rem;
+        height: 2.50rem;
+        color: grey;
+    }
+
+    &__third {
+        padding-bottom: 0.25rem;
+    }
+
+    &__multi {
+        width: 100%;
+    }
+
+    &__fourth {
+        padding-bottom: 2.00rem;
+    }
+
+    &__multi2 {
+        width: 100%;
+
+        @media screen and (width >= 37.50rem) {
+            width: 31.25rem;
+        }
+    }
+
+    &__text3 {
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-bottom: 0.75rem;
+    }
+
+    &__lastButton {
+        padding-top: 2.25rem;
+
+        @media screen and (width >= 37.50rem) {
+            padding-left: 14.00rem;
+            padding-right: 14.00rem;
+        }
+
+    }
+}

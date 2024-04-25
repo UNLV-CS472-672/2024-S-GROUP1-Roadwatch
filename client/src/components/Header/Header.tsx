@@ -1,7 +1,9 @@
 import styles from './Header.module.scss';
-import { CustomButton } from '@/components';
+import { CustomButton, ProfileIcon } from '@/components';
 import notification_icon from 'src/assets/icons/notification-icon.svg';
 import help_icon from 'src/assets/icons/help-icon.svg';
+import { useNavigate } from "react-router-dom";
+
 
 interface HeaderProps {
   userName?: string; // Optional prop
@@ -18,15 +20,17 @@ export default function Header(props: HeaderProps): JSX.Element {
     throw new Error('Function not implemented.');
   }
 
+  // Route for help button 
+  const navigateHelp = useNavigate();
+  const onClick_helpButton = () => {
+    navigateHelp('/instructions');
+  }
+
   return (
     <div className={styles['Header__wrapper']}>
       <div className={styles['Header__horizontal_container']}>
         {/* Profile Image */}
-        <img
-          className={styles['Header__profile_picture']}
-          src="/images/UNLV.png"
-          alt="Profile Picture"
-        />
+        <ProfileIcon />
 
         {/* Welcome message and logout button */}
         <div className={styles['Header__vertical_container']}>
@@ -57,7 +61,7 @@ export default function Header(props: HeaderProps): JSX.Element {
           </div>
           <div className={styles['Header__block']}
             role="button"
-            onClick={throwError}
+            onClick={onClick_helpButton}
             tabIndex={0}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
@@ -65,7 +69,6 @@ export default function Header(props: HeaderProps): JSX.Element {
               }
             }} // Adds keyboard interaction
           >
-            {/* <CustomButton onClick={throwError}>Notifications</CustomButton> */}
             <img
               src={help_icon}
               alt="Help Icon"

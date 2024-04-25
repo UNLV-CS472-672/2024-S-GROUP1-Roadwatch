@@ -3,8 +3,21 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Chat, Community, Home, Login, Profile, Instructions, Register } from '@/pages';
+import {
+  Chat,
+  Community,
+  Home,
+  Login,
+  Profile,
+  Instructions,
+  Register,
+  ResetPassword,
+  SettingsPage,
+  CommunityX,
+  Forgot,
+} from '@/pages';
 import { PrivateRoute } from '@/utils';
+import PostDiscussion from './components/PostDiscussion/PostDiscussion';
 
 // Collection of paths for the site.
 const router = createBrowserRouter([
@@ -15,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: '/community',
     element: <Community />,
+  },
+  {
+    path: '/communityX',
+    element: <CommunityX />,
   },
   {
     path: '/chat',
@@ -39,6 +56,22 @@ const router = createBrowserRouter([
   {
     path: '/register/',
     element: <Register />,
+  },
+  {
+    path: '/reset-password/:token',
+    element: <ResetPassword />,
+  },
+  {
+    path: '/settings',
+    element: <SettingsPage />,
+  },
+  {
+    path: '/forgot-password',
+    element: <Forgot />,
+  },
+  {
+    path: '/post/:id',
+    element: <PostDiscussion id="id" />,
   },
 ]);
 
