@@ -17,3 +17,4 @@ export { default as CommunityPost } from './CommunityPost/CommunityPost';
 export { default as CreatePost } from './CreatePost/CreatePost';
 export { default as UserProfileUpdate } from './UserProfileUpdate/UserProfileUpdate';
 export { default as UpdatePassword } from './Security/UpdatePassword/UpdatePassword';
+export { default as ProfileIcon } from './ProfileIcon/ProfileIcon';
