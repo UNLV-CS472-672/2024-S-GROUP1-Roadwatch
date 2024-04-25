@@ -52,9 +52,9 @@ const transformPostResponse = (response: PostResponse[]) =>
 
 const post = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    // Get all posts query
+    // Get community posts query
     getCommunityPosts: builder.query<TPost[], string>({
-      query: (communityId) => `/post/community/${communityId}`,
+      query: (communityId) => `/community/${communityId}/posts`,
       transformResponse: transformPostResponse,
       providesTags: ['Post'],
     }),
@@ -73,7 +73,7 @@ const post = apiSlice.injectEndpoints({
     */
     savePost: builder.mutation<void, SavePost>({
       query: (body) => ({
-        url: 'post/save-post',
+        url: 'posts/',
         method: 'POST',
         body: body,
       }),
@@ -86,7 +86,7 @@ const post = apiSlice.injectEndpoints({
     */
     deletePost: builder.mutation<void, string>({
       query: (id) => ({
-        url: `/delete-post/${id}`,
+        url: `posts/${id}`,
         method: 'DELETE',
       }),
       invalidatesTags: ['Post'],

@@ -62,6 +62,7 @@ const CommunityPost: React.FC<CommunityPostProps> = ({
   const viewPost = () => {
     navigate(`/post/${id}`);
   };
+
   const { title, body } = content;
 
   //Variable to store marker icon
