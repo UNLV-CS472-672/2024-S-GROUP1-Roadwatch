@@ -3,6 +3,12 @@ import Carousel from 'react-material-ui-carousel';
 import { CustomButton } from '@/components';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/Updated_RoadWatch_Logo.svg';
+import instruct1 from '../../assets/InstructionPage_1.png';
+import instruct4 from '../../assets/markers/CarAccident.svg';
+import instruct2 from '../../assets/markers/Cone.svg';
+import instruct3 from '../../assets/markers/Pothole.svg';
+import instruct5 from '../../assets/markers/RoadDamage.svg';
+import instruct6 from '../../assets/markers/WarningSign.svg';
 
 interface Item {
   name: string;
@@ -15,21 +21,39 @@ function Instructions() {
     // Array of items for the carousel
     {
       name: 'Instructions  #1',
-      description: 'Description for Image 1',
+      description: 'Tap on your location',
       imageUrl:
-        'https://images.unsplash.com/photo-1552728089-57bdde30beb3?q=80&w=1925&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Example image URL
+        instruct1,
     },
     {
       name: 'Instructions  #2',
-      description: 'Description for Image 2',
+      description: 'Click to report a construction zone',
       imageUrl:
-        'https://images.unsplash.com/photo-1606567595334-d39972c85dbe?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Example image URL
+      instruct2,
     },
     {
       name: 'Instructions  #3',
-      description: 'Description for Image 3',
+      description: 'Click to report a pothole',
       imageUrl:
-        'https://images.unsplash.com/photo-1555169062-013468b47731?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Example image URL
+        instruct3,
+    },
+    {
+      name: 'Instructions  #4',
+      description: 'Click to report a car accident',
+      imageUrl:
+        instruct4,
+    },
+    {
+      name: 'Instructions  #5',
+      description: 'Click to report road damage',
+      imageUrl:
+        instruct5,
+    },
+    {
+      name: 'Instructions  #6',
+      description: 'Click to report a hazard',
+      imageUrl:
+        instruct6,
     },
   ];
 
@@ -38,7 +62,7 @@ function Instructions() {
   const navigateHome = () => {
     // Function to navigate to the Home page
     try {
-      navigate('/'); // Navigate to the Home page
+      navigate('/home'); // Navigate to the Home page
     } catch (err) {
       // Log any errors to the console
       console.log(err);
@@ -50,9 +74,10 @@ function Instructions() {
       {/* Main container for the Instructions component */}
       <div className={Styles['Instructions__center']}>
         {/* Centered container for the logo and carousel */}
-        <img src={logo} alt={'Roadwatch'} className={Styles['Instructions__cimage']} />
+        <img src={logo} alt={'Roadwatch'} className={Styles['Instructions__cimage']} data-testid={'Instructions-logo'} />
         <div className={Styles['Instructions__whiteContainer']}>
           {/* Container for the carousel and button */}
+          <div data-testid={'Instructions-carousel'}>
           <Carousel
             navButtonsAlwaysInvisible={true} // Hide navigation buttons
             autoPlay={false} // Disable auto-play
@@ -78,7 +103,8 @@ function Instructions() {
               />
             ))}
           </Carousel>
-          <div style={{ marginTop: '20px' }}>
+          </div>
+          <div style={{ marginTop: '20px' }} data-testid={'Instructions-button'} >
             {/* Button component with onClick event to navigate */}
             <CustomButton onClick={navigateHome}> Lets Go! </CustomButton>
           </div>

@@ -5,12 +5,20 @@
     height: 6.25rem;
     background-color: #4f4f4f;
     align-items: center;
-    padding: 0.625rem; // ~10px
+    padding: 0.75rem;
   }
 
   &__button {
     width: 7.5rem;
     height: 70%;
     appearance: none;
+  }
+
+  &__text {
+    color: black !important;
+  }
+
+  &__icon {
+    color: #fb7111 !important;
   }
 }

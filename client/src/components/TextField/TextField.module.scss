@@ -1,15 +1,15 @@
 .TextField {
     &__textBox {
         background-color: #F9FAFA;
-        border-radius: 5px;
-        height: 30px;
+        border-radius: 0.25rem;
+        height: 2.00rem;
         width: 100%;
         border: 1px solid lightgray;
-        margin: 5px 0 10px 0;
+        margin: 0.25rem 0 0.75rem;
     }
 
     &__header {
-        padding-top: 5px; 
+        padding-top: 0.25rem; 
         font-weight: bold;
     }
 }

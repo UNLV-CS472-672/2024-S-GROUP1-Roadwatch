@@ -7,19 +7,19 @@
 
     &__header{
         display: flex;
-        width: 384px;
-        padding: 10px;
+        width: 24.00rem;
+        padding: 0.75rem;
     }
 
     &__backButton{
         height: 100%;
         align-self: flex-start;
-        padding-left: 10px;
+        padding-left: 0.75rem;
     }
 
     &__name{
-        padding-left: 40px;
-        font-size: 40px;
+        padding-left: 2.50rem;
+        font-size: 2.50rem;
     }
     
     &__body{
@@ -31,20 +31,21 @@
     }
 
     &__map{
-        padding: 5px;
+        padding: 0.25rem;
     }
 
     &__users{
-        padding: 5px;
+        padding: 0.25rem;
     }
 
     &__showPosts{
+        /* empty */
     }
 
     
 
     &__createPostButton{
-        width: 384px;
-        margin: 10px;
+        width: 24.00rem;
+        margin: 0.75rem;
     }
 }

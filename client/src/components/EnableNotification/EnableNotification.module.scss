@@ -17,42 +17,44 @@
       background-color: rgba(0, 0, 0, 0.5);
     }
   }
+
   &__whiteContainer {
     background-color: white; /* Set the background color of the container */
-    padding: 20px; /* Add padding to create space between the content and the container */
+    padding: 1.25rem; /* Add padding to create space between the content and the container */
     border-radius: 1rem; /* Add rounded corners to the container */
     // width: 80%; /* Adjust the width of the container */
-    max-width: 280px; /* Set maximum width for responsiveness */
-    min-height: 600px;
+    max-width: 17.50rem; /* Set maximum width for responsiveness */
+    min-height: 37.50rem;
   }
+
   &__image {
     padding-top: 10%;
     display: flex;
     justify-content: center; /* Center the image horizontally */
-    height: 200px;
+    height: 12.50rem;
     width: 100%;
   }
 
   &__header {
-    padding-top: 50px; /* Add padding to create space between the content and the container */
+    padding-top: 3.25rem; /* Add padding to create space between the content and the container */
     text-align: center;
     font-size: 2.1rem; /* Increase font size */
   }
 
   &__headerText {
-    padding-top: 40px;
+    padding-top: 2.50rem;
   }
 
   &__message {
     font-size: 1.25rem; /* Decrease font size */
     text-align: center;
-    color: #999; /* Lighter color for message */
-    padding-bottom: 20px;
+    color: #999999; /* Lighter color for message */
+    padding-bottom: 1.25rem;
   }
 
   &__buttonContainer {
     flex-direction: column; /* Stack buttons vertically */
-    padding-bottom: 20px;
+    padding-bottom: 1.25rem;
   }
 
   &__allowButton {

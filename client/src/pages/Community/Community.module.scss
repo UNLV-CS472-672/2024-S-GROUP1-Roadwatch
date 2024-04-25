@@ -10,30 +10,29 @@
 .Header {
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 0px;
-  margin: 10xp;
+  margin-bottom: 0;
 }
 
 .Communities {
   width: 90%;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 0.25rem;
   background-color: lightgray;
-  padding: 10px;
+  padding: 0.75rem;
   margin-left: auto;
   margin-right: auto;
   overflow-y: auto;
   max-height: 68vh;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (width <= 37.50rem) {
   .Community {
     width: 95%;
   }
 
   .Communities {
-    margin-left: 0px;
-    margin-right: 0px;
+    margin-left: 0;
+    margin-right: 0;
   }
 }
