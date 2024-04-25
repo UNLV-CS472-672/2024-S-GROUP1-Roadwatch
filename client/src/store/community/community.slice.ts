@@ -31,6 +31,7 @@ const community = apiSlice.injectEndpoints({
     getAllCommunities: builder.query<ICommunity[], void>({
       query: () => 'community/all-communities',
       transformResponse: transformCommunityResponse,
+      providesTags: ['Community'],
     }),
   }),
 });
