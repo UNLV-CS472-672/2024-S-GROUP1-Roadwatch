@@ -70,7 +70,7 @@ export default function Navbar() {
         value="settings"
         icon={<SettingsIcon className={styles['Navbar__icon']} />}
         onClick={() => {
-          navigate('/general-info');
+          navigate('/settings');
         }}
       />
     </BottomNavigation>
