@@ -3,12 +3,15 @@ import { CustomButton, ProfileIcon } from '@/components';
 import notification_icon from 'src/assets/icons/notification-icon.svg';
 import help_icon from 'src/assets/icons/help-icon.svg';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 interface HeaderProps {
   userName?: string; // Optional prop
 }
 
 export default function Header(props: HeaderProps): JSX.Element {
+  const navigate = useNavigate();
+
   // Destructure the userName prop with a default value
   const { userName = 'Jane Doe' } = props;
 
@@ -19,10 +22,14 @@ export default function Header(props: HeaderProps): JSX.Element {
     throw new Error('Function not implemented.');
   }
 
+  const handleLogout = () => {
+    Cookies.remove('accessToken');
+    navigate('/login');
+  };
+
   // Route for help button
-  const navigateHelp = useNavigate();
   const onClick_helpButton = () => {
-    navigateHelp('/instructions');
+    navigate('/instructions');
   };
 
   return (
@@ -34,7 +41,7 @@ export default function Header(props: HeaderProps): JSX.Element {
         {/* Welcome message and logout button */}
         <div className={styles['Header__vertical_container']}>
           <p className={styles['Header__heading_text']}>Welcome, {userName}</p>
-          <CustomButton onClick={throwError}>Logout</CustomButton>
+          <CustomButton onClick={handleLogout}>Logout</CustomButton>
         </div>
       </div>
 
